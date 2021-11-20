@@ -11,10 +11,16 @@
     "url": "git@github.com:luca-borrione/webnd-project5-travel-app.git"
   },
   "scripts": {
-    "check-yarn-integrity": "yarn check --integrity"
+    "check-yarn-integrity": "yarn check --integrity",
+    "lint": "npm-run-all --parallel lint:*",
+    "lint:html": "linthtml 'src/client/views/**/*.html'"
   },
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@linthtml/linthtml": "~0.8.0",
+    "@linthtml/linthtml-config-recommended": "^0.1.0",
+    "npm-run-all": "~4.1.5"
+  },
   "engineStrict": true,
   "engines": {
     "node": "16.13.0",
