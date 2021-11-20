@@ -1,0 +1,5 @@
+coverage/
+dist
+.history/
+node_modules
+package.json
