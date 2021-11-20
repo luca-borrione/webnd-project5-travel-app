@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`server routes should return the content of the index.html in the main project folder when the the GET \`/\` route is requested 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"GB\\">
+  <head>
+    <meta charset=\\"UTF-8\\" />
+    <title>Mock Title</title>
+  </head>
+
+  <body>
+    MOCK
+  </body>
+</html>
+"
+`;
