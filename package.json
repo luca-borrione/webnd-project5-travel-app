@@ -1,0 +1,21 @@
+{
+  "private": false,
+  "name": "webnd-project5-travel-app",
+  "version": "1.0.0",
+  "description": "Travel App - Project 5 for the Front End Web Developer Nanodegree at Udacity ",
+  "license": "CC0-1.0",
+  "author": "Luca Borrione",
+  "homepage": "https://github.com/luca-borrione/webnd-project5-travel-app",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:luca-borrione/webnd-project5-travel-app.git"
+  },
+  "scripts": {
+    "check-yarn-integrity": "yarn check --integrity"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "yarn": "^1.22.17"
+  }
+}
