@@ -26,7 +26,8 @@
     "lint:js": "eslint . --ext .js",
     "lint:scss": "stylelint 'src/client/styles/**/*.scss'",
     "prepare": "husky install",
-    "start": "node src/server/index.js"
+    "start": "node src/server/index.js",
+    "test": "jest"
   },
   "dependencies": {
     "body-parser": "~1.19.0",
@@ -44,6 +45,7 @@
     "@babel/preset-env": "~7.16.4",
     "@linthtml/linthtml": "~0.8.0",
     "@linthtml/linthtml-config-recommended": "~0.1.0",
+    "@types/jest": "^27.0.3",
     "babel-loader": "~8.2.3",
     "clean-webpack-plugin": "~4.0.0",
     "css-loader": "~6.5.1",
@@ -52,7 +54,9 @@
     "eslint-config-airbnb-base": "~15.0.0",
     "eslint-config-prettier": "~8.3.0",
     "eslint-plugin-import": "~2.25.3",
+    "eslint-plugin-jest": "^25.2.4",
     "husky": "~7.0.4",
+    "jest": "^27.3.1",
     "lint-staged": "~12.0.3",
     "mini-css-extract-plugin": "^2.4.5",
     "node-sass": "~6.0.1",
@@ -61,6 +65,7 @@
     "prettier": "~2.4.1",
     "prettier-package-json": "~2.6.0",
     "prettier-plugin-sort-json": "~0.0.2",
+    "regenerator-runtime": "^0.13.9",
     "sass": "~1.43.4",
     "sass-loader": "~12.3.0",
     "style-loader": "~3.3.1",
@@ -68,13 +73,15 @@
     "stylelint-config-prettier": "~9.0.3",
     "stylelint-config-standard": "~24.0.0",
     "stylelint-config-standard-scss": "~2.0.1",
+    "supertest": "^6.1.6",
+    "typescript": "^4.5.2",
     "webpack": "~5.64.2",
     "webpack-bundle-analyzer": "~4.5.0",
     "webpack-cli": "~4.9.1",
     "webpack-dev-server": "~4.5.0"
   },
   "engines": {
-    "node": "~16.13.0",
+    "node": "^16.0.0",
     "npm": "~8.1.0",
     "yarn": "~1.22.17"
   }

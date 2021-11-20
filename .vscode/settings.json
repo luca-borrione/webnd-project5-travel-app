@@ -27,6 +27,12 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "jest.autoRun": {
+    "onSave": "test-file",
+    // "onStartup": ["all-tests"],
+    "watch": false
+  },
+  "jest.jestCommandLine": "yarn test",
   "less.validate": false,
   "linthtml.packageManager": "yarn",
   "scss.validate": false

@@ -5,6 +5,7 @@
   - linthtml
 '*.js':
   - eslint --fix
+  - jest --bail --findRelatedTests
 '*.scss':
   - stylelint --fix
 package.json:
