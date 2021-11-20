@@ -21,9 +21,16 @@
     "lint:html": "linthtml 'src/client/views/**/*.html'",
     "lint:js": "eslint . --ext .js",
     "lint:scss": "stylelint 'src/client/styles/**/*.scss'",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "node src/server/index.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "~1.19.0",
+    "cors": "~2.8.5",
+    "dotenv": "~10.0.0",
+    "express": "~4.17.1",
+    "node-fetch": "~3.1.0"
+  },
   "devDependencies": {
     "@linthtml/linthtml": "~0.8.0",
     "@linthtml/linthtml-config-recommended": "^0.1.0",
