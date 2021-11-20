@@ -15,9 +15,11 @@
     "format:html": "prettier --write 'src/client/views/**/*.html'",
     "format:js": "$npm_execpath run lint:js --fix",
     "format:json": "prettier --write '*.json'",
+    "format:scss": "$npm_execpath run lint:scss --fix",
     "format": "npm-run-all --parallel format:*",
     "lint:html": "linthtml 'src/client/views/**/*.html'",
     "lint:js": "eslint . --ext .js",
+    "lint:scss": "stylelint 'src/client/styles/**/*.scss'",
     "lint": "npm-run-all --parallel lint:*"
   },
   "dependencies": {},
@@ -29,9 +31,14 @@
     "eslint-config-prettier": "~8.3.0",
     "eslint-plugin-import": "~2.25.3",
     "npm-run-all": "~4.1.5",
+    "postcss": "~8.3.11",
     "prettier": "~2.4.1",
     "prettier-package-json": "~2.6.0",
-    "prettier-plugin-sort-json": "~0.0.2"
+    "prettier-plugin-sort-json": "~0.0.2",
+    "stylelint": "~14.1.0",
+    "stylelint-config-prettier": "~9.0.3",
+    "stylelint-config-standard": "~24.0.0",
+    "stylelint-config-standard-scss": "~2.0.1"
   },
   "engineStrict": true,
   "engines": {

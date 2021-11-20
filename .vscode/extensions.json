@@ -2,6 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "kamikillerto.vscode-linthtml"
+    "kamikillerto.vscode-linthtml",
+    "stylelint.vscode-stylelint"
   ]
 }

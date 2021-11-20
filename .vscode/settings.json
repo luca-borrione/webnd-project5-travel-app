@@ -17,13 +17,17 @@
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "css.validate": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
   },
   "editor.tabSize": 2,
   "eslint.validate": ["javascript"],
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "linthtml.packageManager": "yarn"
+  "less.validate": false,
+  "linthtml.packageManager": "yarn",
+  "scss.validate": false
 }
