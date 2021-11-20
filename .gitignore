@@ -1,0 +1,9 @@
+*.code-workspace
+coverage/
+dist
+.DS_Store
+.env
+.eslintcache
+.history/
+node_modules
+yarn-error.log
