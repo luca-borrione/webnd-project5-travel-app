@@ -1,0 +1,13 @@
+'*.css':
+  - stylelint --fix
+'*.html':
+  - prettier --write
+  - linthtml
+'*.js':
+  - eslint --fix
+'*.scss':
+  - stylelint --fix
+package.json:
+  - prettier-package-json --write
+'*.json':
+  - prettier --write
