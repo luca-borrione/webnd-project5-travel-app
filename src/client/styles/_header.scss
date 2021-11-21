@@ -7,15 +7,14 @@
   justify-content: center;
   background-image: url('../assets/lighthouse.jpg');
   background-size: auto;
-  background-position-y: 58%;
+  background-position-y: 52%;
   background-position-x: 75%;
   background-repeat: no-repeat;
-  height: 10em;
+  height: 10rem;
 
   &__text {
-    font-family: $secondary-font-family;
     color: $secondary-font-color;
-    font-size: 1.3em;
+    font-size: 1.35rem;
     font-weight: 100;
     margin: 0;
     padding: 0;
@@ -26,9 +25,10 @@
 @media (min-width: 600px) {
   .banner {
     height: 12em;
-    margin-top: 1.5em;
+    background-position-y: 63%;
 
     &__text {
+      // color: yellow;
       font-size: 1.5em;
       font-weight: 400;
     }
@@ -39,10 +39,10 @@
 @media (min-width: 961px) {
   .banner {
     background-size: cover;
-    background-position-y: 57%;
-    margin-top: 2em;
+    background-position-y: 61%;
 
     &__text {
+      // color: aqua;
       font-size: 2em;
       font-weight: 600;
     }

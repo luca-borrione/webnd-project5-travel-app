@@ -12,5 +12,29 @@
         <h2 class="banner__text">Find Your Next Adventure</h2>
       </section>
     </header>
+
+    <main>
+      <section class="search">
+        <form class="search-form" onsubmit="return Client.handleSubmit(event)">
+          <label class="search-form__destination" for="destination">
+            To
+            <input id="destination" type="text" name="destination" required />
+          </label>
+          <label class="search-form__departure" for="departure">
+            From
+            <input id="departure" type="text" name="departure" required />
+          </label>
+          <label class="search-form__departure-date" for="departure-date">
+            Departure
+            <input id="departure-date" type="date" name="departure-date" required />
+          </label>
+          <label class="search-form__return-date" for="return-date">
+            Return
+            <input id="return-date" type="date" name="return-date" required />
+          </label>
+          <button type="submit" class="search-form__submit-button">Search</button>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
