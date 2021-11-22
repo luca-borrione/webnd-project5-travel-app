@@ -15,22 +15,22 @@
 
     <main>
       <section class="search">
-        <form class="search-form" onsubmit="return Client.handleSubmit(event)">
-          <label class="search-form__destination" for="destination">
+        <form class="search-form" name="search">
+          <label for="search-form__destination">
             To
-            <input id="destination" type="text" name="destination" required />
+            <input id="search-form__destination" type="text" required />
           </label>
-          <label class="search-form__departure" for="departure">
+          <label for="search-form__departure">
             From
-            <input id="departure" type="text" name="departure" required />
+            <input id="search-form__departure" type="text" required />
           </label>
-          <label class="search-form__departure-date" for="departure-date">
+          <label for="search-form__departure-date">
             Departure
-            <input id="departure-date" type="date" name="departure-date" required />
+            <input id="search-form__departure-date" type="date" required placeholder="dd/mm/yyyy" />
           </label>
-          <label class="search-form__return-date" for="return-date">
+          <label for="search-form__return-date">
             Return
-            <input id="return-date" type="date" name="return-date" required />
+            <input id="search-form__return-date" type="date" required placeholder="dd/mm/yyyy" />
           </label>
           <button type="submit" class="search-form__submit-button">Search</button>
         </form>

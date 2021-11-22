@@ -5,5 +5,8 @@ Array [
   Array [
     "/test",
   ],
+  Array [
+    "/geoname",
+  ],
 ]
 `;
