@@ -1,5 +1,5 @@
 import { handleError, selectors } from './utils';
-import { gePositionInfo, getGeoName } from './app-controller';
+import { getPositionInfo, getGeoName, getDestinationImage } from './app-controller';
 
 let $form;
 let $results;
@@ -25,24 +25,37 @@ const storeElements = () => {
     language: document.querySelector(selectors.results.language),
     offset: document.querySelector(selectors.results.offset),
     subregion: document.querySelector(selectors.results.subregion),
+    thumbnail: document.querySelector(selectors.results.thumbnail),
     timezone: document.querySelector(selectors.results.timezone),
   };
 };
 
-const updateResultsView = (data) => {
-  $results.capital.innerHTML = data.capital;
-  $results.continent.innerHTML = data.continent;
-  $results.country.innerHTML = data.country;
-  $results.county.innerHTML = data.county || 'n/a';
-  $results.currency.innerHTML = data.currencies
-    .map(({ code, name }) => `${name} (${code})`)
-    .join(', ');
-  $results.destination.innerHTML = data.destination;
-  $results.flag.innerHTML = data.flag;
-  $results.language.innerHTML = data.languages.join(', ');
-  $results.offset.innerHTML = data.offset;
-  $results.subregion.innerHTML = data.subregion;
-  $results.timezone.innerHTML = data.timezone;
+const updateResultsView = ({
+  capital,
+  continent,
+  country,
+  county = 'n/a',
+  currencies,
+  destination,
+  flag,
+  languages,
+  offset,
+  subregion,
+  timezone,
+  thumbnailUrl = require('../assets/placeholder-destination-thumb.jpg'), // eslint-disable-line global-require, import/no-unresolved, import/no-absolute-path
+}) => {
+  $results.capital.innerHTML = capital;
+  $results.continent.innerHTML = continent;
+  $results.country.innerHTML = country;
+  $results.county.innerHTML = county;
+  $results.currency.innerHTML = currencies.map(({ code, name }) => `${name} (${code})`).join(', ');
+  $results.destination.innerHTML = destination;
+  $results.flag.innerHTML = flag;
+  $results.language.innerHTML = languages.join(', ');
+  $results.offset.innerHTML = offset;
+  $results.subregion.innerHTML = subregion;
+  $results.timezone.innerHTML = timezone;
+  $results.thumbnail.src = thumbnailUrl;
 };
 
 const onSearchFormSubmit = async (event) => {
@@ -53,21 +66,30 @@ const onSearchFormSubmit = async (event) => {
     const { latitude, longitude, destination, county, country } = await getGeoName(
       $form.destination.value
     );
-    const { capital, continent, currencies, languages, timezone, offset, flag, subregion } =
-      await gePositionInfo({ latitude, longitude });
-    return updateResultsView({
-      capital,
-      county,
-      continent,
-      country,
-      destination,
-      currencies,
-      languages,
-      timezone,
-      offset,
-      flag,
-      subregion,
-    });
+
+    return Promise.all([
+      getPositionInfo({ latitude, longitude }),
+      getDestinationImage({ destination, country }),
+    ]).then(
+      ([
+        { capital, continent, currencies, languages, timezone, offset, flag, subregion },
+        thumbnailUrl,
+      ]) =>
+        updateResultsView({
+          capital,
+          county,
+          continent,
+          country,
+          destination,
+          currencies,
+          languages,
+          timezone,
+          offset,
+          flag,
+          subregion,
+          thumbnailUrl,
+        })
+    );
   } catch (e) {
     return handleError(e);
   }

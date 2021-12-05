@@ -1,9 +1,78 @@
 import { getData, handleErrorAndReject } from './utils';
-import { getGeoName, gePositionInfo } from './app-controller';
+import { getGeoName, getPositionInfo, getDestinationImage } from './app-controller';
 
 jest.mock('./utils');
 
 describe('app-controller', () => {
+  describe('getDestinationImage', () => {
+    const mockDestinationImage = {
+      webformatURL: 'mock-thumbnail-url',
+    };
+
+    beforeEach(() => {
+      getData.mockResolvedValue({
+        success: true,
+        results: {
+          hits: [mockDestinationImage],
+        },
+      });
+    });
+
+    it('should correctly call getData', async () => {
+      expect(getData).not.toHaveBeenCalled();
+      await getDestinationImage({ destination: 'mock-destination', country: 'mock-country' });
+      expect(getData).toHaveBeenCalledTimes(1);
+      expect(getData).toHaveBeenCalledWith('/api/destination-image', {
+        destination: 'mock-destination',
+        country: 'mock-country',
+      });
+    });
+
+    it('should correctly parse the data received from getData when successfull', async () => {
+      const result = await getDestinationImage({
+        destination: 'mock-destination',
+        country: 'mock-country',
+      });
+      expect(result).toBe('mock-thumbnail-url');
+    });
+
+    it('should return undefined when no images have been found', async () => {
+      getData.mockResolvedValue({
+        success: true,
+        results: { hits: [] },
+      });
+      const result = await getDestinationImage({
+        destination: 'mock-destination',
+        country: 'mock-country',
+      });
+      expect(result).toBeUndefined();
+    });
+
+    it('should handle an error nicely', async () => {
+      const expectedError = new Error('mock-expected-error');
+      getData.mockRejectedValueOnce(expectedError);
+      expect(handleErrorAndReject).not.toHaveBeenCalled();
+      await getDestinationImage({
+        destination: 'mock-destination',
+        country: 'mock-country',
+      });
+      expect(handleErrorAndReject).toBeCalledTimes(1);
+      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+    });
+
+    it('should reject returning the error message when getData is not successfull', async () => {
+      getData.mockResolvedValueOnce({ success: false, message: 'something went wrong' });
+      const expectedError = new Error('something went wrong');
+      expect(handleErrorAndReject).not.toHaveBeenCalled();
+      await getDestinationImage({
+        destination: 'mock-destination',
+        country: 'mock-country',
+      });
+      expect(handleErrorAndReject).toBeCalledTimes(1);
+      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+    });
+  });
+
   describe('getGeoName', () => {
     const mockGeoName = {
       adminName1: 'mock-county',
@@ -59,7 +128,7 @@ describe('app-controller', () => {
     });
   });
 
-  describe('gePositionInfo', () => {
+  describe('getPositionInfo', () => {
     const mockPositionInfo = {
       continent: 'mock-continent',
       country_module: {
@@ -89,7 +158,7 @@ describe('app-controller', () => {
 
     it('should correctly call getData', async () => {
       expect(getData).not.toHaveBeenCalled();
-      await gePositionInfo({ latitude: 'mock-latitude', longitude: 'mock-longitude' });
+      await getPositionInfo({ latitude: 'mock-latitude', longitude: 'mock-longitude' });
       expect(getData).toHaveBeenCalledTimes(1);
       expect(getData).toHaveBeenCalledWith('/api/position-info', {
         latitude: 'mock-latitude',
@@ -98,7 +167,7 @@ describe('app-controller', () => {
     });
 
     it('should correctly parse the data received from getData when successfull', async () => {
-      const result = await gePositionInfo({
+      const result = await getPositionInfo({
         latitude: 'mock-latitude',
         longitude: 'mock-longitude',
       });
@@ -121,7 +190,7 @@ describe('app-controller', () => {
       const expectedError = new Error('mock-expected-error');
       getData.mockRejectedValueOnce(expectedError);
       expect(handleErrorAndReject).not.toHaveBeenCalled();
-      await gePositionInfo({
+      await getPositionInfo({
         latitude: 'mock-latitude',
         longitude: 'mock-longitude',
       });
@@ -133,7 +202,7 @@ describe('app-controller', () => {
       getData.mockResolvedValueOnce({ success: false, message: 'something went wrong' });
       const expectedError = new Error('something went wrong');
       expect(handleErrorAndReject).not.toHaveBeenCalled();
-      await gePositionInfo({
+      await getPositionInfo({
         latitude: 'mock-latitude',
         longitude: 'mock-longitude',
       });

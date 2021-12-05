@@ -36,10 +36,11 @@ describe('api-routes', () => {
   });
 
   it.each`
-    route               | callbackName
-    ${'/test'}          | ${'getTest'}
-    ${'/geoname'}       | ${'getGeoName'}
-    ${'/position-info'} | ${'gePositionInfo'}
+    route                   | callbackName
+    ${'/test'}              | ${'getTest'}
+    ${'/geoname'}           | ${'getGeoName'}
+    ${'/position-info'}     | ${'getPositionInfo'}
+    ${'/destination-image'} | ${'getDestinationImage'}
   `('should correctly set the route for $route', ({ route, callbackName }) => {
     prepareRouteSpies(route);
     const routeIndex = routeSpy.mock.calls.findIndex((mockCall) => mockCall[0] === route);

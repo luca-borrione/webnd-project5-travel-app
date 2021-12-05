@@ -5,4 +5,8 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   snapshotResolver: '<rootDir>/snapshotResolver.js',
   watchPathIgnorePatterns: ['<rootDir>/node_modules'],
+  transform: {
+    '^.+\\.js$': 'babel-jest',
+    '.+\\.(png|jpg|jpeg|gif)$': 'jest-transform-stub',
+  },
 };

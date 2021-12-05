@@ -8,6 +8,126 @@ describe('api-routes-controller', () => {
     controller = require('./api-routes-controller'); // eslint-disable-line global-require
   });
 
+  describe('getDestinationImage', () => {
+    let mockRequest;
+    let mockResponse;
+    let mockNext;
+    let mockFetch;
+
+    beforeEach(() => {
+      process.env.PIXABAY_APIKEY = 'MOCK-PIXABAY_APIKEY';
+      mockFetch = require('node-fetch'); // eslint-disable-line global-require
+      mockRequest = {
+        query: { destination: 'mock-destination', country: 'mock-country' },
+      };
+      mockResponse = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      mockNext = jest.fn();
+    });
+
+    it('should call fetch with the expected protocol hostname and pathname', async () => {
+      expect(mockFetch).not.toHaveBeenCalled();
+      await controller.getDestinationImage(mockRequest, mockResponse, mockNext);
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+      const { protocol, hostname, pathname } = new URL(mockFetch.mock.calls[0][0]);
+      expect(`${protocol}//${hostname}${pathname}`).toBe('https://pixabay.com/api/');
+    });
+
+    it('should call fetch sending the required params in the query', async () => {
+      expect(mockFetch).not.toHaveBeenCalled();
+      await controller.getDestinationImage(mockRequest, mockResponse, mockNext);
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+      const parsedUrl = new URL(mockFetch.mock.calls[0][0]);
+      const queryParams = Object.fromEntries(new URLSearchParams(parsedUrl.search));
+      const requiredParams = {
+        category: 'travel',
+        image_type: 'photo',
+        key: 'MOCK-PIXABAY_APIKEY',
+        // order: 'popular',
+        orientation: 'horizontal',
+        q: `mock-destination mock-country`,
+        safesearch: 'true',
+      };
+      expect(queryParams).toStrictEqual(requiredParams);
+    });
+
+    it('should call fetch sending undefined key if not set in the env', async () => {
+      delete process.env.PIXABAY_APIKEY;
+      jest.mock('dotenv', () => ({
+        config: jest.fn().mockImplementationOnce(() => {}),
+      }));
+      jest.resetModules();
+      controller = require('./api-routes-controller'); // eslint-disable-line global-require
+      mockFetch = require('node-fetch'); // eslint-disable-line global-require
+      expect(mockFetch).not.toHaveBeenCalled();
+      await controller.getDestinationImage(mockRequest, mockResponse, mockNext);
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+      const parsedUrl = new URL(mockFetch.mock.calls[0][0]);
+      expect(parsedUrl.searchParams.get('key')).toBe('undefined');
+    });
+
+    it('should be unsuccessful and send the failure message when the remote api responds with a non-ok status', async () => {
+      const MOCK_FETCH_STATUS = 401;
+      mockFetch.mockReturnValueOnce({
+        status: MOCK_FETCH_STATUS,
+        json: jest.fn().mockReturnValueOnce({
+          message: 'mock-failure-message',
+        }),
+      });
+      expect(mockFetch).not.toHaveBeenCalled();
+      await controller.getDestinationImage(mockRequest, mockResponse, mockNext);
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+      expect(mockResponse.status).toHaveBeenCalledTimes(1);
+      expect(mockResponse.status).toBeCalledWith(MOCK_FETCH_STATUS);
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        message: 'mock-failure-message',
+        success: false,
+      });
+      expect(mockNext).toHaveBeenCalledTimes(1);
+      expect(mockNext).toHaveBeenCalledWith('mock-failure-message');
+    });
+
+    it('should be successful and send the results data when the remote api responds with an ok status', async () => {
+      mockFetch.mockReturnValueOnce({
+        status: 200,
+        json: jest.fn().mockReturnValueOnce({ data: 'mock-results-data' }),
+      });
+      expect(mockFetch).not.toHaveBeenCalled();
+      await controller.getDestinationImage(mockRequest, mockResponse, mockNext);
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: { data: 'mock-results-data' },
+        success: true,
+      });
+      expect(mockNext).not.toHaveBeenCalled();
+    });
+
+    it('should be unsuccessful and send the error message when an error occurs', async () => {
+      mockFetch.mockReturnValueOnce({
+        status: 200,
+        json: jest.fn().mockImplementationOnce(() => {
+          throw new Error('mock-error-message');
+        }),
+      });
+      expect(mockFetch).not.toHaveBeenCalled();
+      await controller.getDestinationImage(mockRequest, mockResponse, mockNext);
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+      expect(mockResponse.status).toHaveBeenCalledTimes(1);
+      expect(mockResponse.status).toBeCalledWith(500);
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        message: 'mock-error-message',
+        success: false,
+      });
+      expect(mockNext).toHaveBeenCalledTimes(1);
+      expect(mockNext).toHaveBeenCalledWith(new Error('mock-error-message'));
+    });
+  });
+
   describe('getGeoName', () => {
     let mockRequest;
     let mockResponse;
@@ -124,7 +244,7 @@ describe('api-routes-controller', () => {
     });
   });
 
-  describe('gePositionInfo', () => {
+  describe('getPositionInfo', () => {
     let mockRequest;
     let mockResponse;
     let mockNext;
@@ -145,7 +265,7 @@ describe('api-routes-controller', () => {
 
     it('should call fetch with the expected protocol hostname and pathname', async () => {
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.gePositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       const { protocol, hostname, pathname } = new URL(mockFetch.mock.calls[0][0]);
       expect(`${protocol}//${hostname}${pathname}`).toBe('http://api.positionstack.com/v1/reverse');
@@ -153,7 +273,7 @@ describe('api-routes-controller', () => {
 
     it('should call fetch sending the required params in the query', async () => {
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.gePositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       const parsedUrl = new URL(mockFetch.mock.calls[0][0]);
       const queryParams = Object.fromEntries(new URLSearchParams(parsedUrl.search));
@@ -176,7 +296,7 @@ describe('api-routes-controller', () => {
       controller = require('./api-routes-controller'); // eslint-disable-line global-require
       mockFetch = require('node-fetch'); // eslint-disable-line global-require
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.gePositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       const parsedUrl = new URL(mockFetch.mock.calls[0][0]);
       expect(parsedUrl.searchParams.get('access_key')).toBe('undefined');
@@ -191,7 +311,7 @@ describe('api-routes-controller', () => {
         }),
       });
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.gePositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       expect(mockResponse.status).toHaveBeenCalledTimes(1);
       expect(mockResponse.status).toBeCalledWith(MOCK_FETCH_STATUS);
@@ -210,7 +330,7 @@ describe('api-routes-controller', () => {
         json: jest.fn().mockReturnValueOnce({ data: 'mock-results-data' }),
       });
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.gePositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       expect(mockResponse.json).toHaveBeenCalledTimes(1);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -228,7 +348,7 @@ describe('api-routes-controller', () => {
         }),
       });
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.gePositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       expect(mockResponse.status).toHaveBeenCalledTimes(1);
       expect(mockResponse.status).toBeCalledWith(500);

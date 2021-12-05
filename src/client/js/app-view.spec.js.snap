@@ -6,13 +6,19 @@ exports[`app-view receiving the data of the search should update the results 1`]
 >
   
       
-  <span
-    class="results-card__header-flag"
+  <img
+    class="results-card__image-thumbnail"
+    src=""
   />
   
       
   <span
-    class="results-card__header-destination"
+    class="results-card__image-caption-flag"
+  />
+  
+      
+  <span
+    class="results-card__image-caption-destination"
   />
   
       
@@ -70,15 +76,21 @@ exports[`app-view receiving the data of the search should update the results 2`]
 >
   
       
+  <img
+    class="results-card__image-thumbnail"
+    src="mock-image-url"
+  />
+  
+      
   <span
-    class="results-card__header-flag"
+    class="results-card__image-caption-flag"
   >
     mock-flag
   </span>
   
       
   <span
-    class="results-card__header-destination"
+    class="results-card__image-caption-destination"
   >
     mock-destination
   </span>

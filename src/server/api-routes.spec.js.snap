@@ -11,5 +11,8 @@ Array [
   Array [
     "/position-info",
   ],
+  Array [
+    "/destination-image",
+  ],
 ]
 `;

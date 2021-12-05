@@ -50,7 +50,23 @@ const parsePositionInfoResponse = (response) =>
     resolve(transformPositionInfoData(response.results.data[0]));
   });
 
-export const gePositionInfo = ({ latitude, longitude }) =>
+export const getPositionInfo = ({ latitude, longitude }) =>
   getData('/api/position-info', { latitude, longitude })
     .then(parsePositionInfoResponse)
+    .catch(handleErrorAndReject);
+
+// ---- Destination Photo ----
+const transformDestinationPhotoData = ({ webformatURL } = {}) => webformatURL;
+
+const parseDestinationPhotoResponse = (response) =>
+  new Promise((resolve, reject) => {
+    if (!response.success) {
+      reject(new Error(response.message));
+    }
+    resolve(transformDestinationPhotoData(response.results.hits[0]));
+  });
+
+export const getDestinationImage = ({ destination, country }) =>
+  getData('/api/destination-image', { destination, country })
+    .then(parseDestinationPhotoResponse)
     .catch(handleErrorAndReject);
