@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app-view receiving the data of the search should update the results 1`] = `
+<article
+  class="results-card"
+>
+  
+      
+  <span
+    class="results-card__header-flag"
+  />
+  
+      
+  <span
+    class="results-card__header-destination"
+  />
+  
+      
+  <div
+    class="results-card__info-continent--value"
+  />
+  
+      
+  <div
+    class="results-card__info-subregion--value"
+  />
+  
+      
+  <div
+    class="results-card__info-country--value"
+  />
+  
+      
+  <div
+    class="results-card__info-county--value"
+  />
+  
+      
+  <div
+    class="results-card__info-capital--value"
+  />
+  
+      
+  <div
+    class="results-card__info-currency--value"
+  />
+  
+      
+  <div
+    class="results-card__info-language--value"
+  />
+  
+      
+  <div
+    class="results-card__info-timezone-name--value"
+  />
+  
+      
+  <div
+    class="results-card__info-timezone-offset--value"
+  />
+  
+    
+</article>
+`;
+
+exports[`app-view receiving the data of the search should update the results 2`] = `
+<article
+  class="results-card"
+>
+  
+      
+  <span
+    class="results-card__header-flag"
+  >
+    mock-flag
+  </span>
+  
+      
+  <span
+    class="results-card__header-destination"
+  >
+    mock-destination
+  </span>
+  
+      
+  <div
+    class="results-card__info-continent--value"
+  >
+    mock-continent
+  </div>
+  
+      
+  <div
+    class="results-card__info-subregion--value"
+  >
+    mock-subregion
+  </div>
+  
+      
+  <div
+    class="results-card__info-country--value"
+  >
+    mock-country
+  </div>
+  
+      
+  <div
+    class="results-card__info-county--value"
+  >
+    mock-county
+  </div>
+  
+      
+  <div
+    class="results-card__info-capital--value"
+  >
+    mock-capital
+  </div>
+  
+      
+  <div
+    class="results-card__info-currency--value"
+  >
+    mock-currency1 (cur1), mock-currency2 (cur2)
+  </div>
+  
+      
+  <div
+    class="results-card__info-language--value"
+  >
+    mock-language1, mock-language2
+  </div>
+  
+      
+  <div
+    class="results-card__info-timezone-name--value"
+  >
+    mock-timezone
+  </div>
+  
+      
+  <div
+    class="results-card__info-timezone-offset--value"
+  >
+    mock-offset
+  </div>
+  
+    
+</article>
+`;

@@ -1,5 +1,3 @@
-@import './core/variables';
-
 /* Mobile First */
 .banner {
   display: grid;
@@ -28,7 +26,7 @@
     background-position-y: 63%;
 
     &__text {
-      // color: yellow;
+      color: yellow;
       font-size: 1.5em;
       font-weight: 400;
     }
@@ -42,7 +40,7 @@
     background-position-y: 61%;
 
     &__text {
-      // color: aqua;
+      color: aqua;
       font-size: 2em;
       font-weight: 600;
     }

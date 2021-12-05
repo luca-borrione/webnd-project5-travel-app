@@ -35,12 +35,16 @@ describe('api-routes', () => {
     expect(routeSpy.mock.calls).toMatchSnapshot();
   });
 
-  it('should correctly set the route for /test', () => {
-    const route = '/test';
+  it.each`
+    route               | callbackName
+    ${'/test'}          | ${'getTest'}
+    ${'/geoname'}       | ${'getGeoName'}
+    ${'/position-info'} | ${'gePositionInfo'}
+  `('should correctly set the route for $route', ({ route, callbackName }) => {
     prepareRouteSpies(route);
     const routeIndex = routeSpy.mock.calls.findIndex((mockCall) => mockCall[0] === route);
     expect(routeIndex).toBeGreaterThanOrEqual(0);
     const callback = routeGetSpy.mock.calls[0][0];
-    expect(callback.name).toBe('getTest');
+    expect(callback.name).toBe(callbackName);
   });
 });

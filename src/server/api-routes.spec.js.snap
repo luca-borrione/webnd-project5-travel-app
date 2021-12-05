@@ -8,5 +8,8 @@ Array [
   Array [
     "/geoname",
   ],
+  Array [
+    "/position-info",
+  ],
 ]
 `;
