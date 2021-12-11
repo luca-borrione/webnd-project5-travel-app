@@ -1,6 +1,6 @@
 @use 'sass:color';
 
-.results-card {
+.results .card {
   display: flex;
   flex-wrap: wrap;
   background: $main-bg-color;
@@ -29,32 +29,13 @@
         padding-right: 0.2rem;
       }
 
-      &-destination {
+      &-city {
         margin-right: auto;
         text-transform: capitalize;
         font-weight: bold;
         padding-left: 0.2rem;
         align-self: center;
       }
-    }
-  }
-
-  &__header {
-    display: flex;
-    width: 100%;
-
-    &-flag {
-      margin-left: auto;
-      font-size: 1.6rem;
-      padding-right: 0.2rem;
-    }
-
-    &-destination {
-      margin-right: auto;
-      text-transform: capitalize;
-      font-weight: bold;
-      padding-left: 0.2rem;
-      align-self: center;
     }
   }
 
@@ -74,11 +55,56 @@
       overflow: hidden;
     }
   }
+
+  &__weather {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template:
+      'weather-title weather-title' 1fr
+      'weather-date weather-date' 1fr
+      'weather-icon weather-temperature' auto
+      'weather-icon weather-humidity-wind' auto
+      'weather-description weather-description' 1fr / 1fr 2fr;
+
+    &-title {
+      grid-area: weather-title;
+      margin: auto;
+      font-weight: bold;
+    }
+
+    &-date {
+      grid-area: weather-date;
+      margin: auto;
+    }
+
+    &-icon {
+      grid-area: weather-icon;
+      width: 85%;
+      height: auto;
+      margin: auto;
+    }
+
+    &-temperature {
+      grid-area: weather-temperature;
+      margin: auto;
+    }
+
+    &-humidity-wind {
+      grid-area: weather-humidity-wind;
+      margin: auto;
+    }
+
+    &-description {
+      grid-area: weather-description;
+      margin: auto;
+    }
+  }
 }
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 @media (min-width: 600px) {
-  .results-card {
+  .card {
     &__info {
       display: grid;
       grid-template-columns: 1fr 1fr;

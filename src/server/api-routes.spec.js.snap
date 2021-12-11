@@ -12,7 +12,10 @@ Array [
     "/position-info",
   ],
   Array [
-    "/destination-image",
+    "/thumbnail",
+  ],
+  Array [
+    "/weather-current",
   ],
 ]
 `;

@@ -3,7 +3,7 @@ import { getData, handleErrorAndReject } from './utils';
 // ---- Geo Names ----
 const transformGeoNameData = ({ lat, lng, name, adminName1, countryName }) => ({
   county: adminName1,
-  destination: name,
+  city: name,
   latitude: lat,
   longitude: lng,
   country: countryName,
@@ -56,17 +56,48 @@ export const getPositionInfo = ({ latitude, longitude }) =>
     .catch(handleErrorAndReject);
 
 // ---- Destination Photo ----
-const transformDestinationPhotoData = ({ webformatURL } = {}) => webformatURL;
-
-const parseDestinationPhotoResponse = (response) =>
+const parseThumbnailResponse = (response) =>
   new Promise((resolve, reject) => {
     if (!response.success) {
       reject(new Error(response.message));
     }
-    resolve(transformDestinationPhotoData(response.results.hits[0]));
+    resolve(response.results.hits?.[0]?.webformatURL);
   });
 
-export const getDestinationImage = ({ destination, country }) =>
-  getData('/api/destination-image', { destination, country })
-    .then(parseDestinationPhotoResponse)
+export const getThumbnail = ({ city, country }) =>
+  getData('/api/thumbnail', { city, country })
+    .then(parseThumbnailResponse)
+    .catch(handleErrorAndReject);
+
+// ---- Weather Current ----
+const transformCurrentWeatherData = ({
+  app_temp: apparentTemperature,
+  ob_time: dateString,
+  rh: humidity,
+  temp: temperature,
+  timezone,
+  weather: { icon, description },
+  wind_spd: windSpeed,
+}) => ({
+  apparentTemperature,
+  dateString,
+  description,
+  humidity,
+  icon,
+  temperature,
+  timezone,
+  windSpeed,
+});
+
+const parseCurrentWeatherResponse = (response) =>
+  new Promise((resolve, reject) => {
+    if (!response.success) {
+      reject(new Error(response.message));
+    }
+    resolve(transformCurrentWeatherData(response.results.data[0]));
+  });
+
+export const getCurrentWeather = ({ city, country }) =>
+  getData('/api/weather-current', { city, country })
+    .then(parseCurrentWeatherResponse)
     .catch(handleErrorAndReject);

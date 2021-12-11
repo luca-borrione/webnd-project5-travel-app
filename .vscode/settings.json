@@ -23,6 +23,7 @@
     "source.fixAll.stylelint": true
   },
   "editor.tabSize": 2,
+  "editor.formatOnSave": true,
   "eslint.validate": ["javascript"],
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,

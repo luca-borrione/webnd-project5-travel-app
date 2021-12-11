@@ -1,8 +1,8 @@
-import { handleError, selectors } from './utils';
-import { getPositionInfo, getGeoName, getDestinationImage } from './app-controller';
+import { handleError } from './utils';
+import { getPositionInfo, getGeoName, getThumbnail, getCurrentWeather } from './app-controller';
+import { renderResultsView } from './render-results';
 
 let $form;
-let $results;
 
 const storeElements = () => {
   $form = {
@@ -12,50 +12,10 @@ const storeElements = () => {
     departureDate: document.forms.search.elements['search-form__departure-date'],
     returnDate: document.forms.search.elements['search-form__return-date'],
   };
-
-  $results = {
-    capital: document.querySelector(selectors.results.capital),
-    card: document.querySelector(selectors.results.card),
-    continent: document.querySelector(selectors.results.continent),
-    country: document.querySelector(selectors.results.country),
-    county: document.querySelector(selectors.results.county),
-    currency: document.querySelector(selectors.results.currency),
-    destination: document.querySelector(selectors.results.destination),
-    flag: document.querySelector(selectors.results.flag),
-    language: document.querySelector(selectors.results.language),
-    offset: document.querySelector(selectors.results.offset),
-    subregion: document.querySelector(selectors.results.subregion),
-    thumbnail: document.querySelector(selectors.results.thumbnail),
-    timezone: document.querySelector(selectors.results.timezone),
-  };
 };
 
-const updateResultsView = ({
-  capital,
-  continent,
-  country,
-  county = 'n/a',
-  currencies,
-  destination,
-  flag,
-  languages,
-  offset,
-  subregion,
-  timezone,
-  thumbnailUrl = require('../assets/placeholder-destination-thumb.jpg'), // eslint-disable-line global-require, import/no-unresolved, import/no-absolute-path
-}) => {
-  $results.capital.innerHTML = capital;
-  $results.continent.innerHTML = continent;
-  $results.country.innerHTML = country;
-  $results.county.innerHTML = county;
-  $results.currency.innerHTML = currencies.map(({ code, name }) => `${name} (${code})`).join(', ');
-  $results.destination.innerHTML = destination;
-  $results.flag.innerHTML = flag;
-  $results.language.innerHTML = languages.join(', ');
-  $results.offset.innerHTML = offset;
-  $results.subregion.innerHTML = subregion;
-  $results.timezone.innerHTML = timezone;
-  $results.thumbnail.src = thumbnailUrl;
+const updateResultsView = (params) => {
+  document.querySelector('.results').innerHTML = renderResultsView(params);
 };
 
 const onSearchFormSubmit = async (event) => {
@@ -63,31 +23,34 @@ const onSearchFormSubmit = async (event) => {
   event.stopPropagation();
 
   try {
-    const { latitude, longitude, destination, county, country } = await getGeoName(
+    const { latitude, longitude, city, county, country } = await getGeoName(
       $form.destination.value
     );
 
     return Promise.all([
       getPositionInfo({ latitude, longitude }),
-      getDestinationImage({ destination, country }),
+      getThumbnail({ city, country }),
+      getCurrentWeather({ city, country }),
     ]).then(
       ([
         { capital, continent, currencies, languages, timezone, offset, flag, subregion },
-        thumbnailUrl,
+        thumbnail,
+        currentWeather,
       ]) =>
         updateResultsView({
           capital,
           county,
           continent,
           country,
-          destination,
+          city,
           currencies,
           languages,
           timezone,
           offset,
           flag,
           subregion,
-          thumbnailUrl,
+          thumbnail,
+          currentWeather,
         })
     );
   } catch (e) {

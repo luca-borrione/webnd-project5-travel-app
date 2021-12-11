@@ -1,14 +1,12 @@
-import { getGeoName, getPositionInfo, getDestinationImage } from './app-controller';
-import { selectors } from './utils';
+import { getGeoName, getPositionInfo, getThumbnail, getCurrentWeather } from './app-controller';
 import './app-view';
 
 jest.mock('./../assets/placeholder-destination-thumb.jpg', () => 'mock-placeholder-image');
 
 jest.mock('./app-controller', () => ({
-  getDestinationImage: jest.fn().mockResolvedValue('mock-image-url'),
   getGeoName: jest.fn().mockResolvedValue({
     county: 'mock-county',
-    destination: 'mock-destination',
+    city: 'mock-city',
     latitude: 'mock-latitude',
     longitude: 'mock-longitude',
     country: 'mock-country',
@@ -26,6 +24,21 @@ jest.mock('./app-controller', () => ({
     flag: 'mock-flag',
     subregion: 'mock-subregion',
   }),
+  getThumbnail: jest.fn().mockResolvedValue('mock-image-url'),
+  getCurrentWeather: jest.fn().mockResolvedValue({
+    apparentTemperature: 'mock-apparent-temperature',
+    dateString: 'mock-date-string',
+    description: 'mock-description',
+    humidity: 'mock-humidity',
+    icon: 'mock-icon',
+    temperature: 'mock-temperature',
+    timezone: 'mock-timezone',
+    windSpeed: 'mock-wind-speed',
+  }),
+}));
+
+jest.mock('./render-results', () => ({
+  renderResultsView: jest.fn().mockReturnValue('<main class="card">mock-results-view</main>'),
 }));
 
 // eslint-disable-next-line no-promise-executor-return
@@ -44,11 +57,7 @@ describe('app-view', () => {
       returnDate: document.forms.search.elements['search-form__return-date'],
     };
 
-    $results = {
-      card: document.querySelector(selectors.results.card),
-      county: document.querySelector(selectors.results.county),
-      thumbnail: document.querySelector(selectors.results.thumbnail),
-    };
+    $results = document.querySelector('.results');
   };
 
   beforeEach(() => {
@@ -59,20 +68,7 @@ describe('app-view', () => {
       <input id="search-form__departure-date" type="date" />
       <input id="search-form__return-date" type="date" />
     </form>
-    <article class="results-card">
-      <img class="results-card__image-thumbnail" src="" />
-      <span class="results-card__image-caption-flag"></span>
-      <span class="results-card__image-caption-destination"></span>
-      <div class="results-card__info-continent--value"></div>
-      <div class="results-card__info-subregion--value"></div>
-      <div class="results-card__info-country--value"></div>
-      <div class="results-card__info-county--value"></div>
-      <div class="results-card__info-capital--value"></div>
-      <div class="results-card__info-currency--value"></div>
-      <div class="results-card__info-language--value"></div>
-      <div class="results-card__info-timezone-name--value"></div>
-      <div class="results-card__info-timezone-offset--value"></div>
-    </article>
+    <section class="results"></section>
     `;
 
     window.document.dispatchEvent(
@@ -111,14 +107,25 @@ describe('app-view', () => {
       });
     });
 
-    it('should correctly call getPositionInfo', async () => {
-      expect(getDestinationImage).not.toHaveBeenCalled();
+    it('should correctly call getThumbnail', async () => {
+      expect(getThumbnail).not.toHaveBeenCalled();
       $form.search.submit();
       await flushPromises();
-      expect(getDestinationImage).toHaveBeenCalledTimes(1);
-      expect(getDestinationImage).toHaveBeenCalledWith({
+      expect(getThumbnail).toHaveBeenCalledTimes(1);
+      expect(getThumbnail).toHaveBeenCalledWith({
         country: 'mock-country',
-        destination: 'mock-destination',
+        city: 'mock-city',
+      });
+    });
+
+    it('should correctly call getCurrentWeather', async () => {
+      expect(getCurrentWeather).not.toHaveBeenCalled();
+      $form.search.submit();
+      await flushPromises();
+      expect(getCurrentWeather).toHaveBeenCalledTimes(1);
+      expect(getCurrentWeather).toHaveBeenCalledWith({
+        country: 'mock-country',
+        city: 'mock-city',
       });
     });
   });
@@ -144,9 +151,19 @@ describe('app-view', () => {
       expect(errorSpy).toBeCalledWith(expectedError);
     });
 
-    it('should handle an error nicely, if getDestinationImage rejects', async () => {
+    it('should handle an error nicely, if getThumbnail rejects', async () => {
       const expectedError = new Error('mock-expected-error');
-      getDestinationImage.mockRejectedValueOnce(expectedError);
+      getThumbnail.mockRejectedValueOnce(expectedError);
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+      $form.search.submit();
+      await flushPromises();
+      expect(errorSpy).toBeCalledTimes(1);
+      expect(errorSpy).toBeCalledWith(expectedError);
+    });
+
+    it('should handle an error nicely, if getCurrentWeather rejects', async () => {
+      const expectedError = new Error('mock-expected-error');
+      getCurrentWeather.mockRejectedValueOnce(expectedError);
       const errorSpy = jest.spyOn(console, 'error').mockImplementation();
       $form.search.submit();
       await flushPromises();
@@ -155,32 +172,10 @@ describe('app-view', () => {
     });
 
     it('should update the results', async () => {
-      expect($results.card).toMatchSnapshot();
+      expect($results).toMatchSnapshot();
       $form.search.submit();
       await flushPromises();
-      expect($results.card).toMatchSnapshot();
-    });
-
-    it('should default the county to n/a, if not available', async () => {
-      getGeoName.mockResolvedValueOnce({
-        county: undefined,
-        destination: 'mock-destination',
-        latitude: 'mock-latitude',
-        longitude: 'mock-longitude',
-        country: 'mock-country',
-      });
-      expect($results.county.innerHTML).toBe('');
-      $form.search.submit();
-      await flushPromises();
-      expect($results.county.innerHTML).toBe('n/a');
-    });
-
-    it('should default the thumbnail to a placeholder, if not available', async () => {
-      getDestinationImage.mockResolvedValueOnce(undefined);
-      expect($results.thumbnail.src).toBe('http://localhost/');
-      $form.search.submit();
-      await flushPromises();
-      expect($results.thumbnail.src).toBe('http://localhost/mock-placeholder-image');
+      expect($results).toMatchSnapshot();
     });
   });
 });

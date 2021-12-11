@@ -3,7 +3,8 @@ const fetch = require('node-fetch');
 
 const GEONAMES_BASEURL = 'http://api.geonames.org/searchJSON';
 const POSITIONSTACK_BASEURL = 'http://api.positionstack.com/v1/reverse';
-const PIXABAY_BASEURL = 'https://pixabay.com/api/';
+const PIXABAY_BASEURL = 'https://pixabay.com/api';
+const WEATHER_CURRENT_BASEURL = 'http://api.weatherbit.io/v2.0/current';
 
 const getFetchResponse = (res, next) => async (url) => {
   try {
@@ -54,9 +55,9 @@ const getPositionStackUrl = (req) => {
   return `${POSITIONSTACK_BASEURL}?${new URLSearchParams(params).toString()}`;
 };
 
-const getDestinationImageUrl = (req) => {
+const getThumbnailUrl = (req) => {
   const { PIXABAY_APIKEY } = process.env;
-  const { destination, country } = req.query;
+  const { city, country } = req.query;
 
   const params = {
     category: 'travel',
@@ -64,14 +65,27 @@ const getDestinationImageUrl = (req) => {
     key: PIXABAY_APIKEY,
     // order: 'popular',
     orientation: 'horizontal',
-    q: `${destination} ${country}`,
+    q: [city, country].filter(Boolean).join(' '),
     safesearch: 'true',
   };
   return `${PIXABAY_BASEURL}?${new URLSearchParams(params).toString()}`;
 };
 
+const getCurrentWeatherUrl = (req) => {
+  const { WEATHERBIT_APIKEY } = process.env;
+  const { city, country } = req.query;
+
+  const params = {
+    key: WEATHERBIT_APIKEY,
+    city,
+    country,
+  };
+  return `${WEATHER_CURRENT_BASEURL}?${new URLSearchParams(params).toString()}`;
+};
+
 module.exports = {
-  getDestinationImage: (req, res, next) => getFetchResponse(res, next)(getDestinationImageUrl(req)),
+  getCurrentWeather: (req, res, next) => getFetchResponse(res, next)(getCurrentWeatherUrl(req)),
+  getThumbnail: (req, res, next) => getFetchResponse(res, next)(getThumbnailUrl(req)),
   getGeoName: (req, res, next) => getFetchResponse(res, next)(getGeoNameUrl(req)),
   getPositionInfo: (req, res, next) => getFetchResponse(res, next)(getPositionStackUrl(req)),
   getTest: (_, res) => {
