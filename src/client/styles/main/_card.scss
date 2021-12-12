@@ -1,5 +1,9 @@
 @use 'sass:color';
 
+$red-200: hsl(360deg 77% 78%);
+$red-300: hsl(360deg 71% 66%);
+$red-400: hsl(360deg 64% 55%);
+
 .results .card {
   display: flex;
   flex-wrap: wrap;
@@ -60,66 +64,108 @@
     }
   }
 
-  &__weather {
+  .infobox {
     width: 90%;
     margin: auto;
     margin-bottom: 1.5rem;
     display: grid;
     grid-template:
-      'weather-title weather-title' 1fr
-      'weather-date weather-date' 1fr
-      'weather-icon weather-temperature' auto
-      'weather-icon weather-humidity-wind' auto
-      'weather-description weather-description' auto / 1fr 2fr;
+      'infobox-title' 1fr
+      'infobox-date' 1fr
+      'weather' auto / 1fr;
 
-    &-title {
-      grid-area: weather-title;
+    &__title {
+      grid-area: infobox-title;
       margin: auto;
       font-weight: bold;
     }
 
-    &-date {
-      grid-area: weather-date;
+    &__date {
+      grid-area: infobox-date;
       margin: auto;
     }
 
-    &-icon {
-      grid-area: weather-icon;
-      width: 85%;
-      height: auto;
-      margin: auto;
+    .weather {
+      grid-area: weather;
+      display: grid;
+      grid-template:
+        'weather-icon weather-temperature' auto
+        'weather-icon weather-extra-info' auto
+        'weather-description weather-description' 1fr / 1fr 2fr;
+
+      &__icon {
+        grid-area: weather-icon;
+        width: 85%;
+        height: auto;
+        margin: auto;
+      }
+
+      &__temperature {
+        grid-area: weather-temperature;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.5rem;
+      }
+
+      &__extra-info {
+        grid-area: weather-extra-info;
+        margin: auto;
+        font-size: 1.2rem;
+      }
+
+      &__description {
+        grid-area: weather-description;
+        margin: auto;
+      }
+    }
+  }
+
+  &__button {
+    background-color: color.scale($primary-bg-color, $lightness: 85%);
+    border: 0;
+    font-size: 1.1rem;
+    height: 3rem;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+
+    & i {
+      color: $red-400;
+
+      &.icon-heart-empty {
+        display: inline-block;
+      }
+
+      &.icon-heart {
+        display: none;
+      }
     }
 
-    &-temperature {
-      grid-area: weather-temperature;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-    }
+    &:hover {
+      background-color: color.scale($primary-bg-color, $lightness: 65%);
 
-    &-humidity-wind {
-      grid-area: weather-humidity-wind;
-      margin: auto;
-    }
+      & .icon-heart-empty {
+        display: none;
+      }
 
-    &-description {
-      grid-area: weather-description;
-      margin: auto;
+      & .icon-heart {
+        display: inline-block;
+      }
     }
   }
 }
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 @media (min-width: 600px) {
-  .card {
-    &__info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+  // .card {
+  //   &__info {
+  //     display: grid;
+  //     grid-template-columns: 1fr 1fr;
 
-      & > div:nth-child(even) {
-        align-self: center;
-        margin-bottom: auto;
-      }
-    }
-  }
+  //     & > div:nth-child(even) {
+  //       align-self: center;
+  //       margin-bottom: auto;
+  //     }
+  //   }
+  // }
 }

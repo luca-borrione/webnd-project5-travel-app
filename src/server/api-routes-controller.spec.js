@@ -244,7 +244,7 @@ describe('api-routes-controller', () => {
     });
   });
 
-  describe('getPositionInfo', () => {
+  describe('getLocationInfo', () => {
     let mockRequest;
     let mockResponse;
     let mockNext;
@@ -265,7 +265,7 @@ describe('api-routes-controller', () => {
 
     it('should call fetch with the expected protocol hostname and pathname', async () => {
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getLocationInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       const { protocol, hostname, pathname } = new URL(mockFetch.mock.calls[0][0]);
       expect(`${protocol}//${hostname}${pathname}`).toBe('http://api.positionstack.com/v1/reverse');
@@ -273,7 +273,7 @@ describe('api-routes-controller', () => {
 
     it('should call fetch sending the required params in the query', async () => {
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getLocationInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       const parsedUrl = new URL(mockFetch.mock.calls[0][0]);
       const queryParams = Object.fromEntries(new URLSearchParams(parsedUrl.search));
@@ -296,7 +296,7 @@ describe('api-routes-controller', () => {
       controller = require('./api-routes-controller'); // eslint-disable-line global-require
       mockFetch = require('node-fetch'); // eslint-disable-line global-require
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getLocationInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       const parsedUrl = new URL(mockFetch.mock.calls[0][0]);
       expect(parsedUrl.searchParams.get('access_key')).toBe('undefined');
@@ -311,7 +311,7 @@ describe('api-routes-controller', () => {
         }),
       });
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getLocationInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       expect(mockResponse.status).toHaveBeenCalledTimes(1);
       expect(mockResponse.status).toBeCalledWith(MOCK_FETCH_STATUS);
@@ -330,7 +330,7 @@ describe('api-routes-controller', () => {
         json: jest.fn().mockReturnValueOnce({ data: 'mock-results-data' }),
       });
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getLocationInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       expect(mockResponse.json).toHaveBeenCalledTimes(1);
       expect(mockResponse.json).toHaveBeenCalledWith({
@@ -348,7 +348,7 @@ describe('api-routes-controller', () => {
         }),
       });
       expect(mockFetch).not.toHaveBeenCalled();
-      await controller.getPositionInfo(mockRequest, mockResponse, mockNext);
+      await controller.getLocationInfo(mockRequest, mockResponse, mockNext);
       expect(mockFetch).toHaveBeenCalledTimes(1);
       expect(mockResponse.status).toHaveBeenCalledTimes(1);
       expect(mockResponse.status).toBeCalledWith(500);

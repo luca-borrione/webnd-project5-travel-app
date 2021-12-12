@@ -4,8 +4,8 @@ import {
   getCurrentWeather,
   getWeatherForecast,
   getGeoName,
-  getPositionInfo,
-  getThumbnail,
+  getLocationInfo,
+  getThumbnailUrl,
 } from './app-controller';
 import { renderResultsView } from './render-results';
 
@@ -32,13 +32,13 @@ const onSearchFormSubmit = async (event) => {
   try {
     const daysFromDeparture = getDaysFromToday($form.departureDate.value);
 
-    const { latitude, longitude, city, county, country } = await getGeoName(
+    const { latitude, longitude, city, county, country, id } = await getGeoName(
       $form.destination.value
     );
 
     return Promise.all([
-      getPositionInfo({ latitude, longitude }),
-      getThumbnail({ city, country }),
+      getLocationInfo({ latitude, longitude }),
+      getThumbnailUrl({ city, country }),
       getCurrentWeather({ latitude, longitude }),
       daysFromDeparture < 16
         ? getWeatherForecast({
@@ -52,23 +52,30 @@ const onSearchFormSubmit = async (event) => {
       ([
         { capital, continent, currencies, languages, timezone, offset, flag, subregion },
         thumbnail,
-        currentWeather,
+        { dateString: currentDateString, ...currentWeather },
         forecastWeather,
-      ]) =>
-        updateResultsView({
-          capital,
-          county,
-          continent,
-          country,
-          city,
-          currencies,
-          languages,
-          timezone,
-          offset,
-          flag,
-          subregion,
+      ]) => {
+        const tripCard = {
+          id,
           thumbnail,
-          currentWeather,
+          locationInfo: {
+            capital,
+            city,
+            continent,
+            country,
+            county,
+            currencies,
+            flag,
+            languages,
+            offset,
+            subregion,
+            timezone,
+          },
+          currentInfo: {
+            dateString: currentDateString,
+            timezone,
+            weather: currentWeather,
+          },
           departureInfo: {
             dateString: $form.departureDate.value,
             weather: forecastWeather?.departure,
@@ -77,7 +84,9 @@ const onSearchFormSubmit = async (event) => {
             dateString: $form.returnDate.value,
             weather: forecastWeather?.return,
           },
-        })
+        };
+        updateResultsView(tripCard);
+      }
     );
   } catch (e) {
     return handleError(e);

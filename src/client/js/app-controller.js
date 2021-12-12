@@ -2,12 +2,13 @@ import { getData } from './utils/controller-utils';
 import { handleErrorAndReject } from './utils/error-utils';
 
 // ---- Geo Names ----
-const transformGeoNameData = ({ lat, lng, name, adminName1, countryName }) => ({
-  county: adminName1,
+const transformGeoNameData = ({ lat, lng, name, adminName1, countryName, geonameId }) => ({
   city: name,
+  country: countryName,
+  county: adminName1,
+  id: geonameId,
   latitude: lat,
   longitude: lng,
-  country: countryName,
 });
 
 const parseGeoNameResponse = (response) =>
@@ -51,7 +52,7 @@ const parsePositionInfoResponse = (response) =>
     resolve(transformPositionInfoData(response.results.data[0]));
   });
 
-export const getPositionInfo = ({ latitude, longitude }) =>
+export const getLocationInfo = ({ latitude, longitude }) =>
   getData('/api/position-info', { latitude, longitude })
     .then(parsePositionInfoResponse)
     .catch(handleErrorAndReject);
@@ -65,28 +66,24 @@ const parseThumbnailResponse = (response) =>
     resolve(response.results.hits?.[0]?.webformatURL);
   });
 
-export const getThumbnail = ({ city, country }) =>
+export const getThumbnailUrl = ({ city, country }) =>
   getData('/api/thumbnail', { city, country })
     .then(parseThumbnailResponse)
     .catch(handleErrorAndReject);
 
 // ---- Weather Current ----
 const transformCurrentWeatherData = ({
-  app_temp: apparentTemperature,
   ob_time: dateString,
   rh: humidity,
   temp: temperature,
-  timezone,
   weather: { icon, description },
   wind_spd: windSpeed,
 }) => ({
-  apparentTemperature,
   dateString,
   description,
   humidity,
   icon,
   temperature,
-  timezone,
   windSpeed,
 });
 
@@ -105,21 +102,15 @@ export const getCurrentWeather = ({ latitude, longitude }) =>
 
 // ---- Weather Forecast ----
 const transformWeatherForecastData = ({
-  app_max_temp: apparentMaxTemperature,
-  app_min_temp: apparentMinTemperature,
-  max_temp: maxTemperature,
-  min_temp: minTemperature,
   rh: humidity,
+  temp: temperature,
   weather: { icon, description },
   wind_spd: windSpeed,
 }) => ({
-  apparentMaxTemperature,
-  apparentMinTemperature,
   description,
   humidity,
   icon,
-  maxTemperature,
-  minTemperature,
+  temperature,
   windSpeed,
 });
 

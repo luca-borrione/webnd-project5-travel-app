@@ -54,6 +54,33 @@ const renderLocationInfo = ({
     )
     .join('')}</article>`;
 
+const renderWeather = ({ description, humidity, icon, temperature = '', windSpeed }) => `
+  <aside class="weather">
+    <img
+    class="weather__icon"
+    src="${require(`../assets/weather-icons/${icon}.png`)}"
+    alt="weather icon"
+    />
+    ${
+      temperature &&
+      `<div class="weather__temperature">
+      <span>${temperature}<sup>&#8451;</sup></sup></span>
+    </div>`
+    }
+
+    <div class="weather__extra-info">
+    H ${Math.round(humidity)}% W ${Math.round(windSpeed)}&#x33A7;
+    </div>
+    <div class="weather__description">${description}</div>
+  </aside>`;
+
+const renderInfoBox = ({ className, dateFormatted, title, weather = '' }) => `
+  <article class="infobox ${className}">
+    <div class="infobox__title">${title}</div>
+    <div class="infobox__date">${dateFormatted}</div>
+    ${weather && renderWeather(weather)}
+  </article>`;
+
 const getLocaleDateString = (date, timeZone) =>
   date.toLocaleDateString('en-GB', {
     day: 'numeric',
@@ -70,128 +97,67 @@ const getLocaleTimeString = (date, timeZone) =>
     timeZone,
   });
 
-const renderWeather = ({ className, dateFormatted, title, weather = '' }) => {
-  const {
-    // apparentMaxTemperature,
-    // apparentMinTemperature,
-    // apparentTemperature,
-    description,
-    humidity,
-    icon,
-    maxTemperature = '',
-    minTemperature,
-    temperature = '',
-    windSpeed,
-  } = weather;
-  return `
-  <article class="${className}">
-    <main class="card__weather">
-      <div class="card__weather-title">${title}</div>
-      <div class="card__weather-date">${dateFormatted}</div>
-      ${
-        weather &&
-        `<img
-          class="card__weather-icon"
-          src="${require(`../assets/weather-icons/${icon}.png`)}"
-          alt="weather icon"
-        />
-        ${
-          temperature &&
-          `<div class="card__weather-temperature">
-            <span>${temperature}<sup>&#8451;</sup></sup></span>
-          </div>`
-        }
-        ${
-          maxTemperature &&
-          `<div class="card__weather-temperature">
-            <span>max ${maxTemperature}<sup>&#8451;</sup></span>
-            <span>min ${minTemperature}<sup>&#8451;</sup></span>
-          </div>`
-        }
-        <div class="card__weather-humidity-wind">
-          H ${Math.round(humidity)}% W ${Math.round(windSpeed)}&#x33A7;
-        </div>
-        <div class="card__weather-description">${description}</div>`
-      }
-    </main>
-  </article>`;
+const formatDateString = ({
+  dateString,
+  timezone = Intl.DateTimeFormat().resolvedOptions().timeZone,
+  addTime = false,
+}) => {
+  const currentDate = new Date(dateString);
+  const localeDateString = getLocaleDateString(currentDate, timezone);
+  const localeTimeString = addTime ? ` - ${getLocaleTimeString(currentDate, timezone)}` : '';
+  return `${localeDateString}${localeTimeString}`;
 };
 
-const renderCurrentWeather = ({ dateString, timezone, ...currentWeather }) => {
-  const currentDate = new Date(dateString);
-  const currentDateFormatted = [
-    getLocaleDateString(currentDate, timezone),
-    getLocaleTimeString(currentDate, timezone),
-  ].join(' - ');
-  return renderWeather({
+const renderCurrentInfo = ({ dateString, timezone, weather }) =>
+  renderInfoBox({
     className: 'current',
     title: 'Current Weather',
-    dateFormatted: currentDateFormatted,
-    weather: currentWeather,
+    dateFormatted: formatDateString({
+      dateString,
+      timezone,
+      addTime: true,
+    }),
+    weather,
   });
-};
 
-const renderDepartureInfo = ({ dateString, weather }) => {
-  const departureDate = new Date(dateString);
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const departureDateFormatted = [getLocaleDateString(departureDate, timezone)].join(' - ');
-  return renderWeather({
+const renderDepartureInfo = ({ dateString, weather }) =>
+  renderInfoBox({
     className: 'departure',
     title: 'Departure',
-    dateFormatted: departureDateFormatted,
+    dateFormatted: formatDateString({ dateString }),
     weather,
   });
-};
 
-const renderReturnInfo = ({ dateString, weather }) => {
-  const departureDate = new Date(dateString);
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const departureDateFormatted = [getLocaleDateString(departureDate, timezone)].join(' - ');
-  return renderWeather({
+const renderReturnInfo = ({ dateString, weather }) =>
+  renderInfoBox({
     className: 'return',
     title: 'Return',
-    dateFormatted: departureDateFormatted,
+    dateFormatted: formatDateString({ dateString }),
     weather,
   });
-};
+
+const renderCardButton = () => `
+  <button class="card__button" type="button">
+    <i class="icon-heart-empty"></i>
+    <i class="icon-heart"></i>
+    <span>Save Trip</span>
+  </button>
+  `;
 
 export const renderResultsView = ({
-  capital,
-  county,
-  continent,
-  country,
-  city,
-  currencies,
-  languages,
-  timezone,
-  offset,
-  flag,
-  subregion,
   thumbnail,
-  currentWeather,
+  locationInfo: { city, flag, ...locationInfo },
+  currentInfo,
   departureInfo,
   returnInfo,
 }) => `
 <main class="card">
-  ${renderThumbnail({
-    city,
-    flag,
-    thumbnail,
-  })}
-  ${renderLocationInfo({
-    continent,
-    subregion,
-    country,
-    county,
-    capital,
-    currencies,
-    languages,
-    timezone,
-    offset,
-  })}
-  ${renderCurrentWeather(currentWeather)}
+  ${renderThumbnail({ thumbnail, city, flag })}
+  ${renderLocationInfo(locationInfo)}
+  ${renderCurrentInfo(currentInfo)}
   ${renderDepartureInfo(departureInfo)}
   ${renderReturnInfo(returnInfo)}
+  ${renderCardButton()}
 </main>`;
 
 /* eslint-enable global-require, import/no-dynamic-require */

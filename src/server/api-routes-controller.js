@@ -99,7 +99,7 @@ const getWeatherForecastUrl = (req) => {
 module.exports = {
   getCurrentWeather: (req, res, next) => getFetchResponse(res, next)(getCurrentWeatherUrl(req)),
   getGeoName: (req, res, next) => getFetchResponse(res, next)(getGeoNameUrl(req)),
-  getPositionInfo: (req, res, next) => getFetchResponse(res, next)(getPositionStackUrl(req)),
+  getLocationInfo: (req, res, next) => getFetchResponse(res, next)(getPositionStackUrl(req)),
   getTest: (_, res) => res.send({ title: 'test json response', message: 'it works!' }),
   getThumbnail: (req, res, next) => getFetchResponse(res, next)(getThumbnailUrl(req)),
   getWeatherForecast: (req, res, next) => getFetchResponse(res, next)(getWeatherForecastUrl(req)),

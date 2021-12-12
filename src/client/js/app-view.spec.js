@@ -1,8 +1,8 @@
 import {
   getCurrentWeather,
   getGeoName,
-  getPositionInfo,
-  getThumbnail,
+  getLocationInfo,
+  getThumbnailUrl,
   getWeatherForecast,
 } from './app-controller';
 import { getDaysFromToday } from './utils/date-utils';
@@ -18,7 +18,7 @@ jest.mock('./app-controller', () => ({
     longitude: 'mock-longitude',
     country: 'mock-country',
   }),
-  getPositionInfo: jest.fn().mockResolvedValue({
+  getLocationInfo: jest.fn().mockResolvedValue({
     capital: 'mock-capital',
     continent: 'mock-continent',
     currencies: [
@@ -31,9 +31,8 @@ jest.mock('./app-controller', () => ({
     flag: 'mock-flag',
     subregion: 'mock-subregion',
   }),
-  getThumbnail: jest.fn().mockResolvedValue('mock-image-url'),
+  getThumbnailUrl: jest.fn().mockResolvedValue('mock-image-url'),
   getCurrentWeather: jest.fn().mockResolvedValue({
-    apparentTemperature: 'mock-apparent-temperature',
     dateString: 'mock-date-string',
     description: 'mock-description',
     humidity: 'mock-humidity',
@@ -44,23 +43,15 @@ jest.mock('./app-controller', () => ({
   }),
   getWeatherForecast: jest.fn().mockResolvedValue({
     departure: {
-      apparentMaxTemperature: 'mock-apparent-max-temperature',
-      apparentMinTemperature: 'mock-apparent-min-temperature',
       description: 'mock-description',
       humidity: 'mock-humidity',
       icon: 'mock-icon',
-      maxTemperature: 'mock-max-temperature',
-      minTemperature: 'mock-min-temperature',
       windSpeed: 'mock-wind-speed',
     },
     return: {
-      apparentMaxTemperature: 'mock-apparent-max-temperature',
-      apparentMinTemperature: 'mock-apparent-min-temperature',
       description: 'mock-description',
       humidity: 'mock-humidity',
       icon: 'mock-icon',
-      maxTemperature: 'mock-max-temperature',
-      minTemperature: 'mock-min-temperature',
       windSpeed: 'mock-wind-speed',
     },
   }),
@@ -129,23 +120,23 @@ describe('app-view', () => {
       expect(getGeoName).toHaveBeenCalledWith('mock-destination');
     });
 
-    it('should correctly call getPositionInfo', async () => {
-      expect(getPositionInfo).not.toHaveBeenCalled();
+    it('should correctly call getLocationInfo', async () => {
+      expect(getLocationInfo).not.toHaveBeenCalled();
       $form.search.submit();
       await flushPromises();
-      expect(getPositionInfo).toHaveBeenCalledTimes(1);
-      expect(getPositionInfo).toHaveBeenCalledWith({
+      expect(getLocationInfo).toHaveBeenCalledTimes(1);
+      expect(getLocationInfo).toHaveBeenCalledWith({
         latitude: 'mock-latitude',
         longitude: 'mock-longitude',
       });
     });
 
     it('should correctly call getThumbnail', async () => {
-      expect(getThumbnail).not.toHaveBeenCalled();
+      expect(getThumbnailUrl).not.toHaveBeenCalled();
       $form.search.submit();
       await flushPromises();
-      expect(getThumbnail).toHaveBeenCalledTimes(1);
-      expect(getThumbnail).toHaveBeenCalledWith({
+      expect(getThumbnailUrl).toHaveBeenCalledTimes(1);
+      expect(getThumbnailUrl).toHaveBeenCalledWith({
         country: 'mock-country',
         city: 'mock-city',
       });
@@ -195,9 +186,9 @@ describe('app-view', () => {
       expect(errorSpy).toBeCalledWith(expectedError);
     });
 
-    it('should handle an error nicely, if getPositionInfo rejects', async () => {
+    it('should handle an error nicely, if getLocationInfo rejects', async () => {
       const expectedError = new Error('mock-expected-error');
-      getPositionInfo.mockRejectedValueOnce(expectedError);
+      getLocationInfo.mockRejectedValueOnce(expectedError);
       const errorSpy = jest.spyOn(console, 'error').mockImplementation();
       $form.search.submit();
       await flushPromises();
@@ -207,7 +198,7 @@ describe('app-view', () => {
 
     it('should handle an error nicely, if getThumbnail rejects', async () => {
       const expectedError = new Error('mock-expected-error');
-      getThumbnail.mockRejectedValueOnce(expectedError);
+      getThumbnailUrl.mockRejectedValueOnce(expectedError);
       const errorSpy = jest.spyOn(console, 'error').mockImplementation();
       $form.search.submit();
       await flushPromises();

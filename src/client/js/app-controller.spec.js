@@ -3,8 +3,8 @@ import { handleErrorAndReject } from './utils/error-utils';
 import {
   getCurrentWeather,
   getGeoName,
-  getPositionInfo,
-  getThumbnail,
+  getLocationInfo,
+  getThumbnailUrl,
   getWeatherForecast,
 } from './app-controller';
 
@@ -15,10 +15,11 @@ describe('app-controller', () => {
   describe('getGeoName', () => {
     const mockGeoName = {
       adminName1: 'mock-county',
-      lng: 'mock-longitude',
-      lat: 'mock-latitude',
-      name: 'mock-city',
       countryName: 'mock-country',
+      geonameId: 'mock-id',
+      lat: 'mock-latitude',
+      lng: 'mock-longitude',
+      name: 'mock-city',
     };
 
     beforeEach(() => {
@@ -40,11 +41,12 @@ describe('app-controller', () => {
     it('should correctly parse the data received from getData when successfull', async () => {
       const result = await getGeoName('mock-location');
       expect(result).toStrictEqual({
-        county: 'mock-county',
         city: 'mock-city',
+        country: 'mock-country',
+        county: 'mock-county',
+        id: 'mock-id',
         latitude: 'mock-latitude',
         longitude: 'mock-longitude',
-        country: 'mock-country',
       });
     });
 
@@ -67,7 +69,7 @@ describe('app-controller', () => {
     });
   });
 
-  describe('getPositionInfo', () => {
+  describe('getLocationInfo', () => {
     const mockPositionInfo = {
       continent: 'mock-continent',
       country_module: {
@@ -97,7 +99,7 @@ describe('app-controller', () => {
 
     it('should correctly call getData', async () => {
       expect(getData).not.toHaveBeenCalled();
-      await getPositionInfo({ latitude: 'mock-latitude', longitude: 'mock-longitude' });
+      await getLocationInfo({ latitude: 'mock-latitude', longitude: 'mock-longitude' });
       expect(getData).toHaveBeenCalledTimes(1);
       expect(getData).toHaveBeenCalledWith('/api/position-info', {
         latitude: 'mock-latitude',
@@ -106,7 +108,7 @@ describe('app-controller', () => {
     });
 
     it('should correctly parse the data received from getData when successfull', async () => {
-      const result = await getPositionInfo({
+      const result = await getLocationInfo({
         latitude: 'mock-latitude',
         longitude: 'mock-longitude',
       });
@@ -129,7 +131,7 @@ describe('app-controller', () => {
       const expectedError = new Error('mock-expected-error');
       getData.mockRejectedValueOnce(expectedError);
       expect(handleErrorAndReject).not.toHaveBeenCalled();
-      await getPositionInfo({
+      await getLocationInfo({
         latitude: 'mock-latitude',
         longitude: 'mock-longitude',
       });
@@ -141,7 +143,7 @@ describe('app-controller', () => {
       getData.mockResolvedValueOnce({ success: false, message: 'something went wrong' });
       const expectedError = new Error('something went wrong');
       expect(handleErrorAndReject).not.toHaveBeenCalled();
-      await getPositionInfo({
+      await getLocationInfo({
         latitude: 'mock-latitude',
         longitude: 'mock-longitude',
       });
@@ -150,7 +152,7 @@ describe('app-controller', () => {
     });
   });
 
-  describe('getThumbnail', () => {
+  describe('getThumbnailUrl', () => {
     const mockDestinationImage = {
       webformatURL: 'mock-thumbnail-url',
     };
@@ -166,7 +168,7 @@ describe('app-controller', () => {
 
     it('should correctly call getData', async () => {
       expect(getData).not.toHaveBeenCalled();
-      await getThumbnail({ city: 'mock-city', country: 'mock-country' });
+      await getThumbnailUrl({ city: 'mock-city', country: 'mock-country' });
       expect(getData).toHaveBeenCalledTimes(1);
       expect(getData).toHaveBeenCalledWith('/api/thumbnail', {
         city: 'mock-city',
@@ -175,7 +177,7 @@ describe('app-controller', () => {
     });
 
     it('should correctly parse the data received from getData when successfull', async () => {
-      const result = await getThumbnail({
+      const result = await getThumbnailUrl({
         city: 'mock-city',
         country: 'mock-country',
       });
@@ -187,7 +189,7 @@ describe('app-controller', () => {
         success: true,
         results: { hits: [] },
       });
-      const result = await getThumbnail({
+      const result = await getThumbnailUrl({
         city: 'mock-city',
         country: 'mock-country',
       });
@@ -198,7 +200,7 @@ describe('app-controller', () => {
       const expectedError = new Error('mock-expected-error');
       getData.mockRejectedValueOnce(expectedError);
       expect(handleErrorAndReject).not.toHaveBeenCalled();
-      await getThumbnail({
+      await getThumbnailUrl({
         city: 'mock-city',
         country: 'mock-country',
       });
@@ -210,7 +212,7 @@ describe('app-controller', () => {
       getData.mockResolvedValueOnce({ success: false, message: 'something went wrong' });
       const expectedError = new Error('something went wrong');
       expect(handleErrorAndReject).not.toHaveBeenCalled();
-      await getThumbnail({
+      await getThumbnailUrl({
         city: 'mock-city',
         country: 'mock-country',
       });
@@ -222,7 +224,6 @@ describe('app-controller', () => {
   describe('getCurrentWeather', () => {
     const mockCurrentWeatherResult = {
       app_temp: 'mock-apparent-temperature',
-      // ob_time: '2021-12-06 23:12',
       ob_time: 'mock-date-string',
       rh: 'mock-humidity',
       temp: 'mock-temperature',
@@ -262,13 +263,11 @@ describe('app-controller', () => {
         longitude: 'mock-longitude',
       });
       expect(result).toStrictEqual({
-        apparentTemperature: 'mock-apparent-temperature',
         dateString: 'mock-date-string',
         description: 'mock-description',
         humidity: 'mock-humidity',
         icon: 'mock-icon',
         temperature: 'mock-temperature',
-        timezone: 'mock-timezone',
         windSpeed: 'mock-wind-speed',
       });
     });
@@ -300,11 +299,8 @@ describe('app-controller', () => {
 
   describe('getWeatherForecast', () => {
     const mockWeatherForecastResult = {
-      app_max_temp: 'mock-apparent-max-temperature',
-      app_min_temp: 'mock-apparent-min-temperature',
-      max_temp: 'max-temperature',
-      min_temp: 'min-temperature',
       rh: 'mock-humidity',
+      temp: 'mock-temperature',
       weather: { icon: 'mock-icon', description: 'mock-description' },
       wind_spd: 'mock-wind-speed',
     };
@@ -345,23 +341,17 @@ describe('app-controller', () => {
       });
       expect(result).toStrictEqual({
         departure: {
-          apparentMaxTemperature: 'mock-apparent-max-temperature',
-          apparentMinTemperature: 'mock-apparent-min-temperature',
           description: 'mock-description',
           humidity: 'mock-humidity',
           icon: 'mock-icon',
-          maxTemperature: 'max-temperature',
-          minTemperature: 'min-temperature',
+          temperature: 'mock-temperature',
           windSpeed: 'mock-wind-speed',
         },
         return: {
-          apparentMaxTemperature: 'mock-apparent-max-temperature',
-          apparentMinTemperature: 'mock-apparent-min-temperature',
           description: 'mock-description',
           humidity: 'mock-humidity',
           icon: 'mock-icon',
-          maxTemperature: 'max-temperature',
-          minTemperature: 'min-temperature',
+          temperature: 'mock-temperature',
           windSpeed: 'mock-wind-speed',
         },
       });
@@ -382,13 +372,10 @@ describe('app-controller', () => {
       });
       expect(result).toStrictEqual({
         departure: {
-          apparentMaxTemperature: 'mock-apparent-max-temperature',
-          apparentMinTemperature: 'mock-apparent-min-temperature',
           description: 'mock-description',
           humidity: 'mock-humidity',
           icon: 'mock-icon',
-          maxTemperature: 'max-temperature',
-          minTemperature: 'min-temperature',
+          temperature: 'mock-temperature',
           windSpeed: 'mock-wind-speed',
         },
         return: undefined,

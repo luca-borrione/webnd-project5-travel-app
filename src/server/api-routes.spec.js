@@ -39,7 +39,7 @@ describe('api-routes', () => {
     route                  | callbackName
     ${'/test'}             | ${'getTest'}
     ${'/geoname'}          | ${'getGeoName'}
-    ${'/position-info'}    | ${'getPositionInfo'}
+    ${'/position-info'}    | ${'getLocationInfo'}
     ${'/thumbnail'}        | ${'getThumbnail'}
     ${'/weather-current'}  | ${'getCurrentWeather'}
     ${'/weather-forecast'} | ${'getWeatherForecast'}
