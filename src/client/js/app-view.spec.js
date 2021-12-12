@@ -1,4 +1,11 @@
-import { getGeoName, getPositionInfo, getThumbnail, getCurrentWeather } from './app-controller';
+import {
+  getCurrentWeather,
+  getGeoName,
+  getPositionInfo,
+  getThumbnail,
+  getWeatherForecast,
+} from './app-controller';
+import { getDaysFromToday } from './utils/date-utils';
 import './app-view';
 
 jest.mock('./../assets/placeholder-destination-thumb.jpg', () => 'mock-placeholder-image');
@@ -35,10 +42,36 @@ jest.mock('./app-controller', () => ({
     timezone: 'mock-timezone',
     windSpeed: 'mock-wind-speed',
   }),
+  getWeatherForecast: jest.fn().mockResolvedValue({
+    departure: {
+      apparentMaxTemperature: 'mock-apparent-max-temperature',
+      apparentMinTemperature: 'mock-apparent-min-temperature',
+      description: 'mock-description',
+      humidity: 'mock-humidity',
+      icon: 'mock-icon',
+      maxTemperature: 'mock-max-temperature',
+      minTemperature: 'mock-min-temperature',
+      windSpeed: 'mock-wind-speed',
+    },
+    return: {
+      apparentMaxTemperature: 'mock-apparent-max-temperature',
+      apparentMinTemperature: 'mock-apparent-min-temperature',
+      description: 'mock-description',
+      humidity: 'mock-humidity',
+      icon: 'mock-icon',
+      maxTemperature: 'mock-max-temperature',
+      minTemperature: 'mock-min-temperature',
+      windSpeed: 'mock-wind-speed',
+    },
+  }),
 }));
 
 jest.mock('./render-results', () => ({
   renderResultsView: jest.fn().mockReturnValue('<main class="card">mock-results-view</main>'),
+}));
+
+jest.mock('./utils/date-utils', () => ({
+  getDaysFromToday: jest.fn().mockReturnValue(1),
 }));
 
 // eslint-disable-next-line no-promise-executor-return
@@ -85,8 +118,8 @@ describe('app-view', () => {
     beforeEach(() => {
       $form.destination.value = 'mock-destination';
       $form.departure.value = 'mock-deparure';
-      $form.departureDate.value = '10/11/2021';
-      $form.returnDate.value = '17/11/2021';
+      $form.departureDate.value = '2021-11-10';
+      $form.returnDate.value = '2021-11-17';
     });
 
     it('should correctly call getGeoName', () => {
@@ -124,9 +157,30 @@ describe('app-view', () => {
       await flushPromises();
       expect(getCurrentWeather).toHaveBeenCalledTimes(1);
       expect(getCurrentWeather).toHaveBeenCalledWith({
-        country: 'mock-country',
-        city: 'mock-city',
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
       });
+    });
+
+    it('should correctly call getWeatherForecast when the departure date is within 16 days from today', async () => {
+      expect(getWeatherForecast).not.toHaveBeenCalled();
+      $form.search.submit();
+      await flushPromises();
+      expect(getWeatherForecast).toHaveBeenCalledTimes(1);
+      expect(getWeatherForecast).toHaveBeenCalledWith({
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
+        departureDateString: '2021-11-10',
+        returnDateString: '2021-11-17',
+      });
+    });
+
+    it('should not call getWeatherForecast when the departure date is at least 16 days from today', async () => {
+      getDaysFromToday.mockReturnValueOnce(16);
+      expect(getWeatherForecast).not.toHaveBeenCalled();
+      $form.search.submit();
+      await flushPromises();
+      expect(getWeatherForecast).not.toHaveBeenCalled();
     });
   });
 
@@ -164,6 +218,16 @@ describe('app-view', () => {
     it('should handle an error nicely, if getCurrentWeather rejects', async () => {
       const expectedError = new Error('mock-expected-error');
       getCurrentWeather.mockRejectedValueOnce(expectedError);
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+      $form.search.submit();
+      await flushPromises();
+      expect(errorSpy).toBeCalledTimes(1);
+      expect(errorSpy).toBeCalledWith(expectedError);
+    });
+
+    it('should handle an error nicely, if getWeatherForecast rejects', async () => {
+      const expectedError = new Error('mock-expected-error');
+      getWeatherForecast.mockRejectedValueOnce(expectedError);
       const errorSpy = jest.spyOn(console, 'error').mockImplementation();
       $form.search.submit();
       await flushPromises();

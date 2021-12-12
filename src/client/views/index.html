@@ -26,11 +26,23 @@
           </label>
           <label for="search-form__departure-date">
             Departure
-            <input id="search-form__departure-date" type="date" required placeholder="dd/mm/yyyy" />
+            <input
+              id="search-form__departure-date"
+              type="date"
+              required
+              placeholder="yyyy/mm/dd"
+              pattern="\d{4}-\d{2}-\d{2}"
+            />
           </label>
           <label for="search-form__return-date">
             Return
-            <input id="search-form__return-date" type="date" required placeholder="dd/mm/yyyy" />
+            <input
+              id="search-form__return-date"
+              type="date"
+              required
+              placeholder="yyyy/mm/dd"
+              pattern="\d{4}-\d{2}-\d{2}"
+            />
           </label>
           <button type="submit" class="search-form__submit-button">Search</button>
         </form>

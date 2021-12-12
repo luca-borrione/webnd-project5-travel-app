@@ -5,6 +5,7 @@ const GEONAMES_BASEURL = 'http://api.geonames.org/searchJSON';
 const POSITIONSTACK_BASEURL = 'http://api.positionstack.com/v1/reverse';
 const PIXABAY_BASEURL = 'https://pixabay.com/api';
 const WEATHER_CURRENT_BASEURL = 'http://api.weatherbit.io/v2.0/current';
+const WEATHER_FORECAST_BASEURL = 'http://api.weatherbit.io/v2.0/forecast/daily';
 
 const getFetchResponse = (res, next) => async (url) => {
   try {
@@ -73,25 +74,33 @@ const getThumbnailUrl = (req) => {
 
 const getCurrentWeatherUrl = (req) => {
   const { WEATHERBIT_APIKEY } = process.env;
-  const { city, country } = req.query;
+  const { latitude, longitude } = req.query;
 
   const params = {
     key: WEATHERBIT_APIKEY,
-    city,
-    country,
+    lat: latitude,
+    lon: longitude,
   };
   return `${WEATHER_CURRENT_BASEURL}?${new URLSearchParams(params).toString()}`;
 };
 
+const getWeatherForecastUrl = (req) => {
+  const { WEATHERBIT_APIKEY } = process.env;
+  const { latitude, longitude } = req.query;
+
+  const params = {
+    key: WEATHERBIT_APIKEY,
+    lat: latitude,
+    lon: longitude,
+  };
+  return `${WEATHER_FORECAST_BASEURL}?${new URLSearchParams(params).toString()}`;
+};
+
 module.exports = {
   getCurrentWeather: (req, res, next) => getFetchResponse(res, next)(getCurrentWeatherUrl(req)),
-  getThumbnail: (req, res, next) => getFetchResponse(res, next)(getThumbnailUrl(req)),
   getGeoName: (req, res, next) => getFetchResponse(res, next)(getGeoNameUrl(req)),
   getPositionInfo: (req, res, next) => getFetchResponse(res, next)(getPositionStackUrl(req)),
-  getTest: (_, res) => {
-    res.send({
-      title: 'test json response',
-      message: 'it works!',
-    });
-  },
+  getTest: (_, res) => res.send({ title: 'test json response', message: 'it works!' }),
+  getThumbnail: (req, res, next) => getFetchResponse(res, next)(getThumbnailUrl(req)),
+  getWeatherForecast: (req, res, next) => getFetchResponse(res, next)(getWeatherForecastUrl(req)),
 };

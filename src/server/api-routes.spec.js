@@ -36,12 +36,13 @@ describe('api-routes', () => {
   });
 
   it.each`
-    route                 | callbackName
-    ${'/test'}            | ${'getTest'}
-    ${'/geoname'}         | ${'getGeoName'}
-    ${'/position-info'}   | ${'getPositionInfo'}
-    ${'/thumbnail'}       | ${'getThumbnail'}
-    ${'/weather-current'} | ${'getCurrentWeather'}
+    route                  | callbackName
+    ${'/test'}             | ${'getTest'}
+    ${'/geoname'}          | ${'getGeoName'}
+    ${'/position-info'}    | ${'getPositionInfo'}
+    ${'/thumbnail'}        | ${'getThumbnail'}
+    ${'/weather-current'}  | ${'getCurrentWeather'}
+    ${'/weather-forecast'} | ${'getWeatherForecast'}
   `('should correctly set the route for $route', ({ route, callbackName }) => {
     prepareRouteSpies(route);
     const routeIndex = routeSpy.mock.calls.findIndex((mockCall) => mockCall[0] === route);

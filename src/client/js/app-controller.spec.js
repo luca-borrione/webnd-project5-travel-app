@@ -1,7 +1,15 @@
-import { getData, handleErrorAndReject } from './utils';
-import { getGeoName, getPositionInfo, getThumbnail, getCurrentWeather } from './app-controller';
+import { getData } from './utils/controller-utils';
+import { handleErrorAndReject } from './utils/error-utils';
+import {
+  getCurrentWeather,
+  getGeoName,
+  getPositionInfo,
+  getThumbnail,
+  getWeatherForecast,
+} from './app-controller';
 
-jest.mock('./utils');
+jest.mock('./utils/controller-utils');
+jest.mock('./utils/error-utils');
 
 describe('app-controller', () => {
   describe('getGeoName', () => {
@@ -237,18 +245,21 @@ describe('app-controller', () => {
 
     it('should correctly call getData', async () => {
       expect(getData).not.toHaveBeenCalled();
-      await getCurrentWeather({ city: 'mock-city', country: 'mock-country' });
+      await getCurrentWeather({
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
+      });
       expect(getData).toHaveBeenCalledTimes(1);
       expect(getData).toHaveBeenCalledWith('/api/weather-current', {
-        city: 'mock-city',
-        country: 'mock-country',
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
       });
     });
 
     it('should correctly parse the data received from getData when successfull', async () => {
       const result = await getCurrentWeather({
-        city: 'mock-city',
-        country: 'mock-country',
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
       });
       expect(result).toStrictEqual({
         apparentTemperature: 'mock-apparent-temperature',
@@ -267,8 +278,8 @@ describe('app-controller', () => {
       getData.mockRejectedValueOnce(expectedError);
       expect(handleErrorAndReject).not.toHaveBeenCalled();
       await getCurrentWeather({
-        city: 'mock-city',
-        country: 'mock-country',
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
       });
       expect(handleErrorAndReject).toBeCalledTimes(1);
       expect(handleErrorAndReject).toBeCalledWith(expectedError);
@@ -279,8 +290,134 @@ describe('app-controller', () => {
       const expectedError = new Error('something went wrong');
       expect(handleErrorAndReject).not.toHaveBeenCalled();
       await getCurrentWeather({
-        city: 'mock-city',
-        country: 'mock-country',
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
+      });
+      expect(handleErrorAndReject).toBeCalledTimes(1);
+      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+    });
+  });
+
+  describe('getWeatherForecast', () => {
+    const mockWeatherForecastResult = {
+      app_max_temp: 'mock-apparent-max-temperature',
+      app_min_temp: 'mock-apparent-min-temperature',
+      max_temp: 'max-temperature',
+      min_temp: 'min-temperature',
+      rh: 'mock-humidity',
+      weather: { icon: 'mock-icon', description: 'mock-description' },
+      wind_spd: 'mock-wind-speed',
+    };
+
+    beforeEach(() => {
+      getData.mockResolvedValue({
+        success: true,
+        results: {
+          data: [
+            { ...mockWeatherForecastResult, valid_date: 'mock-departure-date' },
+            { ...mockWeatherForecastResult, valid_date: 'mock-return-date' },
+          ],
+        },
+      });
+    });
+
+    it('should correctly call getData', async () => {
+      expect(getData).not.toHaveBeenCalled();
+      await getWeatherForecast({
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
+        departureDateString: 'mock-departure-date',
+        returnDateString: 'mock-return-date',
+      });
+      expect(getData).toHaveBeenCalledTimes(1);
+      expect(getData).toHaveBeenCalledWith('/api/weather-forecast', {
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
+      });
+    });
+
+    it('should correctly parse the data received from getData when successfull', async () => {
+      const result = await getWeatherForecast({
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
+        departureDateString: 'mock-departure-date',
+        returnDateString: 'mock-return-date',
+      });
+      expect(result).toStrictEqual({
+        departure: {
+          apparentMaxTemperature: 'mock-apparent-max-temperature',
+          apparentMinTemperature: 'mock-apparent-min-temperature',
+          description: 'mock-description',
+          humidity: 'mock-humidity',
+          icon: 'mock-icon',
+          maxTemperature: 'max-temperature',
+          minTemperature: 'min-temperature',
+          windSpeed: 'mock-wind-speed',
+        },
+        return: {
+          apparentMaxTemperature: 'mock-apparent-max-temperature',
+          apparentMinTemperature: 'mock-apparent-min-temperature',
+          description: 'mock-description',
+          humidity: 'mock-humidity',
+          icon: 'mock-icon',
+          maxTemperature: 'max-temperature',
+          minTemperature: 'min-temperature',
+          windSpeed: 'mock-wind-speed',
+        },
+      });
+    });
+
+    it('should correctly parse the data received from getData when successfull but there is no weather forecast available for the return date', async () => {
+      getData.mockResolvedValueOnce({
+        success: true,
+        results: {
+          data: [{ ...mockWeatherForecastResult, valid_date: 'mock-departure-date' }],
+        },
+      });
+      const result = await getWeatherForecast({
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
+        departureDateString: 'mock-departure-date',
+        returnDateString: 'mock-return-date',
+      });
+      expect(result).toStrictEqual({
+        departure: {
+          apparentMaxTemperature: 'mock-apparent-max-temperature',
+          apparentMinTemperature: 'mock-apparent-min-temperature',
+          description: 'mock-description',
+          humidity: 'mock-humidity',
+          icon: 'mock-icon',
+          maxTemperature: 'max-temperature',
+          minTemperature: 'min-temperature',
+          windSpeed: 'mock-wind-speed',
+        },
+        return: undefined,
+      });
+    });
+
+    it('should handle an error nicely', async () => {
+      const expectedError = new Error('mock-expected-error');
+      getData.mockRejectedValueOnce(expectedError);
+      expect(handleErrorAndReject).not.toHaveBeenCalled();
+      await getWeatherForecast({
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
+        departureDateString: 'mock-departure-date',
+        returnDateString: 'mock-return-date',
+      });
+      expect(handleErrorAndReject).toBeCalledTimes(1);
+      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+    });
+
+    it('should reject returning the error message when getData is not successfull', async () => {
+      getData.mockResolvedValueOnce({ success: false, message: 'something went wrong' });
+      const expectedError = new Error('something went wrong');
+      expect(handleErrorAndReject).not.toHaveBeenCalled();
+      await getWeatherForecast({
+        latitude: 'mock-latitude',
+        longitude: 'mock-longitude',
+        departureDateString: 'mock-departure-date',
+        returnDateString: 'mock-return-date',
       });
       expect(handleErrorAndReject).toBeCalledTimes(1);
       expect(handleErrorAndReject).toBeCalledWith(expectedError);

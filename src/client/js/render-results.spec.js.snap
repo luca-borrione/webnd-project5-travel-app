@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderResultsView should correctly render the view, when a county is mock-county 1`] = `
+exports[`renderResultsView should correctly render the view, when both the departure and return weather forecasts are undefined 1`] = `
 "
 <main class=\\"card\\">
   
@@ -45,89 +45,45 @@ exports[`renderResultsView should correctly render the view, when a county is mo
         <div class=\\"card__info-continent--value\\">mock-offset</div>
       </article>
   
-<article class=\\"current\\">
-  <main class=\\"card__weather\\">
-    <div class=\\"card__weather-title\\">Current Weather</div>
-    <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
-    <img
-      class=\\"card__weather-icon\\"
-      src=\\"\\"
-      alt=\\"weather icon\\"
-    />
-    <div class=\\"card__weather-temperature\\">
-      mock-temperature<sup>&#8451;</sup> like mock-apparent-temperature<sup>&#8451;</sup>
-    </div>
-    <div class=\\"card__weather-humidity-wind\\">H mock-humidity% W mock-wind-speed&#x33A7;</div>
-    <div class=\\"card__weather-description\\">mock-description</div>
-  </main>
-</article>
-
+  <article class=\\"current\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Current Weather</div>
+      <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        <div class=\\"card__weather-temperature\\">
+            <span>mock-temperature<sup>&#8451;</sup></sup></span>
+          </div>
+        
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"departure\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Departure</div>
+      <div class=\\"card__weather-date\\">11 Dec 2021</div>
+      
+    </main>
+  </article>
+  
+  <article class=\\"return\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Return</div>
+      <div class=\\"card__weather-date\\">12 Dec 2021</div>
+      
+    </main>
+  </article>
 </main>"
 `;
 
-exports[`renderResultsView should correctly render the view, when a county is undefined 1`] = `
-"
-<main class=\\"card\\">
-  
-<figure class=\\"card__image\\">
-  <img
-    class=\\"card__image-thumbnail\\"
-    src=\\"mock-thumbnail\\"
-    alt=\\"view of the destination\\"
-  />
-  <figcaption class=\\"card__image-caption\\">
-    <span class=\\"card__image-caption-flag\\">mock-flag</span>
-    <span class=\\"card__image-caption-city\\">mock-city</span>
-  </figcaption>
-</figure>
-
-  <article class=\\"card__info\\">
-        <div class=\\"card__info-continent--label\\">Continent:</div>
-        <div class=\\"card__info-continent--value\\">mock-continent</div>
-      
-        <div class=\\"card__info-subregion--label\\">Subregion:</div>
-        <div class=\\"card__info-continent--value\\">mock-subregion</div>
-      
-        <div class=\\"card__info-country--label\\">Country:</div>
-        <div class=\\"card__info-continent--value\\">mock-country</div>
-      
-        <div class=\\"card__info-capital--label\\">Capital:</div>
-        <div class=\\"card__info-continent--value\\">mock-capital</div>
-      
-        <div class=\\"card__info-currency--label\\">Currency:</div>
-        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
-      
-        <div class=\\"card__info-language--label\\">Language:</div>
-        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
-      
-        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
-        <div class=\\"card__info-continent--value\\">mock-timezone</div>
-      
-        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
-        <div class=\\"card__info-continent--value\\">mock-offset</div>
-      </article>
-  
-<article class=\\"current\\">
-  <main class=\\"card__weather\\">
-    <div class=\\"card__weather-title\\">Current Weather</div>
-    <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
-    <img
-      class=\\"card__weather-icon\\"
-      src=\\"\\"
-      alt=\\"weather icon\\"
-    />
-    <div class=\\"card__weather-temperature\\">
-      mock-temperature<sup>&#8451;</sup> like mock-apparent-temperature<sup>&#8451;</sup>
-    </div>
-    <div class=\\"card__weather-humidity-wind\\">H mock-humidity% W mock-wind-speed&#x33A7;</div>
-    <div class=\\"card__weather-description\\">mock-description</div>
-  </main>
-</article>
-
-</main>"
-`;
-
-exports[`renderResultsView should correctly render the view, when a thumnail is mock-thumbnail 1`] = `
+exports[`renderResultsView should correctly render the view, when the county is mock-county 1`] = `
 "
 <main class=\\"card\\">
   
@@ -172,27 +128,382 @@ exports[`renderResultsView should correctly render the view, when a thumnail is 
         <div class=\\"card__info-continent--value\\">mock-offset</div>
       </article>
   
-<article class=\\"current\\">
-  <main class=\\"card__weather\\">
-    <div class=\\"card__weather-title\\">Current Weather</div>
-    <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
-    <img
-      class=\\"card__weather-icon\\"
-      src=\\"\\"
-      alt=\\"weather icon\\"
-    />
-    <div class=\\"card__weather-temperature\\">
-      mock-temperature<sup>&#8451;</sup> like mock-apparent-temperature<sup>&#8451;</sup>
-    </div>
-    <div class=\\"card__weather-humidity-wind\\">H mock-humidity% W mock-wind-speed&#x33A7;</div>
-    <div class=\\"card__weather-description\\">mock-description</div>
-  </main>
-</article>
-
+  <article class=\\"current\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Current Weather</div>
+      <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        <div class=\\"card__weather-temperature\\">
+            <span>mock-temperature<sup>&#8451;</sup></sup></span>
+          </div>
+        
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"departure\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Departure</div>
+      <div class=\\"card__weather-date\\">11 Dec 2021</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        
+        <div class=\\"card__weather-temperature\\">
+            <span>max mock-max-temperature<sup>&#8451;</sup></span>
+            <span>min mock-min-temperature<sup>&#8451;</sup></span>
+          </div>
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"return\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Return</div>
+      <div class=\\"card__weather-date\\">12 Dec 2021</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        
+        <div class=\\"card__weather-temperature\\">
+            <span>max mock-max-temperature<sup>&#8451;</sup></span>
+            <span>min mock-min-temperature<sup>&#8451;</sup></span>
+          </div>
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
 </main>"
 `;
 
-exports[`renderResultsView should correctly render the view, when a thumnail is undefined 1`] = `
+exports[`renderResultsView should correctly render the view, when the county is undefined 1`] = `
+"
+<main class=\\"card\\">
+  
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+  <article class=\\"card__info\\">
+        <div class=\\"card__info-continent--label\\">Continent:</div>
+        <div class=\\"card__info-continent--value\\">mock-continent</div>
+      
+        <div class=\\"card__info-subregion--label\\">Subregion:</div>
+        <div class=\\"card__info-continent--value\\">mock-subregion</div>
+      
+        <div class=\\"card__info-country--label\\">Country:</div>
+        <div class=\\"card__info-continent--value\\">mock-country</div>
+      
+        <div class=\\"card__info-capital--label\\">Capital:</div>
+        <div class=\\"card__info-continent--value\\">mock-capital</div>
+      
+        <div class=\\"card__info-currency--label\\">Currency:</div>
+        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
+      
+        <div class=\\"card__info-language--label\\">Language:</div>
+        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
+      
+        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
+        <div class=\\"card__info-continent--value\\">mock-timezone</div>
+      
+        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
+        <div class=\\"card__info-continent--value\\">mock-offset</div>
+      </article>
+  
+  <article class=\\"current\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Current Weather</div>
+      <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        <div class=\\"card__weather-temperature\\">
+            <span>mock-temperature<sup>&#8451;</sup></sup></span>
+          </div>
+        
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"departure\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Departure</div>
+      <div class=\\"card__weather-date\\">11 Dec 2021</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        
+        <div class=\\"card__weather-temperature\\">
+            <span>max mock-max-temperature<sup>&#8451;</sup></span>
+            <span>min mock-min-temperature<sup>&#8451;</sup></span>
+          </div>
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"return\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Return</div>
+      <div class=\\"card__weather-date\\">12 Dec 2021</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        
+        <div class=\\"card__weather-temperature\\">
+            <span>max mock-max-temperature<sup>&#8451;</sup></span>
+            <span>min mock-min-temperature<sup>&#8451;</sup></span>
+          </div>
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+</main>"
+`;
+
+exports[`renderResultsView should correctly render the view, when the return weather forecast is undefined 1`] = `
+"
+<main class=\\"card\\">
+  
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+  <article class=\\"card__info\\">
+        <div class=\\"card__info-continent--label\\">Continent:</div>
+        <div class=\\"card__info-continent--value\\">mock-continent</div>
+      
+        <div class=\\"card__info-subregion--label\\">Subregion:</div>
+        <div class=\\"card__info-continent--value\\">mock-subregion</div>
+      
+        <div class=\\"card__info-country--label\\">Country:</div>
+        <div class=\\"card__info-continent--value\\">mock-country</div>
+      
+        <div class=\\"card__info-county--label\\">County:</div>
+        <div class=\\"card__info-continent--value\\">mock-county</div>
+      
+        <div class=\\"card__info-capital--label\\">Capital:</div>
+        <div class=\\"card__info-continent--value\\">mock-capital</div>
+      
+        <div class=\\"card__info-currency--label\\">Currency:</div>
+        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
+      
+        <div class=\\"card__info-language--label\\">Language:</div>
+        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
+      
+        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
+        <div class=\\"card__info-continent--value\\">mock-timezone</div>
+      
+        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
+        <div class=\\"card__info-continent--value\\">mock-offset</div>
+      </article>
+  
+  <article class=\\"current\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Current Weather</div>
+      <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        <div class=\\"card__weather-temperature\\">
+            <span>mock-temperature<sup>&#8451;</sup></sup></span>
+          </div>
+        
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"departure\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Departure</div>
+      <div class=\\"card__weather-date\\">11 Dec 2021</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        
+        <div class=\\"card__weather-temperature\\">
+            <span>max mock-max-temperature<sup>&#8451;</sup></span>
+            <span>min mock-min-temperature<sup>&#8451;</sup></span>
+          </div>
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"return\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Return</div>
+      <div class=\\"card__weather-date\\">12 Dec 2021</div>
+      
+    </main>
+  </article>
+</main>"
+`;
+
+exports[`renderResultsView should correctly render the view, when the thumbnail is mock-thumbnail 1`] = `
+"
+<main class=\\"card\\">
+  
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+  <article class=\\"card__info\\">
+        <div class=\\"card__info-continent--label\\">Continent:</div>
+        <div class=\\"card__info-continent--value\\">mock-continent</div>
+      
+        <div class=\\"card__info-subregion--label\\">Subregion:</div>
+        <div class=\\"card__info-continent--value\\">mock-subregion</div>
+      
+        <div class=\\"card__info-country--label\\">Country:</div>
+        <div class=\\"card__info-continent--value\\">mock-country</div>
+      
+        <div class=\\"card__info-county--label\\">County:</div>
+        <div class=\\"card__info-continent--value\\">mock-county</div>
+      
+        <div class=\\"card__info-capital--label\\">Capital:</div>
+        <div class=\\"card__info-continent--value\\">mock-capital</div>
+      
+        <div class=\\"card__info-currency--label\\">Currency:</div>
+        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
+      
+        <div class=\\"card__info-language--label\\">Language:</div>
+        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
+      
+        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
+        <div class=\\"card__info-continent--value\\">mock-timezone</div>
+      
+        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
+        <div class=\\"card__info-continent--value\\">mock-offset</div>
+      </article>
+  
+  <article class=\\"current\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Current Weather</div>
+      <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        <div class=\\"card__weather-temperature\\">
+            <span>mock-temperature<sup>&#8451;</sup></sup></span>
+          </div>
+        
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"departure\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Departure</div>
+      <div class=\\"card__weather-date\\">11 Dec 2021</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        
+        <div class=\\"card__weather-temperature\\">
+            <span>max mock-max-temperature<sup>&#8451;</sup></span>
+            <span>min mock-min-temperature<sup>&#8451;</sup></span>
+          </div>
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"return\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Return</div>
+      <div class=\\"card__weather-date\\">12 Dec 2021</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        
+        <div class=\\"card__weather-temperature\\">
+            <span>max mock-max-temperature<sup>&#8451;</sup></span>
+            <span>min mock-min-temperature<sup>&#8451;</sup></span>
+          </div>
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+</main>"
+`;
+
+exports[`renderResultsView should correctly render the view, when the thumbnail is undefined 1`] = `
 "
 <main class=\\"card\\">
   
@@ -237,22 +548,66 @@ exports[`renderResultsView should correctly render the view, when a thumnail is 
         <div class=\\"card__info-continent--value\\">mock-offset</div>
       </article>
   
-<article class=\\"current\\">
-  <main class=\\"card__weather\\">
-    <div class=\\"card__weather-title\\">Current Weather</div>
-    <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
-    <img
-      class=\\"card__weather-icon\\"
-      src=\\"\\"
-      alt=\\"weather icon\\"
-    />
-    <div class=\\"card__weather-temperature\\">
-      mock-temperature<sup>&#8451;</sup> like mock-apparent-temperature<sup>&#8451;</sup>
-    </div>
-    <div class=\\"card__weather-humidity-wind\\">H mock-humidity% W mock-wind-speed&#x33A7;</div>
-    <div class=\\"card__weather-description\\">mock-description</div>
-  </main>
-</article>
-
+  <article class=\\"current\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Current Weather</div>
+      <div class=\\"card__weather-date\\">7 Dec 2021 - 10:12 am</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        <div class=\\"card__weather-temperature\\">
+            <span>mock-temperature<sup>&#8451;</sup></sup></span>
+          </div>
+        
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"departure\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Departure</div>
+      <div class=\\"card__weather-date\\">11 Dec 2021</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        
+        <div class=\\"card__weather-temperature\\">
+            <span>max mock-max-temperature<sup>&#8451;</sup></span>
+            <span>min mock-min-temperature<sup>&#8451;</sup></span>
+          </div>
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
+  
+  <article class=\\"return\\">
+    <main class=\\"card__weather\\">
+      <div class=\\"card__weather-title\\">Return</div>
+      <div class=\\"card__weather-date\\">12 Dec 2021</div>
+      <img
+          class=\\"card__weather-icon\\"
+          src=\\"\\"
+          alt=\\"weather icon\\"
+        />
+        
+        <div class=\\"card__weather-temperature\\">
+            <span>max mock-max-temperature<sup>&#8451;</sup></span>
+            <span>min mock-min-temperature<sup>&#8451;</sup></span>
+          </div>
+        <div class=\\"card__weather-humidity-wind\\">
+          H NaN% W NaN&#x33A7;
+        </div>
+        <div class=\\"card__weather-description\\">mock-description</div>
+    </main>
+  </article>
 </main>"
 `;

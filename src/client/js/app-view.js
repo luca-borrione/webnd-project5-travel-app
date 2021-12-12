@@ -1,5 +1,12 @@
-import { handleError } from './utils';
-import { getPositionInfo, getGeoName, getThumbnail, getCurrentWeather } from './app-controller';
+import { handleError } from './utils/error-utils';
+import { getDaysFromToday } from './utils/date-utils';
+import {
+  getCurrentWeather,
+  getWeatherForecast,
+  getGeoName,
+  getPositionInfo,
+  getThumbnail,
+} from './app-controller';
 import { renderResultsView } from './render-results';
 
 let $form;
@@ -23,6 +30,8 @@ const onSearchFormSubmit = async (event) => {
   event.stopPropagation();
 
   try {
+    const daysFromDeparture = getDaysFromToday($form.departureDate.value);
+
     const { latitude, longitude, city, county, country } = await getGeoName(
       $form.destination.value
     );
@@ -30,12 +39,21 @@ const onSearchFormSubmit = async (event) => {
     return Promise.all([
       getPositionInfo({ latitude, longitude }),
       getThumbnail({ city, country }),
-      getCurrentWeather({ city, country }),
+      getCurrentWeather({ latitude, longitude }),
+      daysFromDeparture < 16
+        ? getWeatherForecast({
+            latitude,
+            longitude,
+            departureDateString: $form.departureDate.value,
+            returnDateString: $form.returnDate.value,
+          })
+        : Promise.resolve(),
     ]).then(
       ([
         { capital, continent, currencies, languages, timezone, offset, flag, subregion },
         thumbnail,
         currentWeather,
+        forecastWeather,
       ]) =>
         updateResultsView({
           capital,
@@ -51,6 +69,14 @@ const onSearchFormSubmit = async (event) => {
           subregion,
           thumbnail,
           currentWeather,
+          departureInfo: {
+            dateString: $form.departureDate.value,
+            weather: forecastWeather?.departure,
+          },
+          returnInfo: {
+            dateString: $form.returnDate.value,
+            weather: forecastWeather?.return,
+          },
         })
     );
   } catch (e) {

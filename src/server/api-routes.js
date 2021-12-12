@@ -1,10 +1,11 @@
 const express = require('express');
 const {
-  getPositionInfo,
+  getCurrentWeather,
   getGeoName,
+  getPositionInfo,
   getTest,
   getThumbnail,
-  getCurrentWeather,
+  getWeatherForecast,
 } = require('./api-routes-controller');
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router.route('/geoname').get(getGeoName);
 router.route('/position-info').get(getPositionInfo);
 router.route('/thumbnail').get(getThumbnail);
 router.route('/weather-current').get(getCurrentWeather);
+router.route('/weather-forecast').get(getWeatherForecast);
 
 module.exports = router;

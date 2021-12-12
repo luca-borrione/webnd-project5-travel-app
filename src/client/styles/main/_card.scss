@@ -7,6 +7,10 @@
   border-radius: 0.5rem;
   box-shadow: 0 0.07rem 0.15rem $primary-bg-color;
 
+  & > * {
+    width: 100%;
+  }
+
   &__image {
     margin: 0;
     background-color: color.scale($primary-bg-color, $lightness: 85%);
@@ -59,13 +63,14 @@
   &__weather {
     width: 90%;
     margin: auto;
+    margin-bottom: 1.5rem;
     display: grid;
     grid-template:
       'weather-title weather-title' 1fr
       'weather-date weather-date' 1fr
       'weather-icon weather-temperature' auto
       'weather-icon weather-humidity-wind' auto
-      'weather-description weather-description' 1fr / 1fr 2fr;
+      'weather-description weather-description' auto / 1fr 2fr;
 
     &-title {
       grid-area: weather-title;
@@ -88,6 +93,8 @@
     &-temperature {
       grid-area: weather-temperature;
       margin: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     &-humidity-wind {

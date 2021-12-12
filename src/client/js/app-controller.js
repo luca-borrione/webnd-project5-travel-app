@@ -1,4 +1,5 @@
-import { getData, handleErrorAndReject } from './utils';
+import { getData } from './utils/controller-utils';
+import { handleErrorAndReject } from './utils/error-utils';
 
 // ---- Geo Names ----
 const transformGeoNameData = ({ lat, lng, name, adminName1, countryName }) => ({
@@ -97,7 +98,60 @@ const parseCurrentWeatherResponse = (response) =>
     resolve(transformCurrentWeatherData(response.results.data[0]));
   });
 
-export const getCurrentWeather = ({ city, country }) =>
-  getData('/api/weather-current', { city, country })
+export const getCurrentWeather = ({ latitude, longitude }) =>
+  getData('/api/weather-current', { latitude, longitude })
     .then(parseCurrentWeatherResponse)
+    .catch(handleErrorAndReject);
+
+// ---- Weather Forecast ----
+const transformWeatherForecastData = ({
+  app_max_temp: apparentMaxTemperature,
+  app_min_temp: apparentMinTemperature,
+  max_temp: maxTemperature,
+  min_temp: minTemperature,
+  rh: humidity,
+  weather: { icon, description },
+  wind_spd: windSpeed,
+}) => ({
+  apparentMaxTemperature,
+  apparentMinTemperature,
+  description,
+  humidity,
+  icon,
+  maxTemperature,
+  minTemperature,
+  windSpeed,
+});
+
+const parseWeatherForecastResponse = ({ response, departureDateString, returnDateString }) =>
+  new Promise((resolve, reject) => {
+    if (!response.success) {
+      reject(new Error(response.message));
+    }
+    const departureWeatherForecastData = response.results.data.find(
+      ({ valid_date: dateString }) => dateString === departureDateString
+    );
+    const returnWeatherForecastData = response.results.data.find(
+      ({ valid_date: dateString }) => dateString === returnDateString
+    );
+    resolve({
+      departure: {
+        ...transformWeatherForecastData(departureWeatherForecastData),
+      },
+      return: returnWeatherForecastData
+        ? transformWeatherForecastData(returnWeatherForecastData)
+        : undefined,
+    });
+  });
+
+export const getWeatherForecast = ({
+  latitude,
+  longitude,
+  departureDateString,
+  returnDateString,
+}) =>
+  getData('/api/weather-forecast', { latitude, longitude })
+    .then((response) =>
+      parseWeatherForecastResponse({ response, departureDateString, returnDateString })
+    )
     .catch(handleErrorAndReject);

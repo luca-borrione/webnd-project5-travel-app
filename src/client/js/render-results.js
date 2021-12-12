@@ -70,34 +70,52 @@ const getLocaleTimeString = (date, timeZone) =>
     timeZone,
   });
 
-const renderWheather = ({
-  apparentTemperature,
-  className,
-  dateFormatted,
-  description,
-  humidity,
-  icon,
-  temperature,
-  title,
-  windSpeed,
-}) => `
-<article class="${className}">
-  <main class="card__weather">
-    <div class="card__weather-title">${title}</div>
-    <div class="card__weather-date">${dateFormatted}</div>
-    <img
-      class="card__weather-icon"
-      src="${require(`../assets/weather-icons/${icon}.png`)}"
-      alt="weather icon"
-    />
-    <div class="card__weather-temperature">
-      ${temperature}<sup>&#8451;</sup> like ${apparentTemperature}<sup>&#8451;</sup>
-    </div>
-    <div class="card__weather-humidity-wind">H ${humidity}% W ${windSpeed}&#x33A7;</div>
-    <div class="card__weather-description">${description}</div>
-  </main>
-</article>
-`;
+const renderWeather = ({ className, dateFormatted, title, weather = '' }) => {
+  const {
+    // apparentMaxTemperature,
+    // apparentMinTemperature,
+    // apparentTemperature,
+    description,
+    humidity,
+    icon,
+    maxTemperature = '',
+    minTemperature,
+    temperature = '',
+    windSpeed,
+  } = weather;
+  return `
+  <article class="${className}">
+    <main class="card__weather">
+      <div class="card__weather-title">${title}</div>
+      <div class="card__weather-date">${dateFormatted}</div>
+      ${
+        weather &&
+        `<img
+          class="card__weather-icon"
+          src="${require(`../assets/weather-icons/${icon}.png`)}"
+          alt="weather icon"
+        />
+        ${
+          temperature &&
+          `<div class="card__weather-temperature">
+            <span>${temperature}<sup>&#8451;</sup></sup></span>
+          </div>`
+        }
+        ${
+          maxTemperature &&
+          `<div class="card__weather-temperature">
+            <span>max ${maxTemperature}<sup>&#8451;</sup></span>
+            <span>min ${minTemperature}<sup>&#8451;</sup></span>
+          </div>`
+        }
+        <div class="card__weather-humidity-wind">
+          H ${Math.round(humidity)}% W ${Math.round(windSpeed)}&#x33A7;
+        </div>
+        <div class="card__weather-description">${description}</div>`
+      }
+    </main>
+  </article>`;
+};
 
 const renderCurrentWeather = ({ dateString, timezone, ...currentWeather }) => {
   const currentDate = new Date(dateString);
@@ -105,11 +123,35 @@ const renderCurrentWeather = ({ dateString, timezone, ...currentWeather }) => {
     getLocaleDateString(currentDate, timezone),
     getLocaleTimeString(currentDate, timezone),
   ].join(' - ');
-  return renderWheather({
-    ...currentWeather,
+  return renderWeather({
     className: 'current',
     title: 'Current Weather',
     dateFormatted: currentDateFormatted,
+    weather: currentWeather,
+  });
+};
+
+const renderDepartureInfo = ({ dateString, weather }) => {
+  const departureDate = new Date(dateString);
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const departureDateFormatted = [getLocaleDateString(departureDate, timezone)].join(' - ');
+  return renderWeather({
+    className: 'departure',
+    title: 'Departure',
+    dateFormatted: departureDateFormatted,
+    weather,
+  });
+};
+
+const renderReturnInfo = ({ dateString, weather }) => {
+  const departureDate = new Date(dateString);
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const departureDateFormatted = [getLocaleDateString(departureDate, timezone)].join(' - ');
+  return renderWeather({
+    className: 'return',
+    title: 'Return',
+    dateFormatted: departureDateFormatted,
+    weather,
   });
 };
 
@@ -127,6 +169,8 @@ export const renderResultsView = ({
   subregion,
   thumbnail,
   currentWeather,
+  departureInfo,
+  returnInfo,
 }) => `
 <main class="card">
   ${renderThumbnail({
@@ -146,6 +190,8 @@ export const renderResultsView = ({
     offset,
   })}
   ${renderCurrentWeather(currentWeather)}
+  ${renderDepartureInfo(departureInfo)}
+  ${renderReturnInfo(returnInfo)}
 </main>`;
 
 /* eslint-enable global-require, import/no-dynamic-require */
