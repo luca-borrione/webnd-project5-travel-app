@@ -20,5 +20,17 @@ Array [
   Array [
     "/weather-forecast",
   ],
+  Array [
+    "/save-trip",
+  ],
+  Array [
+    "/remove-trip",
+  ],
+  Array [
+    "/get-saved-trips",
+  ],
+  Array [
+    "/save-trips",
+  ],
 ]
 `;

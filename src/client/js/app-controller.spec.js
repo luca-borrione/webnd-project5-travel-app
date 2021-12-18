@@ -1,4 +1,4 @@
-import { getData } from './utils/controller-utils';
+import { getData, postData } from './utils/controller-utils';
 import { handleErrorAndReject } from './utils/error-utils';
 import {
   getCurrentWeather,
@@ -6,6 +6,10 @@ import {
   getLocationInfo,
   getThumbnailUrl,
   getWeatherForecast,
+  postSaveTrip,
+  postSaveTrips,
+  postRemoveTrip,
+  getSavedTrips,
 } from './app-controller';
 
 jest.mock('./utils/controller-utils');
@@ -16,7 +20,7 @@ describe('app-controller', () => {
     const mockGeoName = {
       adminName1: 'mock-county',
       countryName: 'mock-country',
-      geonameId: 'mock-id',
+      geonameId: 'mock-geoname-id',
       lat: 'mock-latitude',
       lng: 'mock-longitude',
       name: 'mock-city',
@@ -44,7 +48,7 @@ describe('app-controller', () => {
         city: 'mock-city',
         country: 'mock-country',
         county: 'mock-county',
-        id: 'mock-id',
+        geonameId: 'mock-geoname-id',
         latitude: 'mock-latitude',
         longitude: 'mock-longitude',
       });
@@ -406,6 +410,152 @@ describe('app-controller', () => {
         departureDateString: 'mock-departure-date',
         returnDateString: 'mock-return-date',
       });
+      expect(handleErrorAndReject).toBeCalledTimes(1);
+      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+    });
+  });
+
+  describe('postSaveTrip', () => {
+    const mockSavedTrips = [{ id: 1 }];
+
+    beforeEach(() => {
+      postData.mockResolvedValue({
+        success: true,
+        results: {
+          data: [mockSavedTrips],
+        },
+      });
+    });
+
+    it('should correctly call postData', async () => {
+      await postSaveTrip({ id: 1 });
+      expect(postData).toHaveBeenCalledTimes(1);
+      expect(postData).toHaveBeenCalledWith('/api/save-trip', { trip: { id: 1 } });
+    });
+
+    it('should return the response received from postData', async () => {
+      const response = await postSaveTrip({ id: 1 });
+      expect(response).toStrictEqual({
+        results: { data: [[{ id: 1 }]] },
+        success: true,
+      });
+    });
+
+    it('should handle an error nicely', async () => {
+      const expectedError = new Error('mock-expected-error');
+      postData.mockRejectedValueOnce(expectedError);
+      await postSaveTrip({ id: 1 });
+      expect(handleErrorAndReject).toBeCalledTimes(1);
+      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+    });
+  });
+
+  describe('postSaveTrips', () => {
+    const mockSavedTrips = [{ id: 1 }];
+
+    beforeEach(() => {
+      postData.mockResolvedValue({
+        success: true,
+        results: {
+          data: [mockSavedTrips],
+        },
+      });
+    });
+
+    it('should correctly call postData', async () => {
+      await postSaveTrips({ id: 1 });
+      expect(postData).toHaveBeenCalledTimes(1);
+      expect(postData).toHaveBeenCalledWith('/api/save-trips', { trips: { id: 1 } });
+    });
+
+    it('should return the response received from postData', async () => {
+      const response = await postSaveTrips({ id: 1 });
+      expect(response).toStrictEqual({
+        results: { data: [[{ id: 1 }]] },
+        success: true,
+      });
+    });
+
+    it('should handle an error nicely', async () => {
+      const expectedError = new Error('mock-expected-error');
+      postData.mockRejectedValueOnce(expectedError);
+      await postSaveTrips({ id: 1 });
+      expect(handleErrorAndReject).toBeCalledTimes(1);
+      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+    });
+  });
+
+  describe('postRemoveTrip', () => {
+    const mockSavedTrips = [{ id: 1 }];
+
+    beforeEach(() => {
+      postData.mockResolvedValue({
+        success: true,
+        results: {
+          data: [mockSavedTrips],
+        },
+      });
+    });
+
+    it('should correctly call postData', async () => {
+      await postRemoveTrip({ id: 1 });
+      expect(postData).toHaveBeenCalledTimes(1);
+      expect(postData).toHaveBeenCalledWith('/api/remove-trip', { tripId: { id: 1 } });
+    });
+
+    it('should return the response received from postData', async () => {
+      const response = await postRemoveTrip({ id: 1 });
+      expect(response).toStrictEqual({
+        results: { data: [[{ id: 1 }]] },
+        success: true,
+      });
+    });
+
+    it('should handle an error nicely', async () => {
+      const expectedError = new Error('mock-expected-error');
+      postData.mockRejectedValueOnce(expectedError);
+      await postRemoveTrip({ id: 1 });
+      expect(handleErrorAndReject).toBeCalledTimes(1);
+      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+    });
+  });
+
+  describe('getSavedTrips', () => {
+    beforeEach(() => {
+      getData.mockResolvedValue({
+        success: true,
+        results: {
+          data: [{ id: 1 }],
+        },
+      });
+    });
+
+    it('should correctly call getData', async () => {
+      expect(getData).not.toHaveBeenCalled();
+      await getSavedTrips();
+      expect(getData).toHaveBeenCalledTimes(1);
+      expect(getData).toHaveBeenCalledWith('/api/get-saved-trips');
+    });
+
+    it('should correctly parse the data received from getData when successfull', async () => {
+      const result = await getSavedTrips();
+      expect(result).toStrictEqual([{ id: 1 }]);
+    });
+
+    it('should handle an error nicely', async () => {
+      const expectedError = new Error('mock-expected-error');
+      getData.mockRejectedValueOnce(expectedError);
+      expect(handleErrorAndReject).not.toHaveBeenCalled();
+      await getSavedTrips();
+      expect(handleErrorAndReject).toBeCalledTimes(1);
+      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+    });
+
+    it('should reject returning the error message when getData is not successfull', async () => {
+      getData.mockResolvedValueOnce({ success: false, message: 'something went wrong' });
+      const expectedError = new Error('something went wrong');
+      expect(handleErrorAndReject).not.toHaveBeenCalled();
+      await getSavedTrips();
       expect(handleErrorAndReject).toBeCalledTimes(1);
       expect(handleErrorAndReject).toBeCalledWith(expectedError);
     });

@@ -3,6 +3,34 @@ jest.mock('node-fetch');
 describe('api-routes-controller', () => {
   let controller;
 
+  const postSaveTrip = (trip) => {
+    const mockRequest = { body: { trip } };
+    const mockResponse = { json: jest.fn() };
+    controller.postSaveTrip(mockRequest, mockResponse);
+    return mockResponse;
+  };
+
+  const getSavedTrips = () => {
+    const mockRequest = {};
+    const mockResponse = { json: jest.fn() };
+    controller.getSavedTrips(mockRequest, mockResponse);
+    return mockResponse;
+  };
+
+  const postRemoveTrip = (tripId) => {
+    const mockRequest = { body: { tripId } };
+    const mockResponse = { json: jest.fn() };
+    controller.postRemoveTrip(mockRequest, mockResponse);
+    return mockResponse;
+  };
+
+  const postSaveTrips = (trips) => {
+    const mockRequest = { body: { trips } };
+    const mockResponse = { json: jest.fn() };
+    controller.postSaveTrips(mockRequest, mockResponse);
+    return mockResponse;
+  };
+
   beforeEach(() => {
     jest.resetModules();
     controller = require('./api-routes-controller'); // eslint-disable-line global-require
@@ -605,6 +633,142 @@ describe('api-routes-controller', () => {
       expect(mockResponse.send.mock.calls[0][0]).toStrictEqual({
         message: 'it works!',
         title: 'test json response',
+      });
+    });
+  });
+
+  describe('postSaveTrip', () => {
+    it('should always respond with a success flag and the array of saved trips', () => {
+      const mockResponse = postSaveTrip({ id: 1 });
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        success: true,
+        results: { data: [{ id: 1 }] },
+      });
+    });
+
+    it('should store all the posted trips', () => {
+      postSaveTrip({ id: 1 });
+      postSaveTrip({ id: 2 });
+
+      const mockResponse = getSavedTrips();
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: { data: [{ id: 1 }, { id: 2 }] },
+        success: true,
+      });
+    });
+
+    it('should remove the previously stored entry if one with the same id is sent again', () => {
+      postSaveTrip({ id: 1 });
+      postSaveTrip({ id: 2 });
+      postSaveTrip({ id: 1 });
+
+      const mockResponse = getSavedTrips();
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: { data: [{ id: 2 }, { id: 1 }] },
+        success: true,
+      });
+    });
+  });
+
+  describe('getSavedTrips', () => {
+    it('should retrieve an empty array if no trips have been saved', () => {
+      const mockResponse = getSavedTrips();
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: { data: [] },
+        success: true,
+      });
+    });
+
+    it('should retrieve all the stored trips if any have been posted', () => {
+      const mockRequest = {};
+      const mockResponse = { json: jest.fn() };
+
+      postSaveTrip({ id: 1 });
+      controller.getSavedTrips(mockRequest, mockResponse);
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: { data: [{ id: 1 }] },
+        success: true,
+      });
+
+      postSaveTrip({ id: 2 });
+      controller.getSavedTrips(mockRequest, mockResponse);
+      expect(mockResponse.json).toHaveBeenCalledTimes(2);
+      expect(mockResponse.json).toHaveBeenNthCalledWith(2, {
+        results: { data: [{ id: 1 }, { id: 2 }] },
+        success: true,
+      });
+    });
+  });
+
+  describe('postRemoveTrip', () => {
+    it('should respond with success flag and the array of the remaining saved trips, if it succeeded in removing a trip', () => {
+      postSaveTrip({ id: 1 });
+      postSaveTrip({ id: 2 });
+
+      const mockResponse = postRemoveTrip(1);
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        success: true,
+        results: { data: [{ id: 2 }] },
+      });
+    });
+
+    it('should respond with success flag and the array of the remaining saved trips, if the id passed is not corresponding to any saved trip', () => {
+      postSaveTrip({ id: 1 });
+      postSaveTrip({ id: 2 });
+
+      const mockResponse = postRemoveTrip(3);
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        success: true,
+        results: { data: [{ id: 1 }, { id: 2 }] },
+      });
+    });
+
+    it('should respond with success flag and the array of the remaining saved trips, if there was no saved trips', () => {
+      const mockResponse = postRemoveTrip(3);
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        success: true,
+        results: { data: [] },
+      });
+    });
+  });
+
+  describe('postSaveTrips', () => {
+    it('should replace the stored saved trips with the given ones', () => {
+      const mockRequest = {};
+      const mockResponse = { json: jest.fn() };
+
+      controller.getSavedTrips(mockRequest, mockResponse);
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: { data: [] },
+        success: true,
+      });
+
+      postSaveTrips([{ id: 1 }]);
+
+      controller.getSavedTrips(mockRequest, mockResponse);
+      expect(mockResponse.json).toHaveBeenCalledTimes(2);
+      expect(mockResponse.json).toHaveBeenNthCalledWith(2, {
+        results: { data: [{ id: 1 }] },
+        success: true,
+      });
+    });
+
+    it('should respond with success flag and the replaced array of the saved trips', () => {
+      const mockResponse = postSaveTrips([{ id: 1 }]);
+
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: { data: [{ id: 1 }] },
+        success: true,
       });
     });
   });

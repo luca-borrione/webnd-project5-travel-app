@@ -52,15 +52,14 @@ exports[`renderResultsView should correctly render the view, when both the depar
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></sup></span>
+      <span>mock-temperature<sup>&#8451;</sup></span>
     </div>
-
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 4% W 10&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -139,15 +138,14 @@ exports[`renderResultsView should correctly render the view, when the county is 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></sup></span>
+      <span>mock-temperature<sup>&#8451;</sup></span>
     </div>
-
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 4% W 10&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -160,13 +158,14 @@ exports[`renderResultsView should correctly render the view, when the county is 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
-    
-
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 14% W 20&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -179,13 +178,14 @@ exports[`renderResultsView should correctly render the view, when the county is 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
-    
-
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 24% W 30&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -252,15 +252,14 @@ exports[`renderResultsView should correctly render the view, when the county is 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></sup></span>
+      <span>mock-temperature<sup>&#8451;</sup></span>
     </div>
-
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 4% W 10&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -273,13 +272,14 @@ exports[`renderResultsView should correctly render the view, when the county is 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
-    
-
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 14% W 20&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -292,13 +292,14 @@ exports[`renderResultsView should correctly render the view, when the county is 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
-    
-
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 24% W 30&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -365,15 +366,14 @@ exports[`renderResultsView should correctly render the view, when the return wea
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></sup></span>
+      <span>mock-temperature<sup>&#8451;</sup></span>
     </div>
-
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 4% W 10&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -386,13 +386,14 @@ exports[`renderResultsView should correctly render the view, when the return wea
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
-    
-
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 14% W 20&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -465,15 +466,14 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></sup></span>
+      <span>mock-temperature<sup>&#8451;</sup></span>
     </div>
-
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 4% W 10&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -486,13 +486,14 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
-    
-
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 14% W 20&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -505,13 +506,14 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
-    
-
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 24% W 30&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -533,7 +535,7 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
 <figure class=\\"card__image\\">
   <img
     class=\\"card__image-thumbnail\\"
-    src=\\"\\"
+    src=\\"src/client/assets/placeholder-destination-thumb.jpg\\"
     alt=\\"view of the destination\\"
   />
   <figcaption class=\\"card__image-caption\\">
@@ -578,15 +580,14 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></sup></span>
+      <span>mock-temperature<sup>&#8451;</sup></span>
     </div>
-
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 4% W 10&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -599,13 +600,14 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
-    
-
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 14% W 20&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -618,13 +620,14 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
   <aside class=\\"weather\\">
     <img
     class=\\"weather__icon\\"
-    src=\\"\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
     alt=\\"weather icon\\"
     />
-    
-
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
     <div class=\\"weather__extra-info\\">
-    H NaN% W NaN&#x33A7;
+    H 24% W 30&#x33A7;
     </div>
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
@@ -637,4 +640,354 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
   </button>
   
 </main>"
+`;
+
+exports[`renderSavedTripsView should correctly render the view, when both the departure and return weather forecasts are undefined 1`] = `
+"
+    <main class=\\"card\\" id=\\"mock-trip-id-1\\">
+      
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail-url\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+      
+  <article class=\\"infobox departure\\">
+    <div class=\\"infobox__title\\">Departure</div>
+    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    
+  </article>
+      
+  <article class=\\"infobox return\\">
+    <div class=\\"infobox__title\\">Return</div>
+    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    
+  </article>
+      
+  <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
+    <i class=\\"icon-heart-empty\\"></i>
+    <i class=\\"icon-heart\\"></i>
+    <span>Remove Trip</span>
+  </button>
+  
+    </main>"
+`;
+
+exports[`renderSavedTripsView should correctly render the view, when the return weather forecast is undefined 1`] = `
+"
+    <main class=\\"card\\" id=\\"mock-trip-id-1\\">
+      
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail-url\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+      
+  <article class=\\"infobox departure\\">
+    <div class=\\"infobox__title\\">Departure</div>
+    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 14% W 20&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+      
+  <article class=\\"infobox return\\">
+    <div class=\\"infobox__title\\">Return</div>
+    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    
+  </article>
+      
+  <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
+    <i class=\\"icon-heart-empty\\"></i>
+    <i class=\\"icon-heart\\"></i>
+    <span>Remove Trip</span>
+  </button>
+  
+    </main>"
+`;
+
+exports[`renderSavedTripsView should correctly render the view, when the thumbnail is mock-thumbnail 1`] = `
+"
+    <main class=\\"card\\" id=\\"mock-trip-id-1\\">
+      
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+      
+  <article class=\\"infobox departure\\">
+    <div class=\\"infobox__title\\">Departure</div>
+    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 14% W 20&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+      
+  <article class=\\"infobox return\\">
+    <div class=\\"infobox__title\\">Return</div>
+    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 24% W 30&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+      
+  <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
+    <i class=\\"icon-heart-empty\\"></i>
+    <i class=\\"icon-heart\\"></i>
+    <span>Remove Trip</span>
+  </button>
+  
+    </main>"
+`;
+
+exports[`renderSavedTripsView should correctly render the view, when the thumbnail is undefined 1`] = `
+"
+    <main class=\\"card\\" id=\\"mock-trip-id-1\\">
+      
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"src/client/assets/placeholder-destination-thumb.jpg\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+      
+  <article class=\\"infobox departure\\">
+    <div class=\\"infobox__title\\">Departure</div>
+    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 14% W 20&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+      
+  <article class=\\"infobox return\\">
+    <div class=\\"infobox__title\\">Return</div>
+    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 24% W 30&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+      
+  <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
+    <i class=\\"icon-heart-empty\\"></i>
+    <i class=\\"icon-heart\\"></i>
+    <span>Remove Trip</span>
+  </button>
+  
+    </main>"
+`;
+
+exports[`renderSavedTripsView should correctly render the view, when there are multiple saved trips 1`] = `
+"
+    <main class=\\"card\\" id=\\"mock-trip-id-1\\">
+      
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail-url\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+      
+  <article class=\\"infobox departure\\">
+    <div class=\\"infobox__title\\">Departure</div>
+    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 14% W 20&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+      
+  <article class=\\"infobox return\\">
+    <div class=\\"infobox__title\\">Return</div>
+    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 24% W 30&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+      
+  <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
+    <i class=\\"icon-heart-empty\\"></i>
+    <i class=\\"icon-heart\\"></i>
+    <span>Remove Trip</span>
+  </button>
+  
+    </main>
+    <main class=\\"card\\" id=\\"mock-trip-id-2\\">
+      
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail-url\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+      
+  <article class=\\"infobox departure\\">
+    <div class=\\"infobox__title\\">Departure</div>
+    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 14% W 20&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+      
+  <article class=\\"infobox return\\">
+    <div class=\\"infobox__title\\">Return</div>
+    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 24% W 30&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+      
+  <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-2)\\">
+    <i class=\\"icon-heart-empty\\"></i>
+    <i class=\\"icon-heart\\"></i>
+    <span>Remove Trip</span>
+  </button>
+  
+    </main>"
 `;

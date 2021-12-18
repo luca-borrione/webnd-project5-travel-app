@@ -100,10 +100,10 @@ describe('server', () => {
       expect(result).toBe(true);
     });
 
-    it('should default to port 8085 if process.env.PORT if not set', async () => {
+    it('should default to port 8080 if process.env.PORT if not set', async () => {
       delete process.env.PORT;
       prepareTest();
-      const result = await portUsed(8085);
+      const result = await portUsed(8080);
       expect(result).toBe(true);
     });
   });

@@ -7,6 +7,8 @@ const PIXABAY_BASEURL = 'https://pixabay.com/api';
 const WEATHER_CURRENT_BASEURL = 'http://api.weatherbit.io/v2.0/current';
 const WEATHER_FORECAST_BASEURL = 'http://api.weatherbit.io/v2.0/forecast/daily';
 
+let savedTrips = [];
+
 const getFetchResponse = (res, next) => async (url) => {
   try {
     const response = await fetch(url);
@@ -96,11 +98,44 @@ const getWeatherForecastUrl = (req) => {
   return `${WEATHER_FORECAST_BASEURL}?${new URLSearchParams(params).toString()}`;
 };
 
+const postSaveTrips = (req, res) => {
+  const { trips } = req.body;
+  savedTrips = trips;
+  res.json({ success: true, results: { data: savedTrips } });
+};
+
+const postSaveTrip = (req, res) => {
+  const { trip } = req.body;
+  savedTrips = savedTrips.filter(({ id }) => id !== trip.id);
+  savedTrips.push(trip);
+  res.json({ success: true, results: { data: savedTrips } });
+};
+
+const postRemoveTrip = (req, res) => {
+  const { tripId } = req.body;
+  savedTrips = savedTrips.filter(({ id }) => id !== tripId);
+  res.json({ success: true, results: { data: savedTrips } });
+};
+
 module.exports = {
   getCurrentWeather: (req, res, next) => getFetchResponse(res, next)(getCurrentWeatherUrl(req)),
   getGeoName: (req, res, next) => getFetchResponse(res, next)(getGeoNameUrl(req)),
   getLocationInfo: (req, res, next) => getFetchResponse(res, next)(getPositionStackUrl(req)),
-  getTest: (_, res) => res.send({ title: 'test json response', message: 'it works!' }),
+  getSavedTrips: (_, res) =>
+    res.json({
+      success: true,
+      results: {
+        data: savedTrips,
+      },
+    }),
+  getTest: (_, res) =>
+    res.send({
+      title: 'test json response',
+      message: 'it works!',
+    }),
   getThumbnail: (req, res, next) => getFetchResponse(res, next)(getThumbnailUrl(req)),
   getWeatherForecast: (req, res, next) => getFetchResponse(res, next)(getWeatherForecastUrl(req)),
+  postRemoveTrip,
+  postSaveTrip,
+  postSaveTrips,
 };

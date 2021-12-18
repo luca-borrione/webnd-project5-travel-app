@@ -54,20 +54,16 @@ const renderLocationInfo = ({
     )
     .join('')}</article>`;
 
-const renderWeather = ({ description, humidity, icon, temperature = '', windSpeed }) => `
+const renderWeather = ({ description, humidity, icon, temperature, windSpeed }) => `
   <aside class="weather">
     <img
     class="weather__icon"
     src="${require(`../assets/weather-icons/${icon}.png`)}"
     alt="weather icon"
     />
-    ${
-      temperature &&
-      `<div class="weather__temperature">
-      <span>${temperature}<sup>&#8451;</sup></sup></span>
-    </div>`
-    }
-
+    <div class="weather__temperature">
+      <span>${temperature}<sup>&#8451;</sup></span>
+    </div>
     <div class="weather__extra-info">
     H ${Math.round(humidity)}% W ${Math.round(windSpeed)}&#x33A7;
     </div>
@@ -144,6 +140,14 @@ const renderCardButton = () => `
   </button>
   `;
 
+const renderRemoveTripButton = (tripId) => `
+  <button class="card__button" type="button" onClick="return Client.removeTrip(${tripId})">
+    <i class="icon-heart-empty"></i>
+    <i class="icon-heart"></i>
+    <span>Remove Trip</span>
+  </button>
+  `;
+
 export const renderResultsView = ({
   thumbnail,
   locationInfo: { city, flag, ...locationInfo },
@@ -159,5 +163,20 @@ export const renderResultsView = ({
   ${renderReturnInfo(returnInfo)}
   ${renderCardButton()}
 </main>`;
+
+export const renderSavedTripsView = (savedTrips) =>
+  savedTrips.reduce(
+    (
+      acc,
+      { id: tripId, thumbnail, locationInfo: { city, flag }, departureInfo, returnInfo }
+    ) => `${acc}
+    <main class="card" id="${tripId}">
+      ${renderThumbnail({ thumbnail, city, flag })}
+      ${renderDepartureInfo(departureInfo)}
+      ${renderReturnInfo(returnInfo)}
+      ${renderRemoveTripButton(tripId)}
+    </main>`,
+    ''
+  );
 
 /* eslint-enable global-require, import/no-dynamic-require */

@@ -2,14 +2,22 @@ import { handleError } from './utils/error-utils';
 import { getDaysFromToday } from './utils/date-utils';
 import {
   getCurrentWeather,
-  getWeatherForecast,
   getGeoName,
   getLocationInfo,
   getThumbnailUrl,
+  getWeatherForecast,
+  postRemoveTrip,
+  postSaveTrip,
+  getSavedTrips,
+  postSaveTrips,
 } from './app-controller';
-import { renderResultsView } from './render-results';
+import { renderResultsView, renderSavedTripsView } from './render-results';
+
+const SAVED_TRIPS_KEY = 'savedTrips';
 
 let $form;
+let $results;
+let $savedTrips;
 
 const storeElements = () => {
   $form = {
@@ -19,10 +27,43 @@ const storeElements = () => {
     departureDate: document.forms.search.elements['search-form__departure-date'],
     returnDate: document.forms.search.elements['search-form__return-date'],
   };
+
+  $results = document.querySelector('.results');
+
+  $savedTrips = document.querySelector('.saved-trips');
 };
 
-const updateResultsView = (params) => {
-  document.querySelector('.results').innerHTML = renderResultsView(params);
+const saveTripListener = (trip) => (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  return postSaveTrip(trip)
+    .then(({ results: { data: savedTrips } }) => {
+      window.localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips));
+      $savedTrips.innerHTML = renderSavedTripsView(savedTrips);
+    })
+    .catch(handleError);
+};
+
+export const removeTrip = (tripId) =>
+  postRemoveTrip(tripId)
+    .then(({ results: { data: savedTrips } }) => {
+      localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips));
+      $savedTrips.innerHTML = renderSavedTripsView(savedTrips);
+    })
+    .catch(handleError);
+
+const restoreSavedTrips = async () => {
+  const remoteSavedTrips = await getSavedTrips();
+  if (remoteSavedTrips.length > 0) {
+    window.localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(remoteSavedTrips));
+    $savedTrips.innerHTML = renderSavedTripsView(remoteSavedTrips);
+  } else {
+    const localSavedTrips = JSON.parse(window.localStorage.getItem(SAVED_TRIPS_KEY)) ?? [];
+    if (localSavedTrips.length > 0) {
+      await postSaveTrips(localSavedTrips);
+      $savedTrips.innerHTML = renderSavedTripsView(localSavedTrips);
+    }
+  }
 };
 
 const onSearchFormSubmit = async (event) => {
@@ -32,7 +73,7 @@ const onSearchFormSubmit = async (event) => {
   try {
     const daysFromDeparture = getDaysFromToday($form.departureDate.value);
 
-    const { latitude, longitude, city, county, country, id } = await getGeoName(
+    const { latitude, longitude, city, county, country, geonameId } = await getGeoName(
       $form.destination.value
     );
 
@@ -56,7 +97,7 @@ const onSearchFormSubmit = async (event) => {
         forecastWeather,
       ]) => {
         const tripCard = {
-          id,
+          id: new Date($form.departureDate.value).getTime() + geonameId,
           thumbnail,
           locationInfo: {
             capital,
@@ -85,7 +126,12 @@ const onSearchFormSubmit = async (event) => {
             weather: forecastWeather?.return,
           },
         };
-        updateResultsView(tripCard);
+
+        $results.innerHTML = renderResultsView(tripCard);
+
+        $results
+          .querySelector('.card__button')
+          .addEventListener('click', saveTripListener(tripCard));
       }
     );
   } catch (e) {
@@ -97,9 +143,14 @@ const initEventListeners = () => {
   $form.search.addEventListener('submit', onSearchFormSubmit);
 };
 
-const init = () => {
-  storeElements();
-  initEventListeners();
+const init = async () => {
+  try {
+    storeElements();
+    initEventListeners();
+    await restoreSavedTrips();
+  } catch (e) {
+    handleError(e);
+  }
 };
 
 window.document.addEventListener('DOMContentLoaded', init);

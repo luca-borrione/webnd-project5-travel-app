@@ -1,4 +1,4 @@
-import { getData } from './utils/controller-utils';
+import { getData, postData } from './utils/controller-utils';
 import { handleErrorAndReject } from './utils/error-utils';
 
 // ---- Geo Names ----
@@ -6,7 +6,7 @@ const transformGeoNameData = ({ lat, lng, name, adminName1, countryName, geoname
   city: name,
   country: countryName,
   county: adminName1,
-  id: geonameId,
+  geonameId,
   latitude: lat,
   longitude: lng,
 });
@@ -146,3 +146,27 @@ export const getWeatherForecast = ({
       parseWeatherForecastResponse({ response, departureDateString, returnDateString })
     )
     .catch(handleErrorAndReject);
+
+// ---- Save Trip ----
+export const postSaveTrip = (trip) =>
+  postData('/api/save-trip', { trip }).catch(handleErrorAndReject);
+
+// ---- Save Trips ----
+export const postSaveTrips = (trips) =>
+  postData('/api/save-trips', { trips }).catch(handleErrorAndReject);
+
+// ---- Remove Trip ----
+export const postRemoveTrip = (tripId) =>
+  postData('/api/remove-trip', { tripId }).catch(handleErrorAndReject);
+
+// ---- Get Saved Trips ----
+const parseSavedTripsResponse = (response) =>
+  new Promise((resolve, reject) => {
+    if (!response.success) {
+      reject(new Error(response.message));
+    }
+    resolve(response.results.data);
+  });
+
+export const getSavedTrips = () =>
+  getData('/api/get-saved-trips').then(parseSavedTripsResponse).catch(handleErrorAndReject);
