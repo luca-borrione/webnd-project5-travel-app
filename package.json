@@ -21,6 +21,7 @@
     "format:js": "$npm_execpath run lint:js --fix",
     "format:json": "prettier --write '*.json'",
     "format:scss": "$npm_execpath run lint:scss --fix",
+    "heroku-postbuild": "yarn clean; yarn compile",
     "lint": "npm-run-all --parallel lint:*",
     "lint:html": "linthtml 'src/client/views/**/*.html'",
     "lint:js": "eslint . --ext .js",
