@@ -4,12 +4,11 @@ import {
   getCurrentWeather,
   getGeoName,
   getLocationInfo,
-  getThumbnailUrl,
+  getThumbnail,
   getWeatherForecast,
   postRemoveTrip,
   postSaveTrip,
-  getSavedTrips,
-  postSaveTrips,
+  postRestoreTrips,
 } from './app-controller';
 import { renderResultsView, renderSavedTripsView } from './render-results';
 
@@ -36,7 +35,7 @@ const storeElements = () => {
 const saveTripListener = (trip) => (event) => {
   event.preventDefault();
   event.stopPropagation();
-  return postSaveTrip(trip)
+  return postSaveTrip({ trip })
     .then(({ results: { data: savedTrips } }) => {
       window.localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips));
       $savedTrips.innerHTML = renderSavedTripsView(savedTrips);
@@ -45,7 +44,7 @@ const saveTripListener = (trip) => (event) => {
 };
 
 export const removeTrip = (tripId) =>
-  postRemoveTrip(tripId)
+  postRemoveTrip({ tripId })
     .then(({ results: { data: savedTrips } }) => {
       localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips));
       $savedTrips.innerHTML = renderSavedTripsView(savedTrips);
@@ -53,17 +52,10 @@ export const removeTrip = (tripId) =>
     .catch(handleError);
 
 const restoreSavedTrips = async () => {
-  const remoteSavedTrips = await getSavedTrips();
-  if (remoteSavedTrips.length > 0) {
-    window.localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(remoteSavedTrips));
-    $savedTrips.innerHTML = renderSavedTripsView(remoteSavedTrips);
-  } else {
-    const localSavedTrips = JSON.parse(window.localStorage.getItem(SAVED_TRIPS_KEY)) ?? [];
-    if (localSavedTrips.length > 0) {
-      await postSaveTrips(localSavedTrips);
-      $savedTrips.innerHTML = renderSavedTripsView(localSavedTrips);
-    }
-  }
+  const localStorageTrips = JSON.parse(window.localStorage.getItem(SAVED_TRIPS_KEY));
+  const restoredTrips = await postRestoreTrips({ localStorageTrips });
+  window.localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(restoredTrips));
+  $savedTrips.innerHTML = renderSavedTripsView(restoredTrips);
 };
 
 const onSearchFormSubmit = async (event) => {
@@ -73,20 +65,20 @@ const onSearchFormSubmit = async (event) => {
   try {
     const daysFromDeparture = getDaysFromToday($form.departureDate.value);
 
-    const { latitude, longitude, city, county, country, geonameId } = await getGeoName(
-      $form.destination.value
-    );
+    const { latitude, longitude, city, county, country, geonameId } = await getGeoName({
+      location: $form.destination.value,
+    });
 
     return Promise.all([
       getLocationInfo({ latitude, longitude }),
-      getThumbnailUrl({ city, country }),
+      getThumbnail({ city, country }),
       getCurrentWeather({ latitude, longitude }),
       daysFromDeparture < 16
         ? getWeatherForecast({
             latitude,
             longitude,
-            departureDateString: $form.departureDate.value,
-            returnDateString: $form.returnDate.value,
+            departureDate: $form.departureDate.value,
+            returnDate: $form.returnDate.value,
           })
         : Promise.resolve(),
     ]).then(
@@ -148,8 +140,8 @@ const init = async () => {
     storeElements();
     initEventListeners();
     await restoreSavedTrips();
-  } catch (e) {
-    handleError(e);
+  } catch (error) {
+    handleError(error);
   }
 };
 

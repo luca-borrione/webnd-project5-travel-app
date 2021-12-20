@@ -34,34 +34,4 @@ describe('api-routes', () => {
     prepareRouteSpies();
     expect(routeSpy.mock.calls).toMatchSnapshot();
   });
-
-  it.each`
-    route                  | callbackName
-    ${'/test'}             | ${'getTest'}
-    ${'/geoname'}          | ${'getGeoName'}
-    ${'/position-info'}    | ${'getLocationInfo'}
-    ${'/thumbnail'}        | ${'getThumbnail'}
-    ${'/weather-current'}  | ${'getCurrentWeather'}
-    ${'/weather-forecast'} | ${'getWeatherForecast'}
-    ${'/get-saved-trips'}  | ${'getSavedTrips'}
-  `('should correctly set the route for $route', ({ route, callbackName }) => {
-    prepareRouteSpies(route);
-    const routeIndex = routeSpy.mock.calls.findIndex((mockCall) => mockCall[0] === route);
-    expect(routeIndex).toBeGreaterThanOrEqual(0);
-    const callback = routeGetSpy.mock.calls[0][0];
-    expect(callback.name).toBe(callbackName);
-  });
-
-  it.each`
-    route             | callbackName
-    ${'/save-trip'}   | ${'postSaveTrip'}
-    ${'/remove-trip'} | ${'postRemoveTrip'}
-    ${'/save-trips'}  | ${'postSaveTrips'}
-  `('should correctly set the route for $route', ({ route, callbackName }) => {
-    prepareRouteSpies(route);
-    const routeIndex = routeSpy.mock.calls.findIndex((mockCall) => mockCall[0] === route);
-    expect(routeIndex).toBeGreaterThanOrEqual(0);
-    const callback = routePostSpy.mock.calls[0][0];
-    expect(callback.name).toBe(callbackName);
-  });
 });

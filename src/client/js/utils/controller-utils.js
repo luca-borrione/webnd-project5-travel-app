@@ -1,4 +1,4 @@
-import { handleErrorAndReject } from './error-utils.js';
+import { handleErrorAndReject } from './error-utils';
 
 export const postData = (url, data) =>
   fetch(url, {

@@ -26,63 +26,65 @@ exports[`app-view after having launched the app calling removeTrip should correc
 
 exports[`app-view after having launched the app clicking on the save trip button of the search results should correctly call postSaveTrip 1`] = `
 Object {
-  "currentInfo": Object {
-    "dateString": "mock-date-string",
-    "timezone": "mock-timezone",
-    "weather": Object {
-      "description": "mock-description",
-      "humidity": "mock-humidity",
-      "icon": "mock-icon",
-      "temperature": "mock-temperature",
+  "trip": Object {
+    "currentInfo": Object {
+      "dateString": "mock-date-string",
       "timezone": "mock-timezone",
-      "windSpeed": "mock-wind-speed",
-    },
-  },
-  "departureInfo": Object {
-    "dateString": "2021-11-10",
-    "weather": Object {
-      "description": "mock-description",
-      "humidity": "mock-humidity",
-      "icon": "mock-icon",
-      "windSpeed": "mock-wind-speed",
-    },
-  },
-  "id": 1636502401234,
-  "locationInfo": Object {
-    "capital": "mock-capital",
-    "city": "mock-city",
-    "continent": "mock-continent",
-    "country": "mock-country",
-    "county": "mock-county",
-    "currencies": Array [
-      Object {
-        "code": "cur1",
-        "name": "mock-currency1",
+      "weather": Object {
+        "description": "mock-description",
+        "humidity": "mock-humidity",
+        "icon": "mock-icon",
+        "temperature": "mock-temperature",
+        "timezone": "mock-timezone",
+        "windSpeed": "mock-wind-speed",
       },
-      Object {
-        "code": "cur2",
-        "name": "mock-currency2",
-      },
-    ],
-    "flag": "mock-flag",
-    "languages": Array [
-      "mock-language1",
-      "mock-language2",
-    ],
-    "offset": "mock-offset",
-    "subregion": "mock-subregion",
-    "timezone": "mock-timezone",
-  },
-  "returnInfo": Object {
-    "dateString": "2021-11-17",
-    "weather": Object {
-      "description": "mock-description",
-      "humidity": "mock-humidity",
-      "icon": "mock-icon",
-      "windSpeed": "mock-wind-speed",
     },
+    "departureInfo": Object {
+      "dateString": "2021-11-10",
+      "weather": Object {
+        "description": "mock-description",
+        "humidity": "mock-humidity",
+        "icon": "mock-icon",
+        "windSpeed": "mock-wind-speed",
+      },
+    },
+    "id": 1636502401234,
+    "locationInfo": Object {
+      "capital": "mock-capital",
+      "city": "mock-city",
+      "continent": "mock-continent",
+      "country": "mock-country",
+      "county": "mock-county",
+      "currencies": Array [
+        Object {
+          "code": "cur1",
+          "name": "mock-currency1",
+        },
+        Object {
+          "code": "cur2",
+          "name": "mock-currency2",
+        },
+      ],
+      "flag": "mock-flag",
+      "languages": Array [
+        "mock-language1",
+        "mock-language2",
+      ],
+      "offset": "mock-offset",
+      "subregion": "mock-subregion",
+      "timezone": "mock-timezone",
+    },
+    "returnInfo": Object {
+      "dateString": "2021-11-17",
+      "weather": Object {
+        "description": "mock-description",
+        "humidity": "mock-humidity",
+        "icon": "mock-icon",
+        "windSpeed": "mock-wind-speed",
+      },
+    },
+    "thumbnail": "mock-image-url",
   },
-  "thumbnail": "mock-image-url",
 }
 `;
 
@@ -202,37 +204,13 @@ exports[`app-view after having launched the app receiving the data of the search
 </section>
 `;
 
-exports[`app-view launching the app when trips are not retrieved from the server when trips are retrieved from the local storage should correctly update the saved trips view 1`] = `
+exports[`app-view launching the app should correctly update the saved trips view 1`] = `
 <section
   class="saved-trips"
 />
 `;
 
-exports[`app-view launching the app when trips are not retrieved from the server when trips are retrieved from the local storage should correctly update the saved trips view 2`] = `
-<section
-  class="saved-trips"
->
-  
-    
-  <main
-    class="card"
-  >
-    
-      mock-saved-trips-view
-    
-  </main>
-  
-  
-</section>
-`;
-
-exports[`app-view launching the app when trips are retrieved from the server should correctly update the saved trips view 1`] = `
-<section
-  class="saved-trips"
-/>
-`;
-
-exports[`app-view launching the app when trips are retrieved from the server should correctly update the saved trips view 2`] = `
+exports[`app-view launching the app should correctly update the saved trips view 2`] = `
 <section
   class="saved-trips"
 >

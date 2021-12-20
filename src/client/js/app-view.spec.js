@@ -2,12 +2,11 @@ import {
   getCurrentWeather,
   getGeoName,
   getLocationInfo,
-  getThumbnailUrl,
+  getThumbnail,
   getWeatherForecast,
-  getSavedTrips,
-  postSaveTrips,
-  postSaveTrip,
   postRemoveTrip,
+  postSaveTrip,
+  postRestoreTrips,
 } from './app-controller';
 import { getDaysFromToday } from './utils/date-utils';
 import { handleError } from './utils/error-utils';
@@ -38,7 +37,7 @@ jest.mock('./app-controller', () => ({
     flag: 'mock-flag',
     subregion: 'mock-subregion',
   }),
-  getThumbnailUrl: jest.fn().mockResolvedValue('mock-image-url'),
+  getThumbnail: jest.fn().mockResolvedValue('mock-image-url'),
   getCurrentWeather: jest.fn().mockResolvedValue({
     dateString: 'mock-date-string',
     description: 'mock-description',
@@ -62,14 +61,13 @@ jest.mock('./app-controller', () => ({
       windSpeed: 'mock-wind-speed',
     },
   }),
-  getSavedTrips: jest.fn().mockResolvedValue([]),
-  postSaveTrips: jest.fn().mockResolvedValue([]),
   postSaveTrip: jest.fn().mockResolvedValue({
     results: { data: [{ saved: 'trip1' }, { saved: 'trip2' }] },
   }),
   postRemoveTrip: jest.fn().mockResolvedValue({
     results: { data: [{ saved: 'trip2' }] },
   }),
+  postRestoreTrips: jest.fn().mockResolvedValue([]),
 }));
 
 jest.mock('./render-results', () => ({
@@ -93,8 +91,8 @@ jest.mock('./utils/date-utils', () => ({
 jest.mock('./utils/error-utils');
 
 const localStorageProto = Object.getPrototypeOf(window.localStorage);
-jest.spyOn(localStorageProto, 'getItem');
-jest.spyOn(localStorageProto, 'setItem');
+jest.spyOn(localStorageProto, 'getItem').mockReturnValue('[{ "retrievedFrom": "storage" }]');
+jest.spyOn(localStorageProto, 'setItem').mockImplementation();
 
 // eslint-disable-next-line no-promise-executor-return
 const flushPromises = () => new Promise((resolve) => setImmediate(resolve));
@@ -134,13 +132,9 @@ describe('app-view', () => {
     storeElements();
   });
 
-  afterEach(() => {
-    window.localStorage.clear();
-  });
-
   describe('launching the app', () => {
-    it('should try to retrieve the saved trips from the server', async () => {
-      expect(getSavedTrips).not.toHaveBeenCalled();
+    it('should try to retrieve the saved trips from the local storage', async () => {
+      expect(window.localStorage.getItem).not.toHaveBeenCalled();
       window.document.dispatchEvent(
         new Event('DOMContentLoaded', {
           bubbles: true,
@@ -148,12 +142,71 @@ describe('app-view', () => {
         })
       );
       await flushPromises();
-      expect(getSavedTrips).toHaveBeenCalledTimes(1);
+      expect(window.localStorage.getItem).toHaveBeenCalledTimes(1);
+      expect(window.localStorage.getItem).toHaveBeenCalledWith(SAVED_TRIPS_KEY);
     });
 
-    it('should handle an error nicely, if getSavedTrips rejects', async () => {
+    it('should correctly call postRestoreTrips', async () => {
+      expect(postRestoreTrips).not.toHaveBeenCalled();
+      window.document.dispatchEvent(
+        new Event('DOMContentLoaded', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+      await flushPromises();
+      expect(postRestoreTrips).toHaveBeenCalledTimes(1);
+      expect(postRestoreTrips).toHaveBeenCalledWith({
+        localStorageTrips: [{ retrievedFrom: 'storage' }],
+      });
+    });
+
+    it('should save to the local storage the restored and updated trips received from the server', async () => {
+      postRestoreTrips.mockResolvedValueOnce([{ restoredFrom: 'server' }]);
+      expect(window.localStorage.setItem).not.toHaveBeenCalled();
+      window.document.dispatchEvent(
+        new Event('DOMContentLoaded', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+      await flushPromises();
+      expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
+      expect(window.localStorage.setItem).toHaveBeenCalledWith(
+        SAVED_TRIPS_KEY,
+        '[{"restoredFrom":"server"}]'
+      );
+    });
+
+    it('should correctly call renderSavedTripsView', async () => {
+      postRestoreTrips.mockResolvedValueOnce([{ restoredFrom: 'server' }]);
+      expect(renderSavedTripsView).not.toHaveBeenCalled();
+      window.document.dispatchEvent(
+        new Event('DOMContentLoaded', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+      await flushPromises();
+      expect(renderSavedTripsView).toHaveBeenCalledTimes(1);
+      expect(renderSavedTripsView).toHaveBeenCalledWith([{ restoredFrom: 'server' }]);
+    });
+
+    it('should correctly update the saved trips view', async () => {
+      expect($savedTrips).toMatchSnapshot();
+      window.document.dispatchEvent(
+        new Event('DOMContentLoaded', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+      await flushPromises();
+      expect($savedTrips).toMatchSnapshot();
+    });
+
+    it('should handle an error nicely, if postRestoreTrips rejects', async () => {
       const expectedError = new Error('mock-expected-error');
-      getSavedTrips.mockRejectedValueOnce(expectedError);
+      postRestoreTrips.mockRejectedValueOnce(expectedError);
       expect(handleError).not.toHaveBeenCalled();
       window.document.dispatchEvent(
         new Event('DOMContentLoaded', {
@@ -164,196 +217,6 @@ describe('app-view', () => {
       await flushPromises();
       expect(handleError).toHaveBeenCalledTimes(1);
       expect(handleError).toHaveBeenCalledWith(expectedError);
-    });
-
-    describe('when trips are retrieved from the server', () => {
-      it('should save the trips to the local storage', async () => {
-        getSavedTrips.mockReturnValueOnce([{ retrievedFrom: 'server' }]);
-
-        expect(postSaveTrips).not.toHaveBeenCalled();
-        expect(window.localStorage.setItem).not.toHaveBeenCalled();
-
-        window.document.dispatchEvent(
-          new Event('DOMContentLoaded', {
-            bubbles: true,
-            cancelable: true,
-          })
-        );
-
-        await flushPromises();
-
-        expect(postSaveTrips).not.toHaveBeenCalled();
-        expect(window.localStorage.setItem).toHaveBeenCalledTimes(1);
-        expect(window.localStorage.setItem).toHaveBeenCalledWith(
-          SAVED_TRIPS_KEY,
-          '[{"retrievedFrom":"server"}]'
-        );
-      });
-
-      it('should correctly call renderSavedTripsView', async () => {
-        getSavedTrips.mockReturnValueOnce([{ retrievedFrom: 'server' }]);
-        expect(renderSavedTripsView).not.toHaveBeenCalled();
-        window.document.dispatchEvent(
-          new Event('DOMContentLoaded', {
-            bubbles: true,
-            cancelable: true,
-          })
-        );
-        await flushPromises();
-        expect(renderSavedTripsView).toHaveBeenCalledTimes(1);
-        expect(renderSavedTripsView).toHaveBeenCalledWith([{ retrievedFrom: 'server' }]);
-      });
-
-      it('should correctly update the saved trips view', async () => {
-        getSavedTrips.mockReturnValueOnce([{ retrievedFrom: 'server' }]);
-        expect($savedTrips).toMatchSnapshot();
-        window.document.dispatchEvent(
-          new Event('DOMContentLoaded', {
-            bubbles: true,
-            cancelable: true,
-          })
-        );
-        await flushPromises();
-        expect($savedTrips).toMatchSnapshot();
-      });
-    });
-
-    describe('when trips are not retrieved from the server', () => {
-      it('should try to retrieve the saved trips from the local storage', async () => {
-        getSavedTrips.mockReturnValueOnce([]);
-        expect(window.localStorage.getItem).not.toHaveBeenCalled();
-        window.document.dispatchEvent(
-          new Event('DOMContentLoaded', {
-            bubbles: true,
-            cancelable: true,
-          })
-        );
-        await flushPromises();
-        expect(window.localStorage.getItem).toHaveBeenCalledTimes(1);
-        expect(window.localStorage.getItem).toHaveBeenCalledWith(SAVED_TRIPS_KEY);
-      });
-
-      describe('when trips are retrieved from the local storage', () => {
-        it('should save the trips on the server', async () => {
-          getSavedTrips.mockReturnValueOnce([]);
-          window.localStorage.getItem.mockReturnValueOnce('[{ "retrievedFrom": "storage" }]');
-
-          expect(postSaveTrips).not.toHaveBeenCalled();
-          expect(window.localStorage.setItem).not.toHaveBeenCalled();
-
-          window.document.dispatchEvent(
-            new Event('DOMContentLoaded', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-
-          await flushPromises();
-
-          expect(postSaveTrips).toHaveBeenCalledTimes(1);
-          expect(postSaveTrips).toHaveBeenCalledWith([{ retrievedFrom: 'storage' }]);
-          expect(window.localStorage.setItem).not.toHaveBeenCalled();
-        });
-
-        it('should handle an error nicely, if postSaveTrips rejects', async () => {
-          getSavedTrips.mockReturnValueOnce([]);
-          window.localStorage.getItem.mockReturnValueOnce('[{ "retrievedFrom": "storage" }]');
-          const expectedError = new Error('mock-expected-error');
-          postSaveTrips.mockRejectedValueOnce(expectedError);
-          expect(handleError).not.toHaveBeenCalled();
-          window.document.dispatchEvent(
-            new Event('DOMContentLoaded', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          await flushPromises();
-          expect(handleError).toHaveBeenCalledTimes(1);
-          expect(handleError).toHaveBeenCalledWith(expectedError);
-        });
-
-        it('should correctly call renderSavedTripsView', async () => {
-          getSavedTrips.mockReturnValueOnce([]);
-          window.localStorage.getItem.mockReturnValueOnce('[{ "retrievedFrom": "storage" }]');
-          expect(renderSavedTripsView).not.toHaveBeenCalled();
-          window.document.dispatchEvent(
-            new Event('DOMContentLoaded', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          await flushPromises();
-          expect(renderSavedTripsView).toHaveBeenCalledTimes(1);
-          expect(renderSavedTripsView).toHaveBeenCalledWith([{ retrievedFrom: 'storage' }]);
-        });
-
-        it('should correctly update the saved trips view', async () => {
-          getSavedTrips.mockReturnValueOnce([]);
-          window.localStorage.getItem.mockReturnValueOnce('[{ "retrievedFrom": "storage" }]');
-          expect($savedTrips).toMatchSnapshot();
-          window.document.dispatchEvent(
-            new Event('DOMContentLoaded', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          await flushPromises();
-          expect($savedTrips).toMatchSnapshot();
-        });
-      });
-
-      describe('when trips are not retrieved from the local storage', () => {
-        it('should not try to synchronise the server ot the local storage', async () => {
-          getSavedTrips.mockReturnValueOnce([]);
-          window.localStorage.getItem.mockReturnValueOnce(null);
-
-          expect(postSaveTrips).not.toHaveBeenCalled();
-          expect(window.localStorage.setItem).not.toHaveBeenCalled();
-
-          window.document.dispatchEvent(
-            new Event('DOMContentLoaded', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          await flushPromises();
-
-          expect(postSaveTrips).not.toHaveBeenCalled();
-          expect(window.localStorage.setItem).not.toHaveBeenCalled();
-        });
-
-        it('should not call renderSavedTripsView', async () => {
-          getSavedTrips.mockReturnValueOnce([]);
-          window.localStorage.getItem.mockReturnValueOnce(null);
-
-          expect(renderSavedTripsView).not.toHaveBeenCalled();
-
-          window.document.dispatchEvent(
-            new Event('DOMContentLoaded', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          await flushPromises();
-
-          expect(renderSavedTripsView).not.toHaveBeenCalled();
-        });
-
-        it('should not update the saved trips view', async () => {
-          getSavedTrips.mockReturnValueOnce([]);
-          window.localStorage.getItem.mockReturnValueOnce(null);
-
-          expect($savedTrips.innerHTML).toBe('');
-          window.document.dispatchEvent(
-            new Event('DOMContentLoaded', {
-              bubbles: true,
-              cancelable: true,
-            })
-          );
-          await flushPromises();
-          expect($savedTrips.innerHTML).toBe('');
-        });
-      });
     });
   });
 
@@ -367,6 +230,8 @@ describe('app-view', () => {
       );
 
       await flushPromises();
+      jest.clearAllMocks();
+      $savedTrips.innerHTML = '';
 
       $form.destination.value = 'mock-destination';
       $form.departure.value = 'mock-departure';
@@ -379,7 +244,7 @@ describe('app-view', () => {
         expect(getGeoName).not.toHaveBeenCalled();
         $form.search.submit();
         expect(getGeoName).toHaveBeenCalledTimes(1);
-        expect(getGeoName).toHaveBeenCalledWith('mock-destination');
+        expect(getGeoName).toHaveBeenCalledWith({ location: 'mock-destination' });
       });
 
       it('should correctly call getLocationInfo', async () => {
@@ -394,11 +259,11 @@ describe('app-view', () => {
       });
 
       it('should correctly call getThumbnail', async () => {
-        expect(getThumbnailUrl).not.toHaveBeenCalled();
+        expect(getThumbnail).not.toHaveBeenCalled();
         $form.search.submit();
         await flushPromises();
-        expect(getThumbnailUrl).toHaveBeenCalledTimes(1);
-        expect(getThumbnailUrl).toHaveBeenCalledWith({
+        expect(getThumbnail).toHaveBeenCalledTimes(1);
+        expect(getThumbnail).toHaveBeenCalledWith({
           country: 'mock-country',
           city: 'mock-city',
         });
@@ -423,8 +288,8 @@ describe('app-view', () => {
         expect(getWeatherForecast).toHaveBeenCalledWith({
           latitude: 'mock-latitude',
           longitude: 'mock-longitude',
-          departureDateString: '2021-11-10',
-          returnDateString: '2021-11-17',
+          departureDate: '2021-11-10',
+          returnDate: '2021-11-17',
         });
       });
 
@@ -442,7 +307,7 @@ describe('app-view', () => {
         fnName                  | fn
         ${'getGeoName'}         | ${getGeoName}
         ${'getLocationInfo'}    | ${getLocationInfo}
-        ${'getThumbnailUrl'}    | ${getThumbnailUrl}
+        ${'getThumbnail'}       | ${getThumbnail}
         ${'getCurrentWeather'}  | ${getCurrentWeather}
         ${'getWeatherForecast'} | ${getWeatherForecast}
       `('should handle an error nicely, if $fnName rejects', async ({ fn }) => {
@@ -473,6 +338,7 @@ describe('app-view', () => {
 
     describe('clicking on the save trip button of the search results', () => {
       let $saveTripButton;
+
       beforeEach(async () => {
         $form.search.submit();
         await flushPromises();
@@ -530,7 +396,7 @@ describe('app-view', () => {
         removeTrip('mock-trip-id');
         await flushPromises();
         expect(postRemoveTrip).toHaveBeenCalledTimes(1);
-        expect(postRemoveTrip).toHaveBeenCalledWith('mock-trip-id');
+        expect(postRemoveTrip).toHaveBeenCalledWith({ tripId: 'mock-trip-id' });
       });
 
       it('should store in the local storage the remaining trips saved on the server', async () => {

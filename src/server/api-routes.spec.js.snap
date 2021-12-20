@@ -3,34 +3,31 @@
 exports[`api-routes should match the routes stored in the snapshot 1`] = `
 Array [
   Array [
-    "/test",
-  ],
-  Array [
     "/geoname",
   ],
   Array [
-    "/position-info",
+    "/location-info",
+  ],
+  Array [
+    "/foo",
   ],
   Array [
     "/thumbnail",
   ],
   Array [
-    "/weather-current",
+    "/weather/current",
   ],
   Array [
-    "/weather-forecast",
+    "/weather/forecast",
   ],
   Array [
-    "/save-trip",
+    "/trips/add",
   ],
   Array [
-    "/remove-trip",
+    "/trips/remove",
   ],
   Array [
-    "/get-saved-trips",
-  ],
-  Array [
-    "/save-trips",
+    "/trips/restore",
   ],
 ]
 `;
