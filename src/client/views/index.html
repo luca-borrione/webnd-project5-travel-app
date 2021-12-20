@@ -13,7 +13,11 @@
       </section>
     </header>
 
-    <main>
+    <aside class="spinner">
+      <img src="../assets/spinner.gif" alt="Loading..." />
+    </aside>
+
+    <main class="main-area hide">
       <section class="search">
         <form class="search-form" name="search">
           <label for="search-form__destination">
@@ -44,7 +48,10 @@
               pattern="\d{4}-\d{2}-\d{2}"
             />
           </label>
-          <button type="submit" class="search-form__submit-button">Search</button>
+          <button type="submit" class="search-form__submit-button">
+            <i class="icon-spinner animate-spin"></i>
+            <span>Search</span>
+          </button>
         </form>
       </section>
       <section class="results"></section>

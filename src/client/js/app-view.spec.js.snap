@@ -177,7 +177,13 @@ Object {
 exports[`app-view after having launched the app receiving the data of the search should correctly update the results view 1`] = `
 <section
   class="results"
-/>
+>
+  
+        
+  <section
+    class="saved-trips"
+  />
+</section>
 `;
 
 exports[`app-view after having launched the app receiving the data of the search should correctly update the results view 2`] = `
@@ -207,7 +213,10 @@ exports[`app-view after having launched the app receiving the data of the search
 exports[`app-view launching the app should correctly update the saved trips view 1`] = `
 <section
   class="saved-trips"
-/>
+>
+  
+      
+</section>
 `;
 
 exports[`app-view launching the app should correctly update the saved trips view 2`] = `

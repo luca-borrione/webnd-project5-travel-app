@@ -1,5 +1,6 @@
-import { handleError } from './utils/error-utils';
+import { scrollElementIntoView } from './utils/browser-utils';
 import { getDaysFromToday } from './utils/date-utils';
+import { handleError } from './utils/error-utils';
 import {
   getCurrentWeather,
   getGeoName,
@@ -17,6 +18,8 @@ const SAVED_TRIPS_KEY = 'savedTrips';
 let $form;
 let $results;
 let $savedTrips;
+let $spinner;
+let $main;
 
 const storeElements = () => {
   $form = {
@@ -25,11 +28,30 @@ const storeElements = () => {
     departure: document.forms.search.elements['search-form__departure'],
     departureDate: document.forms.search.elements['search-form__departure-date'],
     returnDate: document.forms.search.elements['search-form__return-date'],
+    button: document.querySelector('.search-form__submit-button'),
   };
 
   $results = document.querySelector('.results');
-
   $savedTrips = document.querySelector('.saved-trips');
+  $spinner = document.querySelector('.spinner');
+  $main = document.querySelector('.main-area');
+};
+
+const toggleSpinner = () => {
+  $spinner.classList.toggle('hide');
+};
+
+const toggleMain = () => {
+  $main.classList.toggle('hide');
+};
+
+const toggleSubmitButton = () => {
+  if ($form.button.classList.contains('loading')) {
+    $form.button.disabled = false;
+  } else {
+    $form.button.disabled = true;
+  }
+  $form.button.classList.toggle('loading');
 };
 
 const saveTripListener = (trip) => (event) => {
@@ -61,6 +83,8 @@ const restoreSavedTrips = async () => {
 const onSearchFormSubmit = async (event) => {
   event.preventDefault();
   event.stopPropagation();
+
+  toggleSubmitButton();
 
   try {
     const daysFromDeparture = getDaysFromToday($form.departureDate.value);
@@ -124,6 +148,9 @@ const onSearchFormSubmit = async (event) => {
         $results
           .querySelector('.card__button')
           .addEventListener('click', saveTripListener(tripCard));
+
+        toggleSubmitButton();
+        scrollElementIntoView($results);
       }
     );
   } catch (e) {
@@ -140,6 +167,8 @@ const init = async () => {
     storeElements();
     initEventListeners();
     await restoreSavedTrips();
+    toggleSpinner();
+    toggleMain();
   } catch (error) {
     handleError(error);
   }

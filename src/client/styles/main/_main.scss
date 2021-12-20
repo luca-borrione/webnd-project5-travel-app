@@ -7,4 +7,8 @@ main {
     margin: 50px auto;
     padding: 0 30px;
   }
+
+  &.hide {
+    display: none;
+  }
 }

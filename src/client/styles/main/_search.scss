@@ -47,6 +47,20 @@
       &:hover {
         background: color.scale($primary-bg-color, $lightness: -20%);
       }
+
+      & .icon-spinner {
+        display: none;
+      }
+
+      &.loading {
+        & span {
+          display: none;
+        }
+
+        & .icon-spinner {
+          display: block;
+        }
+      }
     }
   }
 }

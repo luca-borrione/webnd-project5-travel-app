@@ -8,12 +8,21 @@ import {
   postSaveTrip,
   postRestoreTrips,
 } from './app-controller';
+import { scrollElementIntoView } from './utils/browser-utils';
 import { getDaysFromToday } from './utils/date-utils';
 import { handleError } from './utils/error-utils';
 import { renderResultsView, renderSavedTripsView } from './render-results';
 import { removeTrip } from './app-view';
 
 jest.mock('./../assets/placeholder-destination-thumb.jpg', () => 'mock-placeholder-image');
+
+jest.mock('./utils/date-utils', () => ({
+  getDaysFromToday: jest.fn().mockReturnValue(1),
+}));
+
+jest.mock('./utils/error-utils');
+
+jest.mock('./utils/browser-utils');
 
 jest.mock('./app-controller', () => ({
   getGeoName: jest.fn().mockResolvedValue({
@@ -84,12 +93,6 @@ jest.mock('./render-results', () => ({
   `),
 }));
 
-jest.mock('./utils/date-utils', () => ({
-  getDaysFromToday: jest.fn().mockReturnValue(1),
-}));
-
-jest.mock('./utils/error-utils');
-
 const localStorageProto = Object.getPrototypeOf(window.localStorage);
 jest.spyOn(localStorageProto, 'getItem').mockReturnValue('[{ "retrievedFrom": "storage" }]');
 jest.spyOn(localStorageProto, 'setItem').mockImplementation();
@@ -101,8 +104,10 @@ describe('app-view', () => {
   const SAVED_TRIPS_KEY = 'savedTrips';
 
   let $form;
+  let $main;
   let $results;
   let $savedTrips;
+  let $spinner;
 
   const storeElements = () => {
     $form = {
@@ -111,10 +116,13 @@ describe('app-view', () => {
       departure: document.forms.search.elements['search-form__departure'],
       departureDate: document.forms.search.elements['search-form__departure-date'],
       returnDate: document.forms.search.elements['search-form__return-date'],
+      button: document.querySelector('.search-form__submit-button'),
     };
 
+    $main = document.querySelector('main');
     $results = document.querySelector('.results');
     $savedTrips = document.querySelector('.saved-trips');
+    $spinner = document.querySelector('.spinner');
   };
 
   beforeEach(() => {
@@ -124,15 +132,33 @@ describe('app-view', () => {
         <input id="search-form__departure" type="text" />
         <input id="search-form__departure-date" type="date" />
         <input id="search-form__return-date" type="date" />
+        <button type="submit" class="search-form__submit-button" />
       </form>
-      <section class="results"></section>
-      <section class="saved-trips"></section>
+      <aside class="spinner" />
+      <main class="main-area hide">
+        <section class="results" />
+        <section class="saved-trips" />
+      </main>
     `;
 
     storeElements();
   });
 
   describe('launching the app', () => {
+    it('should hide the main area of the app and showing a spinner, while restoring the saved trips', async () => {
+      expect($main.classList.contains('hide')).toBe(true);
+      expect($spinner.classList.contains('hide')).toBe(false);
+      window.document.dispatchEvent(
+        new Event('DOMContentLoaded', {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+      await flushPromises();
+      expect($main.classList.contains('hide')).toBe(false);
+      expect($spinner.classList.contains('hide')).toBe(true);
+    });
+
     it('should try to retrieve the saved trips from the local storage', async () => {
       expect(window.localStorage.getItem).not.toHaveBeenCalled();
       window.document.dispatchEvent(
@@ -240,6 +266,14 @@ describe('app-view', () => {
     });
 
     describe('submitting a new search', () => {
+      it('should put the form submit button into a loading state', () => {
+        expect($form.button.classList.contains('loading')).toBe(false);
+        expect($form.button.disabled).toBe(false);
+        $form.search.submit();
+        expect($form.button.classList.contains('loading')).toBe(true);
+        expect($form.button.disabled).toBe(true);
+      });
+
       it('should correctly call getGeoName', () => {
         expect(getGeoName).not.toHaveBeenCalled();
         $form.search.submit();
@@ -333,6 +367,25 @@ describe('app-view', () => {
         $form.search.submit();
         await flushPromises();
         expect($results).toMatchSnapshot();
+      });
+
+      it('should restore the form submit button to its initial state', async () => {
+        expect($form.button.classList.contains('loading')).toBe(false);
+        expect($form.button.disabled).toBe(false);
+        $form.search.submit();
+        expect($form.button.classList.contains('loading')).toBe(true);
+        expect($form.button.disabled).toBe(true);
+        await flushPromises();
+        expect($form.button.classList.contains('loading')).toBe(false);
+        expect($form.button.disabled).toBe(false);
+      });
+
+      it('schould try to scroll the results into view', async () => {
+        expect(scrollElementIntoView).not.toHaveBeenCalled();
+        $form.search.submit();
+        await flushPromises();
+        expect(scrollElementIntoView).toHaveBeenCalledTimes(1);
+        expect(scrollElementIntoView).toHaveBeenCalledWith($results);
       });
     });
 
