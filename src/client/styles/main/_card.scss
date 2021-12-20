@@ -5,14 +5,23 @@ $red-300: hsl(360deg 71% 66%);
 $red-400: hsl(360deg 64% 55%);
 
 .card {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   background: $main-bg-color;
   border-radius: 0.5rem;
   box-shadow: 0 0.07rem 0.15rem $primary-bg-color;
 
+  .saved-trips & {
+    margin-bottom: 1.5rem;
+  }
+
   & > * {
     width: 100%;
+  }
+
+  &.expired > * {
+    filter: grayscale(100%);
   }
 
   &__image {

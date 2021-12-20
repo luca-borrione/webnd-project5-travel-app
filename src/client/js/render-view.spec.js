@@ -1,4 +1,9 @@
-import { renderResultsView, renderSavedTripsView } from './render-results';
+import { getDaysFromToday } from './utils/date-utils';
+import { renderResultsView, renderSavedTripsView } from './render-view';
+
+jest.mock('./utils/date-utils', () => ({
+  getDaysFromToday: jest.fn().mockReturnValue(1),
+}));
 
 describe('renderResultsView', () => {
   const resultsViewParams = {
@@ -149,6 +154,18 @@ describe('renderSavedTripsView', () => {
       },
     },
   };
+
+  it('should correctly render the view, when the trip is expired', () => {
+    getDaysFromToday.mockReturnValue(-1);
+    const view = renderSavedTripsView([mockTrip]);
+    expect(view).toMatchSnapshot();
+  });
+
+  it('should correctly render the view, when the trip is not expired', () => {
+    getDaysFromToday.mockReturnValue(1);
+    const view = renderSavedTripsView([mockTrip]);
+    expect(view).toMatchSnapshot();
+  });
 
   it.each`
     thumbnail

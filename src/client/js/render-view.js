@@ -1,5 +1,17 @@
 /* eslint-disable global-require, import/no-dynamic-require */
 
+import { getDaysFromToday } from './utils/date-utils';
+
+const renderCornerRibbon = ({ daysFromDeparture }) => {
+  const expired = daysFromDeparture < 0;
+  const message = expired ? 'expired' : `${daysFromDeparture} days left`;
+  return `
+    <div class="ribbon ${
+      (expired && 'ribbon-top-right') || 'ribbon-top-left'
+    }"><span>${message}</span></div>
+  `;
+};
+
 const renderThumbnail = ({
   city,
   flag,
@@ -164,18 +176,43 @@ export const renderResultsView = ({
   ${renderCardButton()}
 </main>`;
 
+const byDaysLeftAscending = (a, b) =>
+  new Date(a.departureInfo.dateString) - new Date(b.departureInfo.dateString);
+
+const moveExpiredTripsToTheEnd = (savedTrips) =>
+  savedTrips
+    .reduce(
+      (acc, trip) => {
+        if (getDaysFromToday(trip.departureInfo.dateString) < 0) {
+          acc[1] = [...acc[1], trip];
+        } else {
+          acc[0] = [...acc[0], trip];
+        }
+        return acc;
+      },
+      [[], []]
+    )
+    .flat();
+
+const sortSavedTrips = (savedTrips) =>
+  moveExpiredTripsToTheEnd(savedTrips.sort(byDaysLeftAscending));
+
 export const renderSavedTripsView = (savedTrips) =>
-  savedTrips.reduce(
-    (
-      acc,
-      { id: tripId, thumbnail, locationInfo: { city, flag }, departureInfo, returnInfo }
-    ) => `${acc}
-    <main class="card" id="${tripId}">
-      ${renderThumbnail({ thumbnail, city, flag })}
-      ${renderDepartureInfo(departureInfo)}
-      ${renderReturnInfo(returnInfo)}
-      ${renderRemoveTripButton(tripId)}
-    </main>`,
+  sortSavedTrips(savedTrips).reduce(
+    (acc, { id: tripId, thumbnail, locationInfo: { city, flag }, departureInfo, returnInfo }) => {
+      const daysFromDeparture = getDaysFromToday(departureInfo.dateString);
+      const expired = daysFromDeparture < 0;
+      return `
+        ${acc}
+        <main class="card${(expired && ' expired') || ''}" id="${tripId}">
+          ${renderCornerRibbon({ daysFromDeparture })}
+          ${renderThumbnail({ thumbnail, city, flag })}
+          ${renderDepartureInfo(departureInfo)}
+          ${renderReturnInfo(returnInfo)}
+          ${renderRemoveTripButton(tripId)}
+        </main>
+      `;
+    },
     ''
   );
 

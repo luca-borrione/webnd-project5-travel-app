@@ -11,7 +11,7 @@ import {
   postSaveTrip,
   postRestoreTrips,
 } from './app-controller';
-import { renderResultsView, renderSavedTripsView } from './render-results';
+import { renderResultsView, renderSavedTripsView } from './render-view';
 
 const SAVED_TRIPS_KEY = 'savedTrips';
 
@@ -58,7 +58,7 @@ const saveTripListener = (trip) => (event) => {
   event.preventDefault();
   event.stopPropagation();
   return postSaveTrip({ trip })
-    .then(({ results: { data: savedTrips } }) => {
+    .then((savedTrips) => {
       window.localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips));
       $savedTrips.innerHTML = renderSavedTripsView(savedTrips);
     })
@@ -67,7 +67,7 @@ const saveTripListener = (trip) => (event) => {
 
 export const removeTrip = (tripId) =>
   postRemoveTrip({ tripId })
-    .then(({ results: { data: savedTrips } }) => {
+    .then((savedTrips) => {
       localStorage.setItem(SAVED_TRIPS_KEY, JSON.stringify(savedTrips));
       $savedTrips.innerHTML = renderSavedTripsView(savedTrips);
     })

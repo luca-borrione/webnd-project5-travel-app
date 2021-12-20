@@ -11,7 +11,7 @@ import {
 import { scrollElementIntoView } from './utils/browser-utils';
 import { getDaysFromToday } from './utils/date-utils';
 import { handleError } from './utils/error-utils';
-import { renderResultsView, renderSavedTripsView } from './render-results';
+import { renderResultsView, renderSavedTripsView } from './render-view';
 import { removeTrip } from './app-view';
 
 jest.mock('./../assets/placeholder-destination-thumb.jpg', () => 'mock-placeholder-image');
@@ -70,16 +70,12 @@ jest.mock('./app-controller', () => ({
       windSpeed: 'mock-wind-speed',
     },
   }),
-  postSaveTrip: jest.fn().mockResolvedValue({
-    results: { data: [{ saved: 'trip1' }, { saved: 'trip2' }] },
-  }),
-  postRemoveTrip: jest.fn().mockResolvedValue({
-    results: { data: [{ saved: 'trip2' }] },
-  }),
+  postSaveTrip: jest.fn().mockResolvedValue([{ saved: 'trip1' }, { saved: 'trip2' }]),
+  postRemoveTrip: jest.fn().mockResolvedValue([{ saved: 'trip2' }]),
   postRestoreTrips: jest.fn().mockResolvedValue([]),
 }));
 
-jest.mock('./render-results', () => ({
+jest.mock('./render-view', () => ({
   renderResultsView: jest.fn().mockReturnValue(`
     <main class="card">
       mock-results-view
