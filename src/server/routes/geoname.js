@@ -1,3 +1,12 @@
+/**
+ * GeoName API request
+ * http://www.geonames.org/export/web-services.html
+ *
+ * We use this API to retrieve information of a city given its name.
+ * The response this get route is providing contains the data already transformed
+ * in the way as the client is expecting them
+ */
+
 require('dotenv').config();
 const fetch = require('node-fetch');
 

@@ -16,6 +16,13 @@ const scrollTo = (element, params = {}) => {
   }
 };
 
+/**
+ * Tries to scroll a given element into the view,
+ * by using element.scrollIntoView if supported
+ * or window.scrollTo if supported
+ * @param {HTMLElement} element
+ * @returns {boolean} - whether the browser succeeded in scrolling the element into the view
+ */
 export const scrollElementIntoView = (element) =>
   scrollIntoView(element, { behavior: 'smooth' }) ||
   scrollIntoView(element) ||

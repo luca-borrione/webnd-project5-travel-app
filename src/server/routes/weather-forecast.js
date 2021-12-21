@@ -1,3 +1,16 @@
+/**
+ * WeatherBit API request
+ * https://www.weatherbit.io/api/weather-forecast-16-day
+ *
+ * We use this API to retrieve information of the weather forecast,
+ * given its latitude and longitude. The limit is 16 days from the current date.
+ * The response this get route is providing contains the data already transformed
+ * in the way as the client is expecting them.
+ *
+ * Specifically we are selecting the expected forecast, matching the departure date
+ * and the return date. In this way we pass to the client only the forecasts it needs.
+ */
+
 require('dotenv').config();
 const fetch = require('node-fetch');
 

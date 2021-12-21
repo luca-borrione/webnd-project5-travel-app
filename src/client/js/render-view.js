@@ -2,6 +2,11 @@
 
 import { getDaysFromToday } from './utils/date-utils';
 
+/**
+ * A corner ribbon is rendered on the saved trips.
+ * This will show how many days are left from the departure date,
+ * or it will indicate that the trip expired.
+ */
 const renderCornerRibbon = ({ daysFromDeparture }) => {
   const expired = daysFromDeparture < 0;
 
@@ -23,6 +28,10 @@ const renderCornerRibbon = ({ daysFromDeparture }) => {
   `;
 };
 
+/**
+ * The thumbnail image is rendered together with a caption,
+ * which is the name of the city and the flag of its country.
+ */
 const renderThumbnail = ({
   city,
   flag,
@@ -41,6 +50,9 @@ const renderThumbnail = ({
 </figure>
 `;
 
+/**
+ * A grid with information about the country of the trip destination.
+ */
 const renderLocationInfo = ({
   continent,
   subregion,
@@ -78,6 +90,12 @@ const renderLocationInfo = ({
     )
     .join('')}</article>`;
 
+/**
+ * Helper function to render the weather info:
+ * - weather icon and description
+ * - temperature in celsius
+ * - humidity and wind speed
+ */
 const renderWeather = ({ description, humidity, icon, temperature, windSpeed }) => `
   <aside class="weather">
     <img
@@ -94,6 +112,9 @@ const renderWeather = ({ description, humidity, icon, temperature, windSpeed }) 
     <div class="weather__description">${description}</div>
   </aside>`;
 
+/**
+ * Helper function to render a box containing a date and the weather info if available
+ */
 const renderInfoBox = ({ className, dateFormatted, title, weather = '' }) => `
   <article class="infobox ${className}">
     <div class="infobox__title">${title}</div>
@@ -101,6 +122,9 @@ const renderInfoBox = ({ className, dateFormatted, title, weather = '' }) => `
     ${weather && renderWeather(weather)}
   </article>`;
 
+/**
+ * Helper function to format the locale date
+ */
 const getLocaleDateString = (date, timeZone) =>
   date.toLocaleDateString('en-GB', {
     day: 'numeric',
@@ -109,6 +133,9 @@ const getLocaleDateString = (date, timeZone) =>
     timeZone,
   });
 
+/**
+ * Helper function to format the locale time
+ */
 const getLocaleTimeString = (date, timeZone) =>
   date.toLocaleTimeString('en-GB', {
     hour: '2-digit',
@@ -117,6 +144,22 @@ const getLocaleTimeString = (date, timeZone) =>
     timeZone,
   });
 
+/**
+ * Formats a given date string
+ *
+ * @param {Object} p
+ * @param {string} p.dateString
+ * date formatted as `yyyy-mm-dd` or `yyyy-mm-dd hh:mm`
+ *
+ * @param {string} p.timezone
+ * locale timezone e.g. `Europe/London`
+ * this is used to display the correct time and date of when the current weather has been taken
+ *
+ * @param {boolean} p.addTime
+ * Whether to add the time to the output
+ *
+ * @returns {string} - example `20 Dec 2021` or `20 Dec 2021 06:30pm`
+ */
 const formatDateString = ({
   dateString,
   timezone = Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -128,6 +171,9 @@ const formatDateString = ({
   return `${localeDateString}${localeTimeString}`;
 };
 
+/**
+ * Current locale date and weather at destination
+ */
 const renderCurrentInfo = ({ dateString, timezone, weather }) =>
   renderInfoBox({
     className: 'current',
@@ -140,6 +186,9 @@ const renderCurrentInfo = ({ dateString, timezone, weather }) =>
     weather,
   });
 
+/**
+ * Date and weather forecast if available when departing
+ */
 const renderDepartureInfo = ({ dateString, weather }) =>
   renderInfoBox({
     className: 'departure',
@@ -148,6 +197,9 @@ const renderDepartureInfo = ({ dateString, weather }) =>
     weather,
   });
 
+/**
+ * Date and weather forecast if available when returning
+ */
 const renderReturnInfo = ({ dateString, weather }) =>
   renderInfoBox({
     className: 'return',
@@ -156,6 +208,9 @@ const renderReturnInfo = ({ dateString, weather }) =>
     weather,
   });
 
+/**
+ * `Save Trip` button rendered on the results trip card
+ */
 const renderCardButton = () => `
   <button class="card__button" type="button">
     <i class="icon-heart-empty"></i>
@@ -164,6 +219,9 @@ const renderCardButton = () => `
   </button>
   `;
 
+/**
+ * `Remove Trip` button rendered on the individual saved trip card
+ */
 const renderRemoveTripButton = (tripId) => `
   <button class="card__button" type="button" onClick="return Client.removeTrip(${tripId})">
     <i class="icon-heart-empty"></i>
@@ -172,6 +230,9 @@ const renderRemoveTripButton = (tripId) => `
   </button>
   `;
 
+/**
+ * Rendering the results
+ */
 export const renderResultsView = ({
   thumbnail,
   locationInfo: { city, flag, ...locationInfo },
@@ -188,9 +249,18 @@ export const renderResultsView = ({
   ${renderCardButton()}
 </main>`;
 
-const byDaysLeftAscending = (a, b) =>
+/**
+ * Saved trips will be rendered sorted by the date by date ascending
+ * Example:
+ * 21 Dec 2021 - 22 Dec 2021 - 3 Feb 2022
+ */
+const byDateAscending = (a, b) =>
   new Date(a.departureInfo.dateString) - new Date(b.departureInfo.dateString);
 
+/**
+ * Expired trip card will be moved to the end of the list,
+ * keeping the ascending order by date
+ */
 const moveExpiredTripsToTheEnd = (savedTrips) =>
   savedTrips
     .reduce(
@@ -206,9 +276,15 @@ const moveExpiredTripsToTheEnd = (savedTrips) =>
     )
     .flat();
 
-const sortSavedTrips = (savedTrips) =>
-  moveExpiredTripsToTheEnd(savedTrips.sort(byDaysLeftAscending));
+/**
+ * Helper function to sort the array of the saved list
+ */
+const sortSavedTrips = (savedTrips) => moveExpiredTripsToTheEnd(savedTrips.sort(byDateAscending));
 
+/**
+ * Rendering the whole array of saved trips.
+ * Expired trip card will be displayed with a different UI
+ */
 export const renderSavedTripsView = (savedTrips) =>
   sortSavedTrips(savedTrips).reduce(
     (acc, { id: tripId, thumbnail, locationInfo: { city, flag }, departureInfo, returnInfo }) => {

@@ -1,3 +1,13 @@
+/**
+ * WeatherBit API request
+ * https://www.weatherbit.io/api/weather-current
+ *
+ * We use this API to retrieve information of the current weather of a location,
+ * given its latitude and longitude.
+ * The response this get route is providing contains the data already transformed
+ * in the way as the client is expecting them.
+ */
+
 require('dotenv').config();
 const fetch = require('node-fetch');
 

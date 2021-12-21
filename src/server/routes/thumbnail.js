@@ -1,3 +1,10 @@
+/**
+ * Pixabay API request
+ * https://pixabay.com/api/docs/
+ *
+ * We use this API to retrieve a photo of a given city, or its country if none are returned.
+ */
+
 require('dotenv').config();
 const fetch = require('node-fetch');
 
