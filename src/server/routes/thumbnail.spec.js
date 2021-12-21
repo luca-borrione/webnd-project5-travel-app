@@ -142,5 +142,17 @@ describe('thumbnail', () => {
       expect(mockFetch).toHaveBeenCalledTimes(1);
       expect(response).toBe('mock-thumbnail-url');
     });
+
+    it('should throw an unhandled error when something goes wrong', () => {
+      expect.assertions(1);
+      const mockError = new Error('mock-error-message');
+      mockFetch.mockImplementationOnce(() => {
+        throw mockError;
+      });
+
+      getThumbnail(mockQuery).catch((error) => {
+        expect(error).toBe(mockError);
+      });
+    });
   });
 });

@@ -58,10 +58,7 @@ const thumbnailGetRoute = async (req, res) => {
   }
 };
 
-const getThumbnail = async ({ city, country }) => {
-  const response = await fetchThumbnail({ city, country });
-  return parseResponse(response);
-};
+const getThumbnail = ({ city, country }) => fetchThumbnail({ city, country }).then(parseResponse);
 
 module.exports = {
   getThumbnail,

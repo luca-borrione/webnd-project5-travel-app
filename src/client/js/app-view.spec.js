@@ -57,13 +57,13 @@ jest.mock('./app-controller', () => ({
     windSpeed: 'mock-wind-speed',
   }),
   getWeatherForecast: jest.fn().mockResolvedValue({
-    departure: {
+    departureWeather: {
       description: 'mock-description',
       humidity: 'mock-humidity',
       icon: 'mock-icon',
       windSpeed: 'mock-wind-speed',
     },
-    return: {
+    returnWeather: {
       description: 'mock-description',
       humidity: 'mock-humidity',
       icon: 'mock-icon',

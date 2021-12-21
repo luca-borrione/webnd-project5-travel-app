@@ -1,0 +1,244 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`trips restoreTripsPostRoute should add fresh weather forecast for the departure only, if the return date expired 1`] = `
+Object {
+  "results": Object {
+    "data": Array [
+      Object {
+        "departureInfo": Object {
+          "dateString": "mock-departure-date",
+          "weather": "mock-departure-weather",
+        },
+        "locationInfo": Object {
+          "city": "mock-city",
+          "country": "mock-country",
+        },
+        "returnInfo": Object {
+          "dateString": "mock-expired-return-date",
+          "weather": undefined,
+        },
+        "thumbnail": "mock-thumbnail",
+      },
+    ],
+  },
+  "success": true,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should add fresh weather forecasts, if both the departure date and the return date are not expired 1`] = `
+Object {
+  "results": Object {
+    "data": Array [
+      Object {
+        "departureInfo": Object {
+          "dateString": "mock-departure-date",
+          "weather": "mock-departure-weather",
+        },
+        "locationInfo": Object {
+          "city": "mock-city",
+          "country": "mock-country",
+        },
+        "returnInfo": Object {
+          "dateString": "mock-return-date",
+          "weather": "mock-return-weather",
+        },
+        "thumbnail": "mock-thumbnail",
+      },
+    ],
+  },
+  "success": true,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should be able to restore multiple trips 1`] = `
+Object {
+  "message": "Cannot read properties of undefined (reading 'departureWeather')",
+  "success": false,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should default to an empty array if no trips are saved on the server or on the local storage 1`] = `
+Object {
+  "results": Object {
+    "data": Array [],
+  },
+  "success": true,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should not add any weather forecast, if both the departure date and the return date expired 1`] = `
+Object {
+  "results": Object {
+    "data": Array [
+      Object {
+        "departureInfo": Object {
+          "dateString": "mock-expired-departure-date",
+          "weather": undefined,
+        },
+        "locationInfo": Object {
+          "city": "mock-city",
+          "country": "mock-country",
+        },
+        "returnInfo": Object {
+          "dateString": "mock-expired-return-date",
+          "weather": undefined,
+        },
+        "thumbnail": "mock-thumbnail",
+      },
+    ],
+  },
+  "success": true,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should not add any weather forecast, if the getWeatherForecast api rejects 1`] = `
+Object {
+  "results": Object {
+    "data": Array [
+      Object {
+        "departureInfo": Object {
+          "dateString": "mock-departure-date",
+          "weather": undefined,
+        },
+        "locationInfo": Object {
+          "city": "mock-city",
+          "country": "mock-country",
+        },
+        "returnInfo": Object {
+          "dateString": "mock-return-date",
+          "weather": undefined,
+        },
+        "thumbnail": "mock-thumbnail",
+      },
+    ],
+  },
+  "success": true,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should override the thumbnail with undefined if the saved link expired and the getThumbnail api rejects 1`] = `
+Object {
+  "results": Object {
+    "data": Array [
+      Object {
+        "departureInfo": Object {
+          "dateString": "mock-departure-date",
+          "weather": "mock-departure-weather",
+        },
+        "locationInfo": Object {
+          "city": "mock-city",
+          "country": "mock-country",
+        },
+        "returnInfo": Object {
+          "dateString": "mock-return-date",
+          "weather": "mock-return-weather",
+        },
+        "thumbnail": undefined,
+      },
+    ],
+  },
+  "success": true,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should restore the trips saved in the local storage, if there are no trips saved on the server 1`] = `
+Object {
+  "results": Object {
+    "data": Array [
+      Object {
+        "departureInfo": Object {
+          "dateString": "mock-departure-date",
+          "weather": "mock-departure-weather",
+        },
+        "locationInfo": Object {
+          "city": "mock-city",
+          "country": "mock-country",
+        },
+        "returnInfo": Object {
+          "dateString": "mock-return-date",
+          "weather": "mock-return-weather",
+        },
+        "saved": "on-local-storage",
+        "thumbnail": "mock-thumbnail",
+      },
+    ],
+  },
+  "success": true,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should restore the trips saved on the server if present, regardless of the trips saved on the local storage 1`] = `
+Object {
+  "results": Object {
+    "data": Array [
+      Object {
+        "departureInfo": Object {
+          "dateString": "mock-departure-date",
+          "weather": "mock-departure-weather",
+        },
+        "locationInfo": Object {
+          "city": "mock-city",
+          "country": "mock-country",
+        },
+        "returnInfo": Object {
+          "dateString": "mock-return-date",
+          "weather": "mock-return-weather",
+        },
+        "saved": "on-server",
+        "thumbnail": "mock-thumbnail",
+      },
+    ],
+  },
+  "success": true,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should update the thumbnail if the saved link expired 1`] = `
+Object {
+  "results": Object {
+    "data": Array [
+      Object {
+        "departureInfo": Object {
+          "dateString": "mock-departure-date",
+          "weather": "mock-departure-weather",
+        },
+        "locationInfo": Object {
+          "city": "mock-city",
+          "country": "mock-country",
+        },
+        "returnInfo": Object {
+          "dateString": "mock-return-date",
+          "weather": "mock-return-weather",
+        },
+        "thumbnail": "mock-updated-thumbnail",
+      },
+    ],
+  },
+  "success": true,
+}
+`;
+
+exports[`trips restoreTripsPostRoute should update the thumbnail, if the thumbnail is undefined 1`] = `
+Object {
+  "results": Object {
+    "data": Array [
+      Object {
+        "departureInfo": Object {
+          "dateString": "mock-departure-date",
+          "weather": "mock-departure-weather",
+        },
+        "locationInfo": Object {
+          "city": "mock-city",
+          "country": "mock-country",
+        },
+        "returnInfo": Object {
+          "dateString": "mock-return-date",
+          "weather": "mock-return-weather",
+        },
+        "thumbnail": "mock-updated-thumbnail",
+      },
+    ],
+  },
+  "success": true,
+}
+`;

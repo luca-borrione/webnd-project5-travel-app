@@ -110,7 +110,7 @@ const onSearchFormSubmit = async (event) => {
         { capital, continent, currencies, languages, timezone, offset, flag, subregion },
         thumbnail,
         { dateString: currentDateString, ...currentWeather },
-        forecastWeather,
+        forecast,
       ]) => {
         const tripCard = {
           id: new Date($form.departureDate.value).getTime() + geonameId,
@@ -124,6 +124,8 @@ const onSearchFormSubmit = async (event) => {
             currencies,
             flag,
             languages,
+            latitude,
+            longitude,
             offset,
             subregion,
             timezone,
@@ -135,11 +137,11 @@ const onSearchFormSubmit = async (event) => {
           },
           departureInfo: {
             dateString: $form.departureDate.value,
-            weather: forecastWeather?.departure,
+            weather: forecast?.departureWeather,
           },
           returnInfo: {
             dateString: $form.returnDate.value,
-            weather: forecastWeather?.return,
+            weather: forecast?.returnWeather,
           },
         };
 

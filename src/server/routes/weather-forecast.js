@@ -1,6 +1,8 @@
 require('dotenv').config();
 const fetch = require('node-fetch');
 
+const { parseResponse } = require('../utils/request-utils');
+
 const WEATHER_FORECAST_BASEURL = 'http://api.weatherbit.io/v2.0/forecast/daily';
 
 const getUrl = ({ latitude, longitude }) => {
@@ -45,8 +47,8 @@ const fetchWeatherForecast = async ({ latitude, longitude, departureDate, return
     status: response.status,
     results: {
       data: {
-        departure: transformData(departureData),
-        ...(returnData ? { return: transformData(departureData) } : {}),
+        departureWeather: departureData && transformData(departureData),
+        returnWeather: returnData && transformData(returnData),
       },
     },
   };
@@ -74,6 +76,10 @@ const weatherForecastGetRoute = async (req, res) => {
   }
 };
 
+const getWeatherForecast = ({ latitude, longitude, departureDate, returnDate }) =>
+  fetchWeatherForecast({ latitude, longitude, departureDate, returnDate }).then(parseResponse);
+
 module.exports = {
+  getWeatherForecast,
   weatherForecastGetRoute,
 };

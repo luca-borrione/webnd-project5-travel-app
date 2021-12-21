@@ -4,7 +4,6 @@ describe('locationInfoGetRoute', () => {
   let locationInfoGetRoute;
   let mockRequest;
   let mockResponse;
-  let mockNext;
   let mockFetch;
 
   beforeEach(() => {
@@ -33,7 +32,7 @@ describe('locationInfoGetRoute', () => {
 
   it('should call fetch sending the required params in the query', async () => {
     expect(mockFetch).not.toHaveBeenCalled();
-    await locationInfoGetRoute(mockRequest, mockResponse, mockNext);
+    await locationInfoGetRoute(mockRequest, mockResponse);
     expect(mockFetch).toHaveBeenCalledTimes(1);
     const parsedUrl = new URL(mockFetch.mock.calls[0][0]);
     const queryParams = Object.fromEntries(new URLSearchParams(parsedUrl.search));
@@ -58,7 +57,7 @@ describe('locationInfoGetRoute', () => {
 
     expect(mockFetch).not.toHaveBeenCalled();
 
-    await locationInfoGetRoute(mockRequest, mockResponse, mockNext);
+    await locationInfoGetRoute(mockRequest, mockResponse);
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     const parsedUrl = new URL(mockFetch.mock.calls[0][0]);
