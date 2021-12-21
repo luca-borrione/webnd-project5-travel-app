@@ -11,7 +11,7 @@ const getUrl = ({ city, country }) => {
     category: 'travel',
     image_type: 'photo',
     key: PIXABAY_APIKEY,
-    // order: 'popular',
+    order: 'popular',
     orientation: 'horizontal',
     q: [city, country].filter(Boolean).join(' '),
     safesearch: 'true',
@@ -30,9 +30,13 @@ const fetchThumbnail = async ({ city, country }) => {
       message: results.message,
     };
   }
+  const thumbnail = selectData(results);
+  if (city && !thumbnail) {
+    return fetchThumbnail({ country });
+  }
   return {
     status: response.status,
-    results: { data: selectData(results) },
+    results: { data: thumbnail },
   };
 };
 

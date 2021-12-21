@@ -45,7 +45,7 @@ describe('thumbnail', () => {
         category: 'travel',
         image_type: 'photo',
         key: 'MOCK-PIXABAY-APIKEY',
-        // order: 'popular',
+        order: 'popular',
         orientation: 'horizontal',
         q: `mock-city mock-country`,
         safesearch: 'true',
@@ -66,6 +66,49 @@ describe('thumbnail', () => {
       expect(mockFetch).toHaveBeenCalledTimes(1);
       const parsedUrl = new URL(mockFetch.mock.calls[0][0]);
       expect(parsedUrl.searchParams.get('key')).toBe('undefined');
+    });
+
+    it('should be successful and correctly transform the results data when the remote api responds with an ok status', async () => {
+      mockFetch.mockReturnValueOnce({
+        status: 200,
+        json: jest.fn().mockReturnValueOnce({ hits: [{ webformatURL: 'mock-thumbnail-url' }] }),
+      });
+      expect(mockFetch).not.toHaveBeenCalled();
+      await thumbnailGetRoute(mockRequest, mockResponse);
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: { data: 'mock-thumbnail-url' },
+        success: true,
+      });
+    });
+
+    it('should fetch a fallback image of the country, in case there is no thumbnail returned for the city', async () => {
+      mockFetch
+        .mockReturnValueOnce({
+          status: 200,
+          json: jest.fn().mockReturnValueOnce({ hits: [] }),
+        })
+        .mockReturnValueOnce({
+          status: 200,
+          json: jest
+            .fn()
+            .mockReturnValueOnce({ hits: [{ webformatURL: 'mock-country-thumbnail-url' }] }),
+        });
+      expect(mockFetch).not.toHaveBeenCalled();
+      await thumbnailGetRoute(mockRequest, mockResponse);
+      expect(mockFetch).toHaveBeenCalledTimes(2);
+      const parsedUrl1 = new URL(mockFetch.mock.calls[0][0]);
+      const queryParams1 = Object.fromEntries(new URLSearchParams(parsedUrl1.search));
+      expect(queryParams1).toEqual(expect.objectContaining({ q: `mock-city mock-country` }));
+      const parsedUrl2 = new URL(mockFetch.mock.calls[1][0]);
+      const queryParams2 = Object.fromEntries(new URLSearchParams(parsedUrl2.search));
+      expect(queryParams2).toEqual(expect.objectContaining({ q: `mock-country` }));
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: { data: 'mock-country-thumbnail-url' },
+        success: true,
+      });
     });
 
     it('should be unsuccessful and send the failure message when the remote api responds with a non-ok status', async () => {
@@ -104,21 +147,6 @@ describe('thumbnail', () => {
       expect(mockResponse.json).toHaveBeenCalledWith({
         message: 'mock-error-message',
         success: false,
-      });
-    });
-
-    it('should be successful and correctly transform the results data when the remote api responds with an ok status', async () => {
-      mockFetch.mockReturnValueOnce({
-        status: 200,
-        json: jest.fn().mockReturnValueOnce({ hits: [{ webformatURL: 'mock-thumbnail-url' }] }),
-      });
-      expect(mockFetch).not.toHaveBeenCalled();
-      await thumbnailGetRoute(mockRequest, mockResponse);
-      expect(mockFetch).toHaveBeenCalledTimes(1);
-      expect(mockResponse.json).toHaveBeenCalledTimes(1);
-      expect(mockResponse.json).toHaveBeenCalledWith({
-        results: { data: 'mock-thumbnail-url' },
-        success: true,
       });
     });
   });
