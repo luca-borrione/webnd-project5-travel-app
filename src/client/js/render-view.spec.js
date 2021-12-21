@@ -161,8 +161,20 @@ describe('renderSavedTripsView', () => {
     expect(view).toMatchSnapshot();
   });
 
-  it('should correctly render the view, when the trip is not expired', () => {
+  it('should correctly render the view, when the trip is today', () => {
+    getDaysFromToday.mockReturnValue(0);
+    const view = renderSavedTripsView([mockTrip]);
+    expect(view).toMatchSnapshot();
+  });
+
+  it('should correctly render the view, when the trip is tomorrow', () => {
     getDaysFromToday.mockReturnValue(1);
+    const view = renderSavedTripsView([mockTrip]);
+    expect(view).toMatchSnapshot();
+  });
+
+  it('should correctly render the view, when the trip is in future', () => {
+    getDaysFromToday.mockReturnValue(2);
     const view = renderSavedTripsView([mockTrip]);
     expect(view).toMatchSnapshot();
   });

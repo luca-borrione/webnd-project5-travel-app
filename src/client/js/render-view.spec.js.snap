@@ -17,33 +17,51 @@ exports[`renderResultsView should correctly render the view, when both the depar
 </figure>
 
   <article class=\\"card__info\\">
-        <div class=\\"card__info-continent--label\\">Continent:</div>
-        <div class=\\"card__info-continent--value\\">mock-continent</div>
-      
-        <div class=\\"card__info-subregion--label\\">Subregion:</div>
-        <div class=\\"card__info-continent--value\\">mock-subregion</div>
-      
-        <div class=\\"card__info-country--label\\">Country:</div>
-        <div class=\\"card__info-continent--value\\">mock-country</div>
-      
-        <div class=\\"card__info-county--label\\">County:</div>
-        <div class=\\"card__info-continent--value\\">mock-county</div>
-      
-        <div class=\\"card__info-capital--label\\">Capital:</div>
-        <div class=\\"card__info-continent--value\\">mock-capital</div>
-      
-        <div class=\\"card__info-currency--label\\">Currency:</div>
-        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
-      
-        <div class=\\"card__info-language--label\\">Language:</div>
-        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
-      
-        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
-        <div class=\\"card__info-continent--value\\">mock-timezone</div>
-      
-        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
-        <div class=\\"card__info-continent--value\\">mock-offset</div>
-      </article>
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Continent:</div>
+            <div class=\\"value\\">mock-continent</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Subregion:</div>
+            <div class=\\"value\\">mock-subregion</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Country:</div>
+            <div class=\\"value\\">mock-country</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">County:</div>
+            <div class=\\"value\\">mock-county</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Capital:</div>
+            <div class=\\"value\\">mock-capital</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Currency:</div>
+            <div class=\\"value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Language:</div>
+            <div class=\\"value\\">mock-language1, mock-language2</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Timezone:</div>
+            <div class=\\"value\\">mock-timezone</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Offset:</div>
+            <div class=\\"value\\">mock-offset</div>
+          </div>
+        </article>
   
   <article class=\\"infobox current\\">
     <div class=\\"infobox__title\\">Current Weather</div>
@@ -103,33 +121,51 @@ exports[`renderResultsView should correctly render the view, when the county is 
 </figure>
 
   <article class=\\"card__info\\">
-        <div class=\\"card__info-continent--label\\">Continent:</div>
-        <div class=\\"card__info-continent--value\\">mock-continent</div>
-      
-        <div class=\\"card__info-subregion--label\\">Subregion:</div>
-        <div class=\\"card__info-continent--value\\">mock-subregion</div>
-      
-        <div class=\\"card__info-country--label\\">Country:</div>
-        <div class=\\"card__info-continent--value\\">mock-country</div>
-      
-        <div class=\\"card__info-county--label\\">County:</div>
-        <div class=\\"card__info-continent--value\\">mock-county</div>
-      
-        <div class=\\"card__info-capital--label\\">Capital:</div>
-        <div class=\\"card__info-continent--value\\">mock-capital</div>
-      
-        <div class=\\"card__info-currency--label\\">Currency:</div>
-        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
-      
-        <div class=\\"card__info-language--label\\">Language:</div>
-        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
-      
-        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
-        <div class=\\"card__info-continent--value\\">mock-timezone</div>
-      
-        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
-        <div class=\\"card__info-continent--value\\">mock-offset</div>
-      </article>
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Continent:</div>
+            <div class=\\"value\\">mock-continent</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Subregion:</div>
+            <div class=\\"value\\">mock-subregion</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Country:</div>
+            <div class=\\"value\\">mock-country</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">County:</div>
+            <div class=\\"value\\">mock-county</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Capital:</div>
+            <div class=\\"value\\">mock-capital</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Currency:</div>
+            <div class=\\"value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Language:</div>
+            <div class=\\"value\\">mock-language1, mock-language2</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Timezone:</div>
+            <div class=\\"value\\">mock-timezone</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Offset:</div>
+            <div class=\\"value\\">mock-offset</div>
+          </div>
+        </article>
   
   <article class=\\"infobox current\\">
     <div class=\\"infobox__title\\">Current Weather</div>
@@ -217,33 +253,51 @@ exports[`renderResultsView should correctly render the view, when the county is 
 </figure>
 
   <article class=\\"card__info\\">
-        <div class=\\"card__info-continent--label\\">Continent:</div>
-        <div class=\\"card__info-continent--value\\">mock-continent</div>
-      
-        <div class=\\"card__info-subregion--label\\">Subregion:</div>
-        <div class=\\"card__info-continent--value\\">mock-subregion</div>
-      
-        <div class=\\"card__info-country--label\\">Country:</div>
-        <div class=\\"card__info-continent--value\\">mock-country</div>
-      
-        <div class=\\"card__info-county--label\\">County:</div>
-        <div class=\\"card__info-continent--value\\">mock-county</div>
-      
-        <div class=\\"card__info-capital--label\\">Capital:</div>
-        <div class=\\"card__info-continent--value\\">mock-capital</div>
-      
-        <div class=\\"card__info-currency--label\\">Currency:</div>
-        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
-      
-        <div class=\\"card__info-language--label\\">Language:</div>
-        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
-      
-        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
-        <div class=\\"card__info-continent--value\\">mock-timezone</div>
-      
-        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
-        <div class=\\"card__info-continent--value\\">mock-offset</div>
-      </article>
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Continent:</div>
+            <div class=\\"value\\">mock-continent</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Subregion:</div>
+            <div class=\\"value\\">mock-subregion</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Country:</div>
+            <div class=\\"value\\">mock-country</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">County:</div>
+            <div class=\\"value\\">mock-county</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Capital:</div>
+            <div class=\\"value\\">mock-capital</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Currency:</div>
+            <div class=\\"value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Language:</div>
+            <div class=\\"value\\">mock-language1, mock-language2</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Timezone:</div>
+            <div class=\\"value\\">mock-timezone</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Offset:</div>
+            <div class=\\"value\\">mock-offset</div>
+          </div>
+        </article>
   
   <article class=\\"infobox current\\">
     <div class=\\"infobox__title\\">Current Weather</div>
@@ -331,33 +385,51 @@ exports[`renderResultsView should correctly render the view, when the return wea
 </figure>
 
   <article class=\\"card__info\\">
-        <div class=\\"card__info-continent--label\\">Continent:</div>
-        <div class=\\"card__info-continent--value\\">mock-continent</div>
-      
-        <div class=\\"card__info-subregion--label\\">Subregion:</div>
-        <div class=\\"card__info-continent--value\\">mock-subregion</div>
-      
-        <div class=\\"card__info-country--label\\">Country:</div>
-        <div class=\\"card__info-continent--value\\">mock-country</div>
-      
-        <div class=\\"card__info-county--label\\">County:</div>
-        <div class=\\"card__info-continent--value\\">mock-county</div>
-      
-        <div class=\\"card__info-capital--label\\">Capital:</div>
-        <div class=\\"card__info-continent--value\\">mock-capital</div>
-      
-        <div class=\\"card__info-currency--label\\">Currency:</div>
-        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
-      
-        <div class=\\"card__info-language--label\\">Language:</div>
-        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
-      
-        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
-        <div class=\\"card__info-continent--value\\">mock-timezone</div>
-      
-        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
-        <div class=\\"card__info-continent--value\\">mock-offset</div>
-      </article>
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Continent:</div>
+            <div class=\\"value\\">mock-continent</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Subregion:</div>
+            <div class=\\"value\\">mock-subregion</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Country:</div>
+            <div class=\\"value\\">mock-country</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">County:</div>
+            <div class=\\"value\\">mock-county</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Capital:</div>
+            <div class=\\"value\\">mock-capital</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Currency:</div>
+            <div class=\\"value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Language:</div>
+            <div class=\\"value\\">mock-language1, mock-language2</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Timezone:</div>
+            <div class=\\"value\\">mock-timezone</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Offset:</div>
+            <div class=\\"value\\">mock-offset</div>
+          </div>
+        </article>
   
   <article class=\\"infobox current\\">
     <div class=\\"infobox__title\\">Current Weather</div>
@@ -431,33 +503,51 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
 </figure>
 
   <article class=\\"card__info\\">
-        <div class=\\"card__info-continent--label\\">Continent:</div>
-        <div class=\\"card__info-continent--value\\">mock-continent</div>
-      
-        <div class=\\"card__info-subregion--label\\">Subregion:</div>
-        <div class=\\"card__info-continent--value\\">mock-subregion</div>
-      
-        <div class=\\"card__info-country--label\\">Country:</div>
-        <div class=\\"card__info-continent--value\\">mock-country</div>
-      
-        <div class=\\"card__info-county--label\\">County:</div>
-        <div class=\\"card__info-continent--value\\">mock-county</div>
-      
-        <div class=\\"card__info-capital--label\\">Capital:</div>
-        <div class=\\"card__info-continent--value\\">mock-capital</div>
-      
-        <div class=\\"card__info-currency--label\\">Currency:</div>
-        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
-      
-        <div class=\\"card__info-language--label\\">Language:</div>
-        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
-      
-        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
-        <div class=\\"card__info-continent--value\\">mock-timezone</div>
-      
-        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
-        <div class=\\"card__info-continent--value\\">mock-offset</div>
-      </article>
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Continent:</div>
+            <div class=\\"value\\">mock-continent</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Subregion:</div>
+            <div class=\\"value\\">mock-subregion</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Country:</div>
+            <div class=\\"value\\">mock-country</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">County:</div>
+            <div class=\\"value\\">mock-county</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Capital:</div>
+            <div class=\\"value\\">mock-capital</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Currency:</div>
+            <div class=\\"value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Language:</div>
+            <div class=\\"value\\">mock-language1, mock-language2</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Timezone:</div>
+            <div class=\\"value\\">mock-timezone</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Offset:</div>
+            <div class=\\"value\\">mock-offset</div>
+          </div>
+        </article>
   
   <article class=\\"infobox current\\">
     <div class=\\"infobox__title\\">Current Weather</div>
@@ -545,33 +635,51 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
 </figure>
 
   <article class=\\"card__info\\">
-        <div class=\\"card__info-continent--label\\">Continent:</div>
-        <div class=\\"card__info-continent--value\\">mock-continent</div>
-      
-        <div class=\\"card__info-subregion--label\\">Subregion:</div>
-        <div class=\\"card__info-continent--value\\">mock-subregion</div>
-      
-        <div class=\\"card__info-country--label\\">Country:</div>
-        <div class=\\"card__info-continent--value\\">mock-country</div>
-      
-        <div class=\\"card__info-county--label\\">County:</div>
-        <div class=\\"card__info-continent--value\\">mock-county</div>
-      
-        <div class=\\"card__info-capital--label\\">Capital:</div>
-        <div class=\\"card__info-continent--value\\">mock-capital</div>
-      
-        <div class=\\"card__info-currency--label\\">Currency:</div>
-        <div class=\\"card__info-continent--value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
-      
-        <div class=\\"card__info-language--label\\">Language:</div>
-        <div class=\\"card__info-continent--value\\">mock-language1, mock-language2</div>
-      
-        <div class=\\"card__info-timezone-name--label\\">Timezone:</div>
-        <div class=\\"card__info-continent--value\\">mock-timezone</div>
-      
-        <div class=\\"card__info-timezone-offset--label\\">Offset:</div>
-        <div class=\\"card__info-continent--value\\">mock-offset</div>
-      </article>
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Continent:</div>
+            <div class=\\"value\\">mock-continent</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Subregion:</div>
+            <div class=\\"value\\">mock-subregion</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Country:</div>
+            <div class=\\"value\\">mock-country</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">County:</div>
+            <div class=\\"value\\">mock-county</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Capital:</div>
+            <div class=\\"value\\">mock-capital</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Currency:</div>
+            <div class=\\"value\\">mock-currency1 (cur1), mock-currency2 (cur2)</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Language:</div>
+            <div class=\\"value\\">mock-language1, mock-language2</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Timezone:</div>
+            <div class=\\"value\\">mock-timezone</div>
+          </div>
+        
+          <div class=\\"card__info-entry\\">
+            <div class=\\"label\\">Offset:</div>
+            <div class=\\"value\\">mock-offset</div>
+          </div>
+        </article>
   
   <article class=\\"infobox current\\">
     <div class=\\"infobox__title\\">Current Weather</div>
@@ -647,7 +755,7 @@ exports[`renderSavedTripsView should correctly render the view, when both the de
         
         <main class=\\"card\\" id=\\"mock-trip-id-1\\">
           
-    <div class=\\"ribbon ribbon-top-left\\"><span>1 days left</span></div>
+    <div class=\\"ribbon ribbon-top-left\\"><span>in 2 days</span></div>
   
           
 <figure class=\\"card__image\\">
@@ -690,7 +798,7 @@ exports[`renderSavedTripsView should correctly render the view, when the return 
         
         <main class=\\"card\\" id=\\"mock-trip-id-1\\">
           
-    <div class=\\"ribbon ribbon-top-left\\"><span>1 days left</span></div>
+    <div class=\\"ribbon ribbon-top-left\\"><span>in 2 days</span></div>
   
           
 <figure class=\\"card__image\\">
@@ -747,7 +855,7 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
         
         <main class=\\"card\\" id=\\"mock-trip-id-1\\">
           
-    <div class=\\"ribbon ribbon-top-left\\"><span>1 days left</span></div>
+    <div class=\\"ribbon ribbon-top-left\\"><span>in 2 days</span></div>
   
           
 <figure class=\\"card__image\\">
@@ -818,7 +926,7 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
         
         <main class=\\"card\\" id=\\"mock-trip-id-1\\">
           
-    <div class=\\"ribbon ribbon-top-left\\"><span>1 days left</span></div>
+    <div class=\\"ribbon ribbon-top-left\\"><span>in 2 days</span></div>
   
           
 <figure class=\\"card__image\\">
@@ -955,12 +1063,154 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
       "
 `;
 
-exports[`renderSavedTripsView should correctly render the view, when the trip is not expired 1`] = `
+exports[`renderSavedTripsView should correctly render the view, when the trip is in future 1`] = `
 "
         
         <main class=\\"card\\" id=\\"mock-trip-id-1\\">
           
-    <div class=\\"ribbon ribbon-top-left\\"><span>1 days left</span></div>
+    <div class=\\"ribbon ribbon-top-left\\"><span>in 2 days</span></div>
+  
+          
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail-url\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+          
+  <article class=\\"infobox departure\\">
+    <div class=\\"infobox__title\\">Departure</div>
+    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 14% W 20&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+          
+  <article class=\\"infobox return\\">
+    <div class=\\"infobox__title\\">Return</div>
+    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 24% W 30&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+          
+  <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
+    <i class=\\"icon-heart-empty\\"></i>
+    <i class=\\"icon-heart\\"></i>
+    <span>Remove Trip</span>
+  </button>
+  
+        </main>
+      "
+`;
+
+exports[`renderSavedTripsView should correctly render the view, when the trip is today 1`] = `
+"
+        
+        <main class=\\"card\\" id=\\"mock-trip-id-1\\">
+          
+    <div class=\\"ribbon ribbon-top-left\\"><span>today</span></div>
+  
+          
+<figure class=\\"card__image\\">
+  <img
+    class=\\"card__image-thumbnail\\"
+    src=\\"mock-thumbnail-url\\"
+    alt=\\"view of the destination\\"
+  />
+  <figcaption class=\\"card__image-caption\\">
+    <span class=\\"card__image-caption-flag\\">mock-flag</span>
+    <span class=\\"card__image-caption-city\\">mock-city</span>
+  </figcaption>
+</figure>
+
+          
+  <article class=\\"infobox departure\\">
+    <div class=\\"infobox__title\\">Departure</div>
+    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 14% W 20&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+          
+  <article class=\\"infobox return\\">
+    <div class=\\"infobox__title\\">Return</div>
+    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    
+  <aside class=\\"weather\\">
+    <img
+    class=\\"weather__icon\\"
+    src=\\"src/client/assets/weather-icons/a01d.png\\"
+    alt=\\"weather icon\\"
+    />
+    <div class=\\"weather__temperature\\">
+      <span>mock-temperature<sup>&#8451;</sup></span>
+    </div>
+    <div class=\\"weather__extra-info\\">
+    H 24% W 30&#x33A7;
+    </div>
+    <div class=\\"weather__description\\">mock-description</div>
+  </aside>
+  </article>
+          
+  <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
+    <i class=\\"icon-heart-empty\\"></i>
+    <i class=\\"icon-heart\\"></i>
+    <span>Remove Trip</span>
+  </button>
+  
+        </main>
+      "
+`;
+
+exports[`renderSavedTripsView should correctly render the view, when the trip is tomorrow 1`] = `
+"
+        
+        <main class=\\"card\\" id=\\"mock-trip-id-1\\">
+          
+    <div class=\\"ribbon ribbon-top-left\\"><span>tomorrow</span></div>
   
           
 <figure class=\\"card__image\\">
@@ -1032,7 +1282,7 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
         
         <main class=\\"card\\" id=\\"mock-trip-id-1\\">
           
-    <div class=\\"ribbon ribbon-top-left\\"><span>1 days left</span></div>
+    <div class=\\"ribbon ribbon-top-left\\"><span>in 2 days</span></div>
   
           
 <figure class=\\"card__image\\">
@@ -1098,7 +1348,7 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
       
         <main class=\\"card\\" id=\\"mock-trip-id-2\\">
           
-    <div class=\\"ribbon ribbon-top-left\\"><span>1 days left</span></div>
+    <div class=\\"ribbon ribbon-top-left\\"><span>in 2 days</span></div>
   
           
 <figure class=\\"card__image\\">

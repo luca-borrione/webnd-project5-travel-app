@@ -222,6 +222,34 @@ describe('trips', () => {
       });
     });
 
+    it('should try to update the thumbnail, if the thumbnail is undefind', async () => {
+      jest.mock('./thumbnail', () => ({
+        getThumbnail: jest.fn().mockResolvedValue('mock-updated-thumbnail'),
+      }));
+      jest.resetModules();
+      restoreTripsPostRoute = require('./trips').restoreTripsPostRoute; // eslint-disable-line global-require
+
+      const mockResponse = restoreTrips([
+        {
+          ...mockTrip,
+          thumbnail: undefined,
+        },
+      ]);
+      await flushPromises();
+      expect(mockResponse.json).toHaveBeenCalledTimes(1);
+      expect(mockResponse.json).toHaveBeenCalledWith({
+        results: {
+          data: [
+            {
+              locationInfo: { city: 'mock-city', country: 'mock-country' },
+              thumbnail: 'mock-updated-thumbnail',
+            },
+          ],
+        },
+        success: true,
+      });
+    });
+
     it('should override the thumbnail with undefined if the saved link expired and the getThumbnail api rejects', async () => {
       jest.mock('./thumbnail', () => ({
         getThumbnail: jest.fn().mockRejectedValue(),

@@ -19,10 +19,12 @@ const removeTripPostRoute = (req, res) => {
   res.json({ success: true, results: { data: savedTrips } });
 };
 
-const shouldUpdateThumbnail = (trip) =>
-  getBuffer(trip.thumbnail)
-    .then(() => false)
-    .catch(() => true);
+const shouldUpdateThumbnail = (thumbnail) =>
+  thumbnail
+    ? getBuffer(thumbnail)
+        .then(() => false)
+        .catch(() => true)
+    : true;
 
 const updateThumbnail = async ({ city, country }) => {
   try {
@@ -39,7 +41,7 @@ const updateTrip = async (trip) => {
   } = trip;
 
   let updatedThumbail = thumbnail;
-  if (await shouldUpdateThumbnail(trip)) {
+  if (await shouldUpdateThumbnail(trip.thumbnail)) {
     updatedThumbail = await updateThumbnail({ city, country });
   }
 

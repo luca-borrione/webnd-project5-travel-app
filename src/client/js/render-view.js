@@ -4,7 +4,18 @@ import { getDaysFromToday } from './utils/date-utils';
 
 const renderCornerRibbon = ({ daysFromDeparture }) => {
   const expired = daysFromDeparture < 0;
-  const message = expired ? 'expired' : `${daysFromDeparture} days left`;
+
+  let message;
+  if (expired) {
+    message = 'expired';
+  } else if (daysFromDeparture === 0) {
+    message = 'today';
+  } else if (daysFromDeparture === 1) {
+    message = 'tomorrow';
+  } else {
+    message = `in ${daysFromDeparture} days`;
+  }
+
   return `
     <div class="ribbon ${
       (expired && 'ribbon-top-right') || 'ribbon-top-left'
@@ -42,27 +53,28 @@ const renderLocationInfo = ({
   offset,
 }) =>
   `<article class="card__info">${[
-    { className: 'continent', label: 'Continent', value: continent },
-    { className: 'subregion', label: 'Subregion', value: subregion },
-    { className: 'country', label: 'Country', value: country },
-    { className: 'county', label: 'County', value: county },
-    { className: 'capital', label: 'Capital', value: capital },
+    { label: 'Continent', value: continent },
+    { label: 'Subregion', value: subregion },
+    { label: 'Country', value: country },
+    { label: 'County', value: county },
+    { label: 'Capital', value: capital },
     {
-      className: 'currency',
       label: 'Currency',
       value: currencies.map(({ code, name }) => `${name} (${code})`).join(', '),
     },
-    { className: 'language', label: 'Language', value: languages.join(', ') },
-    { className: 'timezone-name', label: 'Timezone', value: timezone },
-    { className: 'timezone-offset', label: 'Offset', value: offset },
+    { label: 'Language', value: languages.join(', ') },
+    { label: 'Timezone', value: timezone },
+    { label: 'Offset', value: offset },
   ]
     .map(
-      ({ className, label, value }) =>
+      ({ label, value }) =>
         value &&
         `
-        <div class="card__info-${className}--label">${label}:</div>
-        <div class="card__info-continent--value">${value}</div>
-      `
+          <div class="card__info-entry">
+            <div class="label">${label}:</div>
+            <div class="value">${value}</div>
+          </div>
+        `
     )
     .join('')}</article>`;
 

@@ -25,6 +25,7 @@ $red-400: hsl(360deg 64% 55%);
   }
 
   &__image {
+    grid-area: card-image;
     margin: 0;
     background-color: color.scale($primary-bg-color, $lightness: 85%);
 
@@ -57,15 +58,16 @@ $red-400: hsl(360deg 64% 55%);
   }
 
   &__info {
+    grid-area: card-info;
     padding: 0.3rem;
     width: 100%;
 
-    & > div:nth-child(odd) {
+    .label {
       font-size: 1.1rem;
       font-weight: 500;
     }
 
-    & > div:nth-child(even) {
+    .value {
       font-size: 1.1rem;
       align-self: center;
       margin-bottom: 0.5rem;
@@ -82,6 +84,18 @@ $red-400: hsl(360deg 64% 55%);
       'infobox-title' 1fr
       'infobox-date' 1fr
       'weather' auto / 1fr;
+
+    &.current {
+      grid-area: infobox-current;
+    }
+
+    &.departure {
+      grid-area: infobox-departure;
+    }
+
+    &.return {
+      grid-area: infobox-return;
+    }
 
     &__title {
       grid-area: infobox-title;
@@ -131,6 +145,7 @@ $red-400: hsl(360deg 64% 55%);
   }
 
   &__button {
+    grid-area: card-button;
     background-color: color.scale($primary-bg-color, $lightness: 85%);
     border: 0;
     font-size: 1.1rem;
@@ -166,15 +181,79 @@ $red-400: hsl(360deg 64% 55%);
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 @media (min-width: 600px) {
-  // .card {
-  //   &__info {
-  //     display: grid;
-  //     grid-template-columns: 1fr 1fr;
+  .results .card {
+    display: grid;
+    align-items: start;
+    grid-template-areas:
+      'card-image infobox-current'
+      'infobox-departure infobox-return'
+      'card-info card-info'
+      'card-button card-button';
 
-  //     & > div:nth-child(even) {
-  //       align-self: center;
-  //       margin-bottom: auto;
-  //     }
-  //   }
-  // }
+    .infobox {
+      margin: initial;
+
+      &.current {
+        align-self: center;
+      }
+
+      &.departure,
+      &.return {
+        margin-top: 1rem;
+      }
+    }
+
+    &__info {
+      display: grid;
+      align-items: self-start;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 1.5rem;
+
+      &-entry {
+        padding: 0.2rem;
+      }
+    }
+
+    &__image {
+      filter: drop-shadow(1px 2px 3px #ccc);
+      border-radius: 0.5rem;
+    }
+  }
+
+  .saved-trips .card {
+    &__image {
+      &-thumbnail {
+        height: 12rem;
+      }
+    }
+  }
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width: 961px) {
+  .results .card {
+    display: grid;
+    align-items: start;
+    grid-template-areas:
+      'card-image card-image card-info'
+      'card-image card-image card-info'
+      'card-image card-image card-info'
+      'infobox-current infobox-departure infobox-return'
+      'card-button card-button card-button';
+    grid-template-columns: repeat(3, 1fr);
+
+    &__info {
+      grid-template-columns: repeat(2, 1fr);
+      margin: initial;
+      padding: initial;
+      align-self: center;
+
+      &-entry {
+        padding: initial;
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+        padding-bottom: 0.4rem;
+      }
+    }
+  }
 }
