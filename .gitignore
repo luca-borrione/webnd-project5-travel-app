@@ -2,7 +2,7 @@
 coverage/
 dist
 .DS_Store
-.env
+# .env
 .eslintcache
 .history/
 node_modules
