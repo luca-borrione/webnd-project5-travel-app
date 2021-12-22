@@ -95,6 +95,11 @@ exports[`renderResultsView should correctly render the view, when both the depar
     
   </article>
   
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
+  
   <button class=\\"card__button\\" type=\\"button\\">
     <i class=\\"icon-heart-empty\\"></i>
     <i class=\\"icon-heart\\"></i>
@@ -226,6 +231,11 @@ exports[`renderResultsView should correctly render the view, when the county is 
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
   </article>
+  
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
   
   <button class=\\"card__button\\" type=\\"button\\">
     <i class=\\"icon-heart-empty\\"></i>
@@ -359,6 +369,11 @@ exports[`renderResultsView should correctly render the view, when the county is 
   </aside>
   </article>
   
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
+  
   <button class=\\"card__button\\" type=\\"button\\">
     <i class=\\"icon-heart-empty\\"></i>
     <i class=\\"icon-heart\\"></i>
@@ -476,6 +491,11 @@ exports[`renderResultsView should correctly render the view, when the return wea
     <div class=\\"infobox__date\\">12 Dec 2021</div>
     
   </article>
+  
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
   
   <button class=\\"card__button\\" type=\\"button\\">
     <i class=\\"icon-heart-empty\\"></i>
@@ -609,6 +629,11 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
   </aside>
   </article>
   
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
+  
   <button class=\\"card__button\\" type=\\"button\\">
     <i class=\\"icon-heart-empty\\"></i>
     <i class=\\"icon-heart\\"></i>
@@ -741,6 +766,11 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
   </aside>
   </article>
   
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
+  
   <button class=\\"card__button\\" type=\\"button\\">
     <i class=\\"icon-heart-empty\\"></i>
     <i class=\\"icon-heart\\"></i>
@@ -782,6 +812,11 @@ exports[`renderSavedTripsView should correctly render the view, when both the de
     <div class=\\"infobox__date\\">12 Dec 2021</div>
     
   </article>
+          
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
           
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
     <i class=\\"icon-heart-empty\\"></i>
@@ -839,6 +874,11 @@ exports[`renderSavedTripsView should correctly render the view, when the return 
     <div class=\\"infobox__date\\">12 Dec 2021</div>
     
   </article>
+          
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
           
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
     <i class=\\"icon-heart-empty\\"></i>
@@ -911,6 +951,11 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
   </aside>
   </article>
           
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
+          
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
     <i class=\\"icon-heart-empty\\"></i>
     <i class=\\"icon-heart\\"></i>
@@ -981,6 +1026,11 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
   </article>
+          
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
           
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
     <i class=\\"icon-heart-empty\\"></i>
@@ -1053,6 +1103,11 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
   </aside>
   </article>
           
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
+          
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
     <i class=\\"icon-heart-empty\\"></i>
     <i class=\\"icon-heart\\"></i>
@@ -1123,6 +1178,11 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
   </article>
+          
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
           
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
     <i class=\\"icon-heart-empty\\"></i>
@@ -1195,6 +1255,11 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
   </aside>
   </article>
           
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
+          
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
     <i class=\\"icon-heart-empty\\"></i>
     <i class=\\"icon-heart\\"></i>
@@ -1265,6 +1330,11 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
   </article>
+          
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
           
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
     <i class=\\"icon-heart-empty\\"></i>
@@ -1338,6 +1408,11 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
   </aside>
   </article>
           
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
+          
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-1)\\">
     <i class=\\"icon-heart-empty\\"></i>
     <i class=\\"icon-heart\\"></i>
@@ -1403,6 +1478,11 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
     <div class=\\"weather__description\\">mock-description</div>
   </aside>
   </article>
+          
+  <aside class=\\"days-diff\\">
+    <div class=\\"days-diff__title\\">Length:</div>
+    <div class=\\"days-diff__value\\">1 days</div>
+  </aside>
           
   <button class=\\"card__button\\" type=\\"button\\" onClick=\\"return Client.removeTrip(mock-trip-id-2)\\">
     <i class=\\"icon-heart-empty\\"></i>

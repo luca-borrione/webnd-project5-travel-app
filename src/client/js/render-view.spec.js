@@ -3,6 +3,7 @@ import { renderResultsView, renderSavedTripsView } from './render-view';
 
 jest.mock('./utils/date-utils', () => ({
   getDaysFromToday: jest.fn().mockReturnValue(1),
+  getDaysDiff: jest.fn().mockReturnValue(1),
 }));
 
 describe('renderResultsView', () => {

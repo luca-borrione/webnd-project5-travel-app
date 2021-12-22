@@ -28,3 +28,9 @@ export const getDaysFromToday = (dateString) => {
   const date = new Date(dateString);
   return Math.ceil((date - today) / MILLISECONDS_IN_A_DAY);
 };
+
+export const getDaysDiff = (departureDateString, returnDateString) => {
+  const departureDate = new Date(departureDateString);
+  const returnDate = new Date(returnDateString);
+  return Math.ceil((returnDate - departureDate) / MILLISECONDS_IN_A_DAY);
+};

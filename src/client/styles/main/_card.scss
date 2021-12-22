@@ -11,6 +11,7 @@ $red-400: hsl(360deg 64% 55%);
   background: $main-bg-color;
   border-radius: 0.5rem;
   box-shadow: 0 0.07rem 0.15rem $primary-bg-color;
+  overflow: hidden;
 
   .saved-trips & {
     margin-bottom: 1.5rem;
@@ -60,7 +61,10 @@ $red-400: hsl(360deg 64% 55%);
   &__info {
     grid-area: card-info;
     padding: 0.3rem;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: initial;
+    margin-top: 1.5rem;
 
     .label {
       font-size: 1.1rem;
@@ -91,6 +95,7 @@ $red-400: hsl(360deg 64% 55%);
 
     &.departure {
       grid-area: infobox-departure;
+      margin-top: 1.5rem;
     }
 
     &.return {
@@ -144,6 +149,19 @@ $red-400: hsl(360deg 64% 55%);
     }
   }
 
+  .days-diff {
+    grid-area: days-diff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    &__title {
+      font-weight: bold;
+    }
+  }
+
   &__button {
     grid-area: card-button;
     background-color: color.scale($primary-bg-color, $lightness: 85%);
@@ -185,10 +203,10 @@ $red-400: hsl(360deg 64% 55%);
     display: grid;
     align-items: start;
     grid-template-areas:
-      'card-image infobox-current'
-      'infobox-departure infobox-return'
-      'card-info card-info'
-      'card-button card-button';
+      'card-image card-image infobox-current'
+      'infobox-departure days-diff infobox-return'
+      'card-info card-info card-info'
+      'card-button card-button card-button';
 
     .infobox {
       margin: initial;
@@ -203,11 +221,16 @@ $red-400: hsl(360deg 64% 55%);
       }
     }
 
+    .days-diff {
+      margin-top: 1rem;
+    }
+
     &__info {
       display: grid;
       align-items: self-start;
       grid-template-columns: repeat(3, 1fr);
       margin-top: 1.5rem;
+      width: 100%;
 
       &-entry {
         padding: 0.2rem;
@@ -235,12 +258,10 @@ $red-400: hsl(360deg 64% 55%);
     display: grid;
     align-items: start;
     grid-template-areas:
-      'card-image card-image card-info'
-      'card-image card-image card-info'
-      'card-image card-image card-info'
-      'infobox-current infobox-departure infobox-return'
-      'card-button card-button card-button';
-    grid-template-columns: repeat(3, 1fr);
+      'card-image card-image card-info card-info'
+      'infobox-current infobox-departure days-diff infobox-return'
+      'card-button card-button card-button card-button';
+    grid-template-columns: 31% 28% auto 31%;
 
     &__info {
       grid-template-columns: repeat(2, 1fr);
@@ -253,6 +274,14 @@ $red-400: hsl(360deg 64% 55%);
         padding-left: 0.4rem;
         padding-right: 0.4rem;
         padding-bottom: 0.4rem;
+      }
+    }
+
+    .infobox {
+      margin-bottom: 1rem;
+
+      &.current {
+        margin-top: 1rem;
       }
     }
   }

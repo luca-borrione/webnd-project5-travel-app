@@ -1,6 +1,6 @@
 /* eslint-disable global-require, import/no-dynamic-require */
 
-import { getDaysFromToday } from './utils/date-utils';
+import { getDaysFromToday, getDaysDiff } from './utils/date-utils';
 
 /**
  * A corner ribbon is rendered on the saved trips.
@@ -208,6 +208,12 @@ const renderReturnInfo = ({ dateString, weather }) =>
     weather,
   });
 
+const renderDaysDiff = (departureDateString, returnDateString) => `
+  <aside class="days-diff">
+    <div class="days-diff__title">Length:</div>
+    <div class="days-diff__value">${getDaysDiff(departureDateString, returnDateString)} days</div>
+  </aside>`;
+
 /**
  * `Save Trip` button rendered on the results trip card
  */
@@ -246,6 +252,7 @@ export const renderResultsView = ({
   ${renderCurrentInfo(currentInfo)}
   ${renderDepartureInfo(departureInfo)}
   ${renderReturnInfo(returnInfo)}
+  ${renderDaysDiff(departureInfo.dateString, returnInfo.dateString)}
   ${renderCardButton()}
 </main>`;
 
@@ -297,6 +304,7 @@ export const renderSavedTripsView = (savedTrips) =>
           ${renderThumbnail({ thumbnail, city, flag })}
           ${renderDepartureInfo(departureInfo)}
           ${renderReturnInfo(returnInfo)}
+          ${renderDaysDiff(departureInfo.dateString, returnInfo.dateString)}
           ${renderRemoveTripButton(tripId)}
         </main>
       `;
