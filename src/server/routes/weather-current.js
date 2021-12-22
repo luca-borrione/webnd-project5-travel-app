@@ -24,13 +24,13 @@ const getUrl = ({ latitude, longitude }) => {
 };
 
 const transformData = ({
-  ob_time: dateString,
+  ts: observedTimestamp,
   rh: humidity,
   temp: temperature,
   weather: { icon, description },
   wind_spd: windSpeed,
 }) => ({
-  dateString,
+  observedTimestamp,
   description,
   humidity,
   icon,

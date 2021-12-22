@@ -64,8 +64,8 @@ exports[`renderResultsView should correctly render the view, when both the depar
         </article>
   
   <article class=\\"infobox current\\">
-    <div class=\\"infobox__title\\">Current Weather</div>
-    <div class=\\"infobox__date\\">7 Dec 2021 - 10:12 am</div>
+    <div class=\\"infobox__title\\">Last Observed</div>
+    <div class=\\"infobox__date\\">mock-observed-timestamp-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -74,24 +74,24 @@ exports[`renderResultsView should correctly render the view, when both the depar
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-current-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 4% W 10&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-current-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   </article>
   
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   </article>
   
@@ -173,8 +173,8 @@ exports[`renderResultsView should correctly render the view, when the county is 
         </article>
   
   <article class=\\"infobox current\\">
-    <div class=\\"infobox__title\\">Current Weather</div>
-    <div class=\\"infobox__date\\">7 Dec 2021 - 10:12 am</div>
+    <div class=\\"infobox__title\\">Last Observed</div>
+    <div class=\\"infobox__date\\">mock-observed-timestamp-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -183,18 +183,18 @@ exports[`renderResultsView should correctly render the view, when the county is 
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-current-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 4% W 10&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-current-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -203,18 +203,18 @@ exports[`renderResultsView should correctly render the view, when the county is 
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -228,7 +228,7 @@ exports[`renderResultsView should correctly render the view, when the county is 
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
   
@@ -310,8 +310,8 @@ exports[`renderResultsView should correctly render the view, when the county is 
         </article>
   
   <article class=\\"infobox current\\">
-    <div class=\\"infobox__title\\">Current Weather</div>
-    <div class=\\"infobox__date\\">7 Dec 2021 - 10:12 am</div>
+    <div class=\\"infobox__title\\">Last Observed</div>
+    <div class=\\"infobox__date\\">mock-observed-timestamp-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -320,18 +320,18 @@ exports[`renderResultsView should correctly render the view, when the county is 
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-current-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 4% W 10&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-current-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -340,18 +340,18 @@ exports[`renderResultsView should correctly render the view, when the county is 
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -365,7 +365,7 @@ exports[`renderResultsView should correctly render the view, when the county is 
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
   
@@ -447,8 +447,8 @@ exports[`renderResultsView should correctly render the view, when the return wea
         </article>
   
   <article class=\\"infobox current\\">
-    <div class=\\"infobox__title\\">Current Weather</div>
-    <div class=\\"infobox__date\\">7 Dec 2021 - 10:12 am</div>
+    <div class=\\"infobox__title\\">Last Observed</div>
+    <div class=\\"infobox__date\\">mock-observed-timestamp-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -457,18 +457,18 @@ exports[`renderResultsView should correctly render the view, when the return wea
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-current-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 4% W 10&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-current-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -477,18 +477,18 @@ exports[`renderResultsView should correctly render the view, when the return wea
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   </article>
   
@@ -570,8 +570,8 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
         </article>
   
   <article class=\\"infobox current\\">
-    <div class=\\"infobox__title\\">Current Weather</div>
-    <div class=\\"infobox__date\\">7 Dec 2021 - 10:12 am</div>
+    <div class=\\"infobox__title\\">Last Observed</div>
+    <div class=\\"infobox__date\\">mock-observed-timestamp-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -580,18 +580,18 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-current-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 4% W 10&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-current-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -600,18 +600,18 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -625,7 +625,7 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
   
@@ -707,8 +707,8 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
         </article>
   
   <article class=\\"infobox current\\">
-    <div class=\\"infobox__title\\">Current Weather</div>
-    <div class=\\"infobox__date\\">7 Dec 2021 - 10:12 am</div>
+    <div class=\\"infobox__title\\">Last Observed</div>
+    <div class=\\"infobox__date\\">mock-observed-timestamp-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -717,18 +717,18 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-current-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 4% W 10&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-current-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -737,18 +737,18 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
   
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -762,7 +762,7 @@ exports[`renderResultsView should correctly render the view, when the thumbnail 
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
   
@@ -803,13 +803,13 @@ exports[`renderSavedTripsView should correctly render the view, when both the de
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   </article>
           
@@ -851,7 +851,7 @@ exports[`renderSavedTripsView should correctly render the view, when the return 
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -860,18 +860,18 @@ exports[`renderSavedTripsView should correctly render the view, when the return 
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   </article>
           
@@ -913,7 +913,7 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -922,18 +922,18 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -942,12 +942,12 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-return-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
           
@@ -989,7 +989,7 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -998,18 +998,18 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1018,12 +1018,12 @@ exports[`renderSavedTripsView should correctly render the view, when the thumbna
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-return-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
           
@@ -1065,7 +1065,7 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1074,18 +1074,18 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1094,12 +1094,12 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-return-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
           
@@ -1141,7 +1141,7 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1150,18 +1150,18 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1170,12 +1170,12 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-return-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
           
@@ -1217,7 +1217,7 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1226,18 +1226,18 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1246,12 +1246,12 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-return-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
           
@@ -1293,7 +1293,7 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1302,18 +1302,18 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1322,12 +1322,12 @@ exports[`renderSavedTripsView should correctly render the view, when the trip is
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-return-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
           
@@ -1370,7 +1370,7 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1379,18 +1379,18 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1399,12 +1399,12 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-return-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
           
@@ -1441,7 +1441,7 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
           
   <article class=\\"infobox departure\\">
     <div class=\\"infobox__title\\">Departure</div>
-    <div class=\\"infobox__date\\">11 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-departure-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1450,18 +1450,18 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-departure-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 14% W 20&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-departure-description</div>
   </aside>
   </article>
           
   <article class=\\"infobox return\\">
     <div class=\\"infobox__title\\">Return</div>
-    <div class=\\"infobox__date\\">12 Dec 2021</div>
+    <div class=\\"infobox__date\\">mock-return-date-formatted</div>
     
   <aside class=\\"weather\\">
     <img
@@ -1470,12 +1470,12 @@ exports[`renderSavedTripsView should correctly render the view, when there are m
     alt=\\"weather icon\\"
     />
     <div class=\\"weather__temperature\\">
-      <span>mock-temperature<sup>&#8451;</sup></span>
+      <span>mock-return-temperature<sup>&#8451;</sup></span>
     </div>
     <div class=\\"weather__extra-info\\">
     H 24% W 30&#x33A7;
     </div>
-    <div class=\\"weather__description\\">mock-description</div>
+    <div class=\\"weather__description\\">mock-return-description</div>
   </aside>
   </article>
           

@@ -1,5 +1,5 @@
 import { scrollElementIntoView } from './utils/browser-utils';
-import { getDaysFromToday } from './utils/date-utils';
+import { getDaysFromToday, getUTCDate } from './utils/date-utils';
 import { handleError } from './utils/error-utils';
 import {
   getCurrentWeather,
@@ -141,12 +141,12 @@ const onSearchFormSubmit = async (event) => {
       ([
         { capital, continent, currencies, languages, timezone, offset, flag, subregion },
         thumbnail,
-        { dateString: currentDateString, ...currentWeather },
+        currentWeather,
         forecast,
       ]) => {
         // We create the trip object based on the data collected from the various API requests
         const tripCard = {
-          id: new Date($form.departureDate.value).getTime() + geonameId,
+          id: getUTCDate($form.departureDate.value).getTime() + geonameId,
           thumbnail,
           locationInfo: {
             capital,
@@ -164,7 +164,6 @@ const onSearchFormSubmit = async (event) => {
             timezone,
           },
           currentInfo: {
-            dateString: currentDateString,
             timezone,
             weather: currentWeather,
           },

@@ -1,9 +1,14 @@
-import { getDaysFromToday } from './utils/date-utils';
+import { getDaysFromToday, formatTimestampToLocale, formatDateString } from './utils/date-utils';
 import { renderResultsView, renderSavedTripsView } from './render-view';
 
 jest.mock('./utils/date-utils', () => ({
+  ...jest.requireActual('./utils/date-utils'),
   getDaysFromToday: jest.fn().mockReturnValue(1),
   getDaysDiff: jest.fn().mockReturnValue(1),
+  formatTimestampToLocale: jest
+    .fn()
+    .mockImplementation(({ timestamp }) => `${timestamp}-formatted`),
+  formatDateString: jest.fn().mockImplementation((date) => `${date}-formatted`),
 }));
 
 describe('renderResultsView', () => {
@@ -32,30 +37,30 @@ describe('renderResultsView', () => {
       timezone: 'mock-timezone',
     },
     currentInfo: {
-      timezone: 'Australia/Sydney',
-      dateString: '2021-12-06 23:12',
+      timezone: 'mock-timezone',
       weather: {
-        description: 'mock-description',
+        description: 'mock-current-description',
         humidity: '3.5',
         icon: 'a01d',
-        temperature: 'mock-temperature',
+        observedTimestamp: 'mock-observed-timestamp',
+        temperature: 'mock-current-temperature',
         windSpeed: '10.3',
       },
     },
     departureInfo: {
-      dateString: '2021-12-11',
+      dateString: 'mock-departure-date',
       weather: {
-        description: 'mock-description',
+        description: 'mock-departure-description',
         humidity: '13.5',
         icon: 'a01d',
-        temperature: 'mock-temperature',
+        temperature: 'mock-departure-temperature',
         windSpeed: '20.3',
       },
     },
     returnInfo: {
-      dateString: '2021-12-12',
+      dateString: 'mock-return-date',
       weather: {
-        description: 'mock-description',
+        description: 'mock-return-description',
         humidity: '23.5',
         icon: 'a01d',
         temperature: 'mock-temperature',
@@ -86,6 +91,23 @@ describe('renderResultsView', () => {
       county,
     });
     expect(resultsView).toMatchSnapshot();
+  });
+
+  it('should correcly format the dates', () => {
+    expect(formatTimestampToLocale).not.toHaveBeenCalled();
+    expect(formatDateString).not.toHaveBeenCalled();
+
+    renderResultsView(resultsViewParams);
+
+    expect(formatTimestampToLocale).toHaveBeenCalledTimes(1);
+    expect(formatTimestampToLocale).toHaveBeenCalledWith({
+      timestamp: 'mock-observed-timestamp',
+      timezone: 'mock-timezone',
+    });
+
+    expect(formatDateString).toHaveBeenCalledTimes(2);
+    expect(formatDateString).toHaveBeenNthCalledWith(1, 'mock-departure-date');
+    expect(formatDateString).toHaveBeenNthCalledWith(2, 'mock-return-date');
   });
 
   it('should correctly render the view, when the return weather forecast is undefined', () => {
@@ -125,32 +147,32 @@ describe('renderSavedTripsView', () => {
     },
     currentInfo: {
       timezone: 'Australia/Sydney',
-      dateString: '2021-12-06 23:12',
       weather: {
         description: 'mock-description',
         humidity: '3.5',
         icon: 'a01d',
+        observedTimestamp: 'mock-observed-timestamp',
         temperature: 'mock-temperature',
         windSpeed: '10.3',
       },
     },
     departureInfo: {
-      dateString: '2021-12-11',
+      dateString: 'mock-departure-date',
       weather: {
-        description: 'mock-description',
+        description: 'mock-departure-description',
         humidity: '13.5',
         icon: 'a01d',
-        temperature: 'mock-temperature',
+        temperature: 'mock-departure-temperature',
         windSpeed: '20.3',
       },
     },
     returnInfo: {
-      dateString: '2021-12-12',
+      dateString: 'mock-return-date',
       weather: {
-        description: 'mock-description',
+        description: 'mock-return-description',
         humidity: '23.5',
         icon: 'a01d',
-        temperature: 'mock-temperature',
+        temperature: 'mock-return-temperature',
         windSpeed: '30.3',
       },
     },

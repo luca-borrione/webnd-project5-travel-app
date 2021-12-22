@@ -18,6 +18,7 @@ jest.mock('./../assets/placeholder-destination-thumb.jpg', () => 'mock-placehold
 
 jest.mock('./utils/date-utils', () => ({
   getDaysFromToday: jest.fn().mockReturnValue(1),
+  getUTCDate: jest.fn().mockImplementation(() => new Date(Date.UTC(2021, 12, 25))),
 }));
 
 jest.mock('./utils/error-utils');
@@ -48,10 +49,10 @@ jest.mock('./app-controller', () => ({
   }),
   getThumbnail: jest.fn().mockResolvedValue('mock-image-url'),
   getCurrentWeather: jest.fn().mockResolvedValue({
-    dateString: 'mock-date-string',
     description: 'mock-description',
     humidity: 'mock-humidity',
     icon: 'mock-icon',
+    observedTimestamp: 'mock-observed-timestamp',
     temperature: 'mock-temperature',
     timezone: 'mock-timezone',
     windSpeed: 'mock-wind-speed',

@@ -1,7 +1,7 @@
 import { getDaysFromToday } from './date-utils';
 
 const mockDateString = '2021-12-24';
-const mockDate = new Date('2021-12-24');
+const mockDate = '2021-12-24';
 jest.spyOn(Date, 'now').mockImplementation(() => mockDate);
 
 describe('getDaysFromToday', () => {

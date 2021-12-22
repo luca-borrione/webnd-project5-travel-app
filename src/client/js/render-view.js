@@ -1,6 +1,12 @@
 /* eslint-disable global-require, import/no-dynamic-require */
 
-import { getDaysFromToday, getDaysDiff } from './utils/date-utils';
+import {
+  formatDateString,
+  formatTimestampToLocale,
+  getDaysDiff,
+  getDaysFromToday,
+  getUTCDate,
+} from './utils/date-utils';
 
 /**
  * A corner ribbon is rendered on the saved trips.
@@ -123,65 +129,15 @@ const renderInfoBox = ({ className, dateFormatted, title, weather = '' }) => `
   </article>`;
 
 /**
- * Helper function to format the locale date
- */
-const getLocaleDateString = (date, timeZone) =>
-  date.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    timeZone,
-  });
-
-/**
- * Helper function to format the locale time
- */
-const getLocaleTimeString = (date, timeZone) =>
-  date.toLocaleTimeString('en-GB', {
-    hour: '2-digit',
-    hour12: true,
-    minute: '2-digit',
-    timeZone,
-  });
-
-/**
- * Formats a given date string
- *
- * @param {Object} p
- * @param {string} p.dateString
- * date formatted as `yyyy-mm-dd` or `yyyy-mm-dd hh:mm`
- *
- * @param {string} p.timezone
- * locale timezone e.g. `Europe/London`
- * this is used to display the correct time and date of when the current weather has been taken
- *
- * @param {boolean} p.addTime
- * Whether to add the time to the output
- *
- * @returns {string} - example `20 Dec 2021` or `20 Dec 2021 06:30pm`
- */
-const formatDateString = ({
-  dateString,
-  timezone = Intl.DateTimeFormat().resolvedOptions().timeZone,
-  addTime = false,
-}) => {
-  const currentDate = new Date(dateString);
-  const localeDateString = getLocaleDateString(currentDate, timezone);
-  const localeTimeString = addTime ? ` - ${getLocaleTimeString(currentDate, timezone)}` : '';
-  return `${localeDateString}${localeTimeString}`;
-};
-
-/**
  * Current locale date and weather at destination
  */
-const renderCurrentInfo = ({ dateString, timezone, weather }) =>
+const renderCurrentInfo = ({ timezone, weather }) =>
   renderInfoBox({
     className: 'current',
-    title: 'Current Weather',
-    dateFormatted: formatDateString({
-      dateString,
+    title: 'Last Observed',
+    dateFormatted: formatTimestampToLocale({
+      timestamp: weather.observedTimestamp,
       timezone,
-      addTime: true,
     }),
     weather,
   });
@@ -193,7 +149,7 @@ const renderDepartureInfo = ({ dateString, weather }) =>
   renderInfoBox({
     className: 'departure',
     title: 'Departure',
-    dateFormatted: formatDateString({ dateString }),
+    dateFormatted: formatDateString(dateString),
     weather,
   });
 
@@ -204,7 +160,7 @@ const renderReturnInfo = ({ dateString, weather }) =>
   renderInfoBox({
     className: 'return',
     title: 'Return',
-    dateFormatted: formatDateString({ dateString }),
+    dateFormatted: formatDateString(dateString),
     weather,
   });
 
@@ -262,7 +218,7 @@ export const renderResultsView = ({
  * 21 Dec 2021 - 22 Dec 2021 - 3 Feb 2022
  */
 const byDateAscending = (a, b) =>
-  new Date(a.departureInfo.dateString) - new Date(b.departureInfo.dateString);
+  getUTCDate(a.departureInfo.dateString) - getUTCDate(b.departureInfo.dateString);
 
 /**
  * Expired trip card will be moved to the end of the list,

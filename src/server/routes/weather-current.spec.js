@@ -110,10 +110,10 @@ describe('weatherCurrentGetRoute', () => {
   it('should be successful correctly transform the results data when the remote api responds with an ok status', async () => {
     const mockCurrentWeatherResult = {
       app_temp: 'mock-apparent-temperature',
-      ob_time: 'mock-date-string',
       rh: 'mock-humidity',
       temp: 'mock-temperature',
       timezone: 'mock-timezone',
+      ts: 'mock-timestamp',
       weather: {
         icon: 'mock-icon',
         description: 'mock-description',
@@ -134,10 +134,10 @@ describe('weatherCurrentGetRoute', () => {
     expect(mockResponse.json).toHaveBeenCalledWith({
       results: {
         data: {
-          dateString: 'mock-date-string',
           description: 'mock-description',
           humidity: 'mock-humidity',
           icon: 'mock-icon',
+          observedTimestamp: 'mock-timestamp',
           temperature: 'mock-temperature',
           windSpeed: 'mock-wind-speed',
         },

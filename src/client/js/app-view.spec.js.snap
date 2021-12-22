@@ -28,12 +28,12 @@ exports[`app-view after having launched the app clicking on the save trip button
 Object {
   "trip": Object {
     "currentInfo": Object {
-      "dateString": "mock-date-string",
       "timezone": "mock-timezone",
       "weather": Object {
         "description": "mock-description",
         "humidity": "mock-humidity",
         "icon": "mock-icon",
+        "observedTimestamp": "mock-observed-timestamp",
         "temperature": "mock-temperature",
         "timezone": "mock-timezone",
         "windSpeed": "mock-wind-speed",
@@ -48,7 +48,7 @@ Object {
         "windSpeed": "mock-wind-speed",
       },
     },
-    "id": 1636502401234,
+    "id": 1643068801234,
     "locationInfo": Object {
       "capital": "mock-capital",
       "city": "mock-city",
@@ -117,12 +117,12 @@ exports[`app-view after having launched the app clicking on the save trip button
 exports[`app-view after having launched the app receiving the data of the search should correctly call renderResultsView 1`] = `
 Object {
   "currentInfo": Object {
-    "dateString": "mock-date-string",
     "timezone": "mock-timezone",
     "weather": Object {
       "description": "mock-description",
       "humidity": "mock-humidity",
       "icon": "mock-icon",
+      "observedTimestamp": "mock-observed-timestamp",
       "temperature": "mock-temperature",
       "timezone": "mock-timezone",
       "windSpeed": "mock-wind-speed",
@@ -137,7 +137,7 @@ Object {
       "windSpeed": "mock-wind-speed",
     },
   },
-  "id": 1636502401234,
+  "id": 1643068801234,
   "locationInfo": Object {
     "capital": "mock-capital",
     "city": "mock-city",

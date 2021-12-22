@@ -208,10 +208,16 @@ $red-400: hsl(360deg 64% 55%);
       'card-button card-button card-button';
 
     .infobox {
+      width: 100%;
       margin: initial;
 
       &.current {
         align-self: center;
+
+        .infobox__date {
+          text-align: center;
+          font-size: 1.2rem;
+        }
       }
 
       &.departure,

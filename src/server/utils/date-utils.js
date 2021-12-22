@@ -1,18 +1,19 @@
 const MILLISECONDS_IN_A_DAY = 1000 * 60 * 60 * 24;
 
 /**
- * Today's date needs to be provided starting at 00:00:00
- * to match the format yyyy-mm-dd of the dateString passed to `getDaysFromToday`
- * Failing to do so could lead to unexpected results when calculating the difference
- * between the two dates.
- * @returns {Date} - today's date
+ * Converts a date representation into a UTC date at 00:00,
+ * which means considering only year, month and date.
+ * @param {string|number} dateRepresentation
+ * Representation of the date either as a string in `yyyy-mm-dd` format
+ * or as milliseconds elapsed since the UNIX epoch.
+ * @returns {Date} - UTC Date
  */
-const getTodayDate = () => {
-  const date = new Date(Date.now());
-  const year = date.getFullYear();
-  const monthIndex = date.getMonth();
-  const day = date.getDate();
-  return new Date(year, monthIndex, day);
+const getUTCDate = (dateRepresentation) => {
+  const date = new Date(dateRepresentation);
+  const year = date.getUTCFullYear();
+  const monthIndex = date.getUTCMonth();
+  const day = date.getUTCDate();
+  return new Date(Date.UTC(year, monthIndex, day));
 };
 
 /**
@@ -24,8 +25,8 @@ const getTodayDate = () => {
  *  - numbers below 0 are returned if the given date is a past date
  */
 const getDaysFromToday = (dateString) => {
-  const today = getTodayDate();
-  const date = new Date(dateString);
+  const today = getUTCDate(Date.now());
+  const date = getUTCDate(dateString);
   return Math.ceil((date - today) / MILLISECONDS_IN_A_DAY);
 };
 
