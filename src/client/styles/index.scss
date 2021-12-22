@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 @import 'core/variables';
 @import 'layout';
 @import 'header';
@@ -35,7 +37,7 @@
     z-index: -1;
     content: '';
     display: block;
-    border: 5px solid $primary-bg-color;
+    border: 5px solid color.scale($primary-bg-color, $lightness: -40%);
   }
 
   & span {
@@ -87,7 +89,7 @@
     &::before,
     &::after {
       border-top-color: transparent;
-      border-left-color: transparent;
+      border-right-color: transparent;
     }
 
     &::before {
