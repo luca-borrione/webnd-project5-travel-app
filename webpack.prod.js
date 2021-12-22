@@ -6,6 +6,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: './src/client/index.js',
@@ -53,5 +54,6 @@ module.exports = {
       favicon: './src/client/assets/favicon.ico',
     }),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
+    new WorkboxPlugin.GenerateSW(),
   ],
 };
