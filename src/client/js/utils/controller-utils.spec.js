@@ -47,8 +47,8 @@ describe('controller-utils', () => {
       const expectedError = new Error('mock-expected-error');
       fetchSpy.mockRejectedValueOnce(expectedError);
       await postData('mock/api', { mock: 'data' });
-      expect(handleErrorAndReject).toBeCalledTimes(1);
-      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+      expect(handleErrorAndReject).toHaveBeenCalledTimes(1);
+      expect(handleErrorAndReject).toHaveBeenCalledWith(expectedError);
     });
   });
 
@@ -75,8 +75,8 @@ describe('controller-utils', () => {
       const expectedError = new Error('mock-expected-error');
       fetchSpy.mockRejectedValueOnce(expectedError);
       await getData('mock/api');
-      expect(handleErrorAndReject).toBeCalledTimes(1);
-      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+      expect(handleErrorAndReject).toHaveBeenCalledTimes(1);
+      expect(handleErrorAndReject).toHaveBeenCalledWith(expectedError);
     });
   });
 });

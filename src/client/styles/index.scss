@@ -1,9 +1,8 @@
 @use 'sass:color';
-
-@import 'core/variables';
-@import 'layout';
-@import 'header';
-@import 'main/main';
+@use 'core/variables';
+@use 'layout';
+@use 'header';
+@use 'main/main';
 
 .spinner {
   width: 100%;
@@ -25,7 +24,7 @@
   position: absolute;
   z-index: 1;
   filter: drop-shadow(1px 2px 3px black);
-  opacity: 95%;
+  opacity: 0.95;
 
   .expired & {
     filter: drop-shadow(1px 2px 3px black) hue-rotate(45deg);
@@ -37,7 +36,7 @@
     z-index: -1;
     content: '';
     display: block;
-    border: 5px solid color.scale($primary-bg-color, $lightness: -40%);
+    border: 5px solid color.scale(variables.$primary-bg-color, $lightness: -40%);
   }
 
   & span {
@@ -45,14 +44,16 @@
     display: block;
     width: 225px;
     padding: 15px 0;
-    background-color: $primary-bg-color;
+    background-color: variables.$primary-bg-color;
     box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
     color: #fff;
-    font: 700 18px/1 Lato, sans-serif;
+    font:
+      700 18px/1 Lato,
+      sans-serif;
     text-shadow: 0 1px 1px rgb(0 0 0 / 20%);
     text-transform: uppercase;
     text-align: center;
-    opacity: 90%;
+    opacity: 0.9;
   }
 
   &.ribbon-top-left {

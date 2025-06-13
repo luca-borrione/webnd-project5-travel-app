@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use '../core/variables';
 
 /* Mobile First */
 .search {
@@ -11,8 +12,8 @@
     justify-content: space-between;
     border-radius: 0.5rem;
     padding: 1.3rem;
-    background: $main-bg-color;
-    box-shadow: 0 0.07rem 0.15rem $primary-bg-color;
+    background: variables.$main-bg-color;
+    box-shadow: 0 0.07rem 0.15rem variables.$primary-bg-color;
 
     & label {
       margin-bottom: 0.8rem;
@@ -24,28 +25,28 @@
     & input {
       margin: 0;
       height: 3rem;
-      background: color.scale($primary-bg-color, $lightness: 85%);
-      border: 0.15rem solid color.scale($primary-bg-color, $lightness: 85%);
+      background: color.scale(variables.$primary-bg-color, $lightness: 85%);
+      border: 0.15rem solid color.scale(variables.$primary-bg-color, $lightness: 85%);
       width: 100%;
       padding: 1rem 0.6rem;
       margin-bottom: 0;
       border-radius: 0.4rem;
-      font-family: $primary-font-family;
+      font-family: variables.$primary-font-family;
       font-size: 1.1rem;
 
       &:focus-visible {
-        outline-color: $primary-bg-color;
+        outline-color: variables.$primary-bg-color;
       }
     }
 
     &__submit-button {
       border: 0.1rem;
-      color: $secondary-font-color;
-      background: $primary-bg-color;
+      color: variables.$secondary-font-color;
+      background: variables.$primary-bg-color;
       padding: 1.15rem 1.3rem;
 
       &:hover {
-        background: color.scale($primary-bg-color, $lightness: -20%);
+        background: color.scale(variables.$primary-bg-color, $lightness: -20%);
       }
 
       & .icon-spinner {
@@ -66,7 +67,7 @@
 }
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
-@media (min-width: 600px) {
+@media (width >= 600px) {
   .search {
     margin-top: -4.5rem;
 

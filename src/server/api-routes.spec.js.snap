@@ -1,32 +1,32 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`api-routes should match the routes stored in the snapshot 1`] = `
-Array [
-  Array [
+[
+  [
     "/geoname",
   ],
-  Array [
+  [
     "/location-info",
   ],
-  Array [
+  [
     "/foo",
   ],
-  Array [
+  [
     "/thumbnail",
   ],
-  Array [
+  [
     "/weather/current",
   ],
-  Array [
+  [
     "/weather/forecast",
   ],
-  Array [
+  [
     "/trips/add",
   ],
-  Array [
+  [
     "/trips/remove",
   ],
-  Array [
+  [
     "/trips/restore",
   ],
 ]

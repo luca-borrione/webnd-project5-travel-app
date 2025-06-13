@@ -11,6 +11,9 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[mjs]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -19,8 +22,8 @@
   },
   "css.validate": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
@@ -28,12 +31,13 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "jest.autoRun": {
-    "onSave": "test-file",
-    // "onStartup": ["all-tests"],
-    "watch": false
+  "jest.runMode": {
+    "type": "on-save",
+    "testFile": true
   },
-  "jest.jestCommandLine": "yarn test",
+  // "jest.jestCommandLine": "yarn test",
+  "jest.jestCommandLine": "source ~/.zshrc && nvm use && yarn test",
+  "jest.shell": "/bin/zsh",
   "less.validate": false,
   "linthtml.packageManager": "yarn",
   "scss.validate": false

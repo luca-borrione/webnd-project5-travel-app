@@ -25,6 +25,15 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: 'html-loader',
+        options: {
+          preprocessor: (content, loaderContext) => {
+            let result = content.replace(
+              /ENABLE_SERVICE_WORKER = false;/g,
+              'ENABLE_SERVICE_WORKER = true;'
+            );
+            return result;
+          },
+        },
       },
       {
         test: /\.(png|jpe?g|gif)$/i,

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
@@ -60,8 +60,10 @@
 
     <!-- Register Service Workers -->
     <script>
+      window.ENABLE_SERVICE_WORKER = false; // This will be replaced during build
+      console.log('>> ENABLE_SERVICE_WORKER', ENABLE_SERVICE_WORKER);
       // Check that service workers are supported
-      if ('serviceWorker' in navigator) {
+      if ('serviceWorker' in navigator && window.ENABLE_SERVICE_WORKER) {
         // Use the window load event to keep the page load performant
         window.addEventListener('load', () => {
           navigator.serviceWorker

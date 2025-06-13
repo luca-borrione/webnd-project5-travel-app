@@ -2,7 +2,7 @@ const scrollIntoView = (element, params = true) => {
   try {
     element.scrollIntoView(params);
     return true;
-  } catch (e) {
+  } catch (_) {
     return false;
   }
 };
@@ -11,7 +11,7 @@ const scrollTo = (element, params = {}) => {
   try {
     window.scrollTo({ ...params, top: element.offsetTop });
     return true;
-  } catch (e) {
+  } catch (_) {
     return false;
   }
 };

@@ -431,7 +431,7 @@ describe('trips', () => {
       expect(handleError).toHaveBeenCalledTimes(1);
       expect(handleError).toHaveBeenCalledWith(mockError);
       expect(mockResponse.status).toHaveBeenCalledTimes(1);
-      expect(mockResponse.status).toBeCalledWith(500);
+      expect(mockResponse.status).toHaveBeenCalledWith(500);
       expect(mockStatusJson).toHaveBeenCalledTimes(1);
       expect(mockStatusJson).toHaveBeenCalledWith({
         message: 'mock-error-message',

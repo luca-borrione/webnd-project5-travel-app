@@ -1,4 +1,4 @@
-"extends": "@linthtml/linthtml-config-recommended"
+'extends': '@linthtml/linthtml-config-recommended'
 maxerr: false
 text-ignore-regex: false
 raw-ignore-regex: false
@@ -9,7 +9,10 @@ rules:
   attr-quote-style:
     - true
     - double
-  id-class-style:
+  id-style:
+    - true
+    - bem
+  class-style:
     - true
     - bem
   indent-width:

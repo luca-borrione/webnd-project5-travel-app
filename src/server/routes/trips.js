@@ -69,7 +69,7 @@ const shouldUpdateThumbnail = (thumbnail) =>
 const fetchThumbnail = async ({ city, country }) => {
   try {
     return await getThumbnail({ city, country });
-  } catch (e) {
+  } catch (_) {
     return Promise.resolve(undefined);
   }
 };
@@ -81,7 +81,7 @@ const fetchThumbnail = async ({ city, country }) => {
 const fetchWeatherForecast = async ({ latitude, longitude, departureDate, returnDate }) => {
   try {
     return await getWeatherForecast({ latitude, longitude, departureDate, returnDate });
-  } catch (e) {
+  } catch (_) {
     return Promise.resolve({});
   }
 };
@@ -146,7 +146,7 @@ const updateTrips = async (trips) => Promise.all(trips.map(updateTrip));
 const restoreTripsPostRoute = async (req, res) => {
   try {
     const { localStorageTrips } = req.body;
-    const restoredTrips = savedTrips.length > 0 ? savedTrips : localStorageTrips ?? [];
+    const restoredTrips = savedTrips.length > 0 ? savedTrips : (localStorageTrips ?? []);
     savedTrips = await updateTrips(restoredTrips);
     return res.json({
       success: true,

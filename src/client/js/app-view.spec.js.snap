@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`app-view after having launched the app calling removeTrip should correctly update the saved trips view 1`] = `
 <section
@@ -25,11 +25,11 @@ exports[`app-view after having launched the app calling removeTrip should correc
 `;
 
 exports[`app-view after having launched the app clicking on the save trip button of the search results should correctly call postSaveTrip 1`] = `
-Object {
-  "trip": Object {
-    "currentInfo": Object {
+{
+  "trip": {
+    "currentInfo": {
       "timezone": "mock-timezone",
-      "weather": Object {
+      "weather": {
         "description": "mock-description",
         "humidity": "mock-humidity",
         "icon": "mock-icon",
@@ -39,9 +39,9 @@ Object {
         "windSpeed": "mock-wind-speed",
       },
     },
-    "departureInfo": Object {
+    "departureInfo": {
       "dateString": "2021-11-10",
-      "weather": Object {
+      "weather": {
         "description": "mock-description",
         "humidity": "mock-humidity",
         "icon": "mock-icon",
@@ -49,24 +49,24 @@ Object {
       },
     },
     "id": 1643068801234,
-    "locationInfo": Object {
+    "locationInfo": {
       "capital": "mock-capital",
       "city": "mock-city",
       "continent": "mock-continent",
       "country": "mock-country",
       "county": "mock-county",
-      "currencies": Array [
-        Object {
+      "currencies": [
+        {
           "code": "cur1",
           "name": "mock-currency1",
         },
-        Object {
+        {
           "code": "cur2",
           "name": "mock-currency2",
         },
       ],
       "flag": "mock-flag",
-      "languages": Array [
+      "languages": [
         "mock-language1",
         "mock-language2",
       ],
@@ -76,9 +76,9 @@ Object {
       "subregion": "mock-subregion",
       "timezone": "mock-timezone",
     },
-    "returnInfo": Object {
+    "returnInfo": {
       "dateString": "2021-11-17",
-      "weather": Object {
+      "weather": {
         "description": "mock-description",
         "humidity": "mock-humidity",
         "icon": "mock-icon",
@@ -115,10 +115,10 @@ exports[`app-view after having launched the app clicking on the save trip button
 `;
 
 exports[`app-view after having launched the app receiving the data of the search should correctly call renderResultsView 1`] = `
-Object {
-  "currentInfo": Object {
+{
+  "currentInfo": {
     "timezone": "mock-timezone",
-    "weather": Object {
+    "weather": {
       "description": "mock-description",
       "humidity": "mock-humidity",
       "icon": "mock-icon",
@@ -128,9 +128,9 @@ Object {
       "windSpeed": "mock-wind-speed",
     },
   },
-  "departureInfo": Object {
+  "departureInfo": {
     "dateString": "2021-11-10",
-    "weather": Object {
+    "weather": {
       "description": "mock-description",
       "humidity": "mock-humidity",
       "icon": "mock-icon",
@@ -138,24 +138,24 @@ Object {
     },
   },
   "id": 1643068801234,
-  "locationInfo": Object {
+  "locationInfo": {
     "capital": "mock-capital",
     "city": "mock-city",
     "continent": "mock-continent",
     "country": "mock-country",
     "county": "mock-county",
-    "currencies": Array [
-      Object {
+    "currencies": [
+      {
         "code": "cur1",
         "name": "mock-currency1",
       },
-      Object {
+      {
         "code": "cur2",
         "name": "mock-currency2",
       },
     ],
     "flag": "mock-flag",
-    "languages": Array [
+    "languages": [
       "mock-language1",
       "mock-language2",
     ],
@@ -165,9 +165,9 @@ Object {
     "subregion": "mock-subregion",
     "timezone": "mock-timezone",
   },
-  "returnInfo": Object {
+  "returnInfo": {
     "dateString": "2021-11-17",
-    "weather": Object {
+    "weather": {
       "description": "mock-description",
       "humidity": "mock-humidity",
       "icon": "mock-icon",

@@ -1,8 +1,9 @@
+@use 'core/variables';
+
 /* Mobile First */
 .banner {
   display: grid;
-  align-content: center;
-  justify-content: center;
+  place-content: center center;
   background-image: url('../assets/lighthouse.jpg');
   background-size: auto;
   background-position-y: 52%;
@@ -11,7 +12,7 @@
   height: 10rem;
 
   &__text {
-    color: $secondary-font-color;
+    color: variables.$secondary-font-color;
     font-size: 1.35rem;
     font-weight: 100;
     margin: 0;
@@ -20,7 +21,7 @@
 }
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
-@media (min-width: 600px) {
+@media (width >= 600px) {
   .banner {
     height: 12em;
     background-position-y: 63%;
@@ -34,7 +35,7 @@
 }
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */
-@media (min-width: 961px) {
+@media (width >= 961px) {
   .banner {
     background-size: cover;
     background-position-y: 61%;

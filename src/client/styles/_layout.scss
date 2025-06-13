@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Asap:wght@400;700&family=Ubuntu:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,500&display=swap');
+@use 'core/variables';
+@import 'https://fonts.googleapis.com/css2?family=Asap:wght@400;700&family=Ubuntu:wght@400;700&family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,500&display=swap';
 
 @font-face {
   font-family: Fontello;
   src: url('../assets/fonts/fontello.eot?39098809');
-  src: url('../assets/fonts/fontello.eot?39098809#iefix') format('embedded-opentype'),
+  src:
+    url('../assets/fonts/fontello.eot?39098809#iefix') format('embedded-opentype'),
     url('../assets/fonts/fontello.woff2?39098809') format('woff2'),
     url('../assets/fonts/fontello.woff?39098809') format('woff'),
     url('../assets/fonts/fontello.ttf?39098809') format('truetype'),
@@ -99,6 +101,7 @@
   animation: spin 2s infinite linear;
   display: inline-block;
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -118,10 +121,10 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: $primary-font-family;
+  font-family: variables.$primary-font-family;
   font-size: 1.3rem;
-  color: $primary-font-color;
-  background-color: $main-bg-color;
+  color: variables.$primary-font-color;
+  background-color: variables.$main-bg-color;
 }
 
 button {
@@ -131,7 +134,7 @@ button {
   font-weight: 500;
   text-transform: uppercase;
   line-height: 1;
-  font-family: $primary-font-family;
+  font-family: variables.$primary-font-family;
 
   // transition: all ease 0.25s;
 

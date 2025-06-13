@@ -1,5 +1,5 @@
-@import 'search';
-@import 'card';
+@use 'search';
+@use 'card';
 
 main {
   section {
@@ -20,7 +20,7 @@ main {
 }
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
-@media (min-width: 600px) {
+@media (width >= 600px) {
   main {
     section {
       &.saved-trips {
@@ -31,7 +31,7 @@ main {
 }
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */
-@media (min-width: 961px) {
+@media (width >= 961px) {
   main {
     section {
       &.saved-trips {

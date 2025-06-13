@@ -79,7 +79,7 @@ describe('locationInfoGetRoute', () => {
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(mockResponse.status).toHaveBeenCalledTimes(1);
-    expect(mockResponse.status).toBeCalledWith(MOCK_FETCH_STATUS);
+    expect(mockResponse.status).toHaveBeenCalledWith(MOCK_FETCH_STATUS);
     expect(mockResponse.json).toHaveBeenCalledTimes(1);
     expect(mockResponse.json).toHaveBeenCalledWith({
       message: 'mock-failure-message',
@@ -101,7 +101,7 @@ describe('locationInfoGetRoute', () => {
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(mockResponse.status).toHaveBeenCalledTimes(1);
-    expect(mockResponse.status).toBeCalledWith(500);
+    expect(mockResponse.status).toHaveBeenCalledWith(500);
     expect(mockResponse.json).toHaveBeenCalledTimes(1);
     expect(mockResponse.json).toHaveBeenCalledWith({
       message: 'mock-error-message',

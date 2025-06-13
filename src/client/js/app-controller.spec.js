@@ -63,8 +63,8 @@ describe('app-controller', () => {
       requestData.mockRejectedValueOnce(expectedError);
       expect(handleErrorAndReject).not.toHaveBeenCalled();
       await fn(params);
-      expect(handleErrorAndReject).toBeCalledTimes(1);
-      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+      expect(handleErrorAndReject).toHaveBeenCalledTimes(1);
+      expect(handleErrorAndReject).toHaveBeenCalledWith(expectedError);
     });
 
     it('should reject returning the error message when getData is not successfull', async () => {
@@ -72,8 +72,8 @@ describe('app-controller', () => {
       const expectedError = new Error('something went wrong');
       expect(handleErrorAndReject).not.toHaveBeenCalled();
       await fn(params);
-      expect(handleErrorAndReject).toBeCalledTimes(1);
-      expect(handleErrorAndReject).toBeCalledWith(expectedError);
+      expect(handleErrorAndReject).toHaveBeenCalledTimes(1);
+      expect(handleErrorAndReject).toHaveBeenCalledWith(expectedError);
     });
   });
 });
